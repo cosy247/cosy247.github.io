@@ -10,6 +10,7 @@ keywords: 网站的关键词。支持多个关键词。
 author: cosy247
 language: zh-CN
 timezone: Asia/Shanghai
+email: 705194673@qq.com
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
@@ -97,7 +98,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: butterfly
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
