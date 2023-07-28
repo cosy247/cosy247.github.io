@@ -30,12 +30,12 @@ social:
 
 # 头像
 avatar:
-  img: https://w.wallhaven.cc/full/gp/wallhaven-gpm7ke.jpg
+  img: https://pic3.zhimg.com/v2-b2b10364c745847811994a69c21d5532_r.jpg
   effect: false # 頭像會一直轉圈
 
 # 顶部图
-index_img: https://w.wallhaven.cc/full/gp/wallhaven-gpm7ke.jpg
-default_top_img: https://w.wallhaven.cc/full/gp/wallhaven-gpm7ke.jpg
+index_img: https://pic3.zhimg.com/v2-b2b10364c745847811994a69c21d5532_r.jpg
+default_top_img: https://pic3.zhimg.com/v2-b2b10364c745847811994a69c21d5532_r.jpg
 
 # 文章封面
 cover:
@@ -47,7 +47,7 @@ cover:
   # 三個值可配置 left , right , both
   position: both
   # 當沒有設置cover時，默認的封面顯示
-  default_cover: https://w.wallhaven.cc/full/gp/wallhaven-gpm7ke.jpg
+  default_cover: https://pic3.zhimg.com/v2-b2b10364c745847811994a69c21d5532_r.jpg
 
 # 頁面 meta 顯示
 post_meta:
@@ -166,26 +166,3 @@ newest_comments:
   limit: 6
   storage: 10 # unit: mins, save data to localStorage
   avatar: true
-
-translate:
-  enable: true
-  # 默認按鈕顯示文字(網站是簡體，應設置為'default: 繁')
-  default: 簡
-  #網站默認語言，1: 繁體中文, 2: 簡體中文
-  defaultEncoding: 1
-  #延遲時間,若不在前, 要設定延遲翻譯時間, 如100表示100ms,默認為0
-  translateDelay: 0
-  #當文字是簡體時，按鈕顯示的文字
-  msgToTraditionalChinese: "繁"
-  #當文字是繁體時，按鈕顯示的文字
-  msgToSimplifiedChinese: "簡"
-
-  # dark mode
-  darkmode:
-    enable: true
-    # dark mode和 light mode切換按鈕
-    button: true
-    autoChangeMode: false
-    # Set the light mode time. The value is between 0 and 24. If not set, the default value is 6 and 18
-    start: 8
-    end: 22
