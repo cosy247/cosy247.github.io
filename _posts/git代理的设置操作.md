@@ -10,3 +10,4 @@ description: git代理的设置操作
 
 # 设置代理
 
+--depth
