@@ -1,14 +1,23 @@
 <template>
     <Menu />
-    <Content />
+    <div class="main">
+        <Home />
+    </div>
     <Footer />
+    <div style="height: 200vh"></div>
 </template>
 
 <script setup>
     import './common/style.css';
     import Footer from './components/Footer.vue';
     import Menu from './components/Menu.vue';
+    import Home from './pages/Home.vue';
 </script>
 
-<style>
+<style scoped>
+    main {
+        width: 100%;
+        min-height: 100%;
+        background: white;
+    }
 </style>
