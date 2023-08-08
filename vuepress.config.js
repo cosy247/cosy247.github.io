@@ -7,11 +7,17 @@ module.exports = {
     public: './assets',
     description: '',
     permalinkPattern: ':slug',
+    head: [],
+    // theme: '',
     plugins: [
-        blogMateData({
-            initMateNames: ['title', 'tags'],
+        [blogMateData, {
+            initMateNames: ['title', 'description', 'tags'],
             countMateNames: ['tags'],
             isArrMateNames: ['tags'],
-        }),
+        }],
+        [false, '@vuepress/theme-default'],
+        ['@vuepress/plugin-container', {
+            disabled: false
+        }],
     ],
 };

@@ -5,6 +5,5 @@
     },
     "devDependencies": {
         "vuepress": "^2.0.0-beta.66"
-    },
-    "main": "layouts/Layout.vue"
+    }
 }
