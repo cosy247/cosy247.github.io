@@ -3,13 +3,21 @@
         <img class="cover-back" src="https://i.loli.net/2021/02/07/HEhPAp6UQbLi7kZ.jpg" alt="" />
         <p class="cover-title">{{ themeConfig.title }}</p>
     </div>
+    <div class="list">
+        <div class="list-item" v-for="item in pageList">
+            
+        </div>
+    </div>
 </template>
 
 <script setup>
     import themeConfig from '../../theme.config';
     import {useSiteData, usePageData} from '@vuepress/client';
-    const siteData = useSiteData();
+    import blogMate from '@temp/blogMate';
+
+        const siteData = useSiteData();
     const pageData = usePageData();
+    const pageList = blogMate.slice(0, 10);
 </script>
 
 <style>

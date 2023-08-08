@@ -55,10 +55,10 @@
 
     onMounted(() => {
         const scrollTop = window.document.body.scrollTop || window.document.documentElement.scrollTop;
-        isPageTop.value = scrollTop == 0;
+        isPageTop.value = scrollTop <= 10;
         window.addEventListener('scroll', (e) => {
             const scrollTop = window.document.body.scrollTop || window.document.documentElement.scrollTop;
-            isPageTop.value = scrollTop == 0;
+            isPageTop.value = scrollTop <= 10;
         });
     });
 </script>

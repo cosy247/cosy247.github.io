@@ -5,5 +5,11 @@ module.exports = {
     temp: './.temp',
     cache: './.cache',
     public: './assets',
-    plugins: [blogData],
+    plugins: [
+        blogData({
+            initMates: ['title', 'tags'],
+            countMates: ['tags', 'title'],
+            isArrMates: ['tags'],
+        }),
+    ],
 };
