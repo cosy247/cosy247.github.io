@@ -1,23 +1,12 @@
-import blogMateData from './theme/plugins/blogMate';
+import themeMaster from './theme';
 
 module.exports = {
+    theme: 'master',
     dest: './dist',
     temp: './.temp',
     cache: './.cache',
     public: './assets',
     description: '',
     permalinkPattern: ':slug',
-    head: [],
-    // theme: '',
-    plugins: [
-        [blogMateData, {
-            initMateNames: ['title', 'description', 'tags'],
-            countMateNames: ['tags'],
-            isArrMateNames: ['tags'],
-        }],
-        [false, '@vuepress/theme-default'],
-        ['@vuepress/plugin-container', {
-            disabled: false
-        }],
-    ],
+    plugins: [themeMaster],
 };
