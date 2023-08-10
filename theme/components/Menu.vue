@@ -1,7 +1,7 @@
 <template>
     <div class="rootMenu">
         <div class="menu-outer" :class="!isPageTop && !isMenuPage ? 'open' : ''">
-            <div class="menu-logo link-hover" :class="isMenuPage ? 'rese' : ''" @click="isMenuPage = !isMenuPage">
+            <div class="menu-logo link-hover" :class="isMenuPage ? 'rese' : ''" @click="showMenu">
                 <span class="menu-logo-left">&#xe883;</span>
                 Menu
                 <span class="menu-logo-right">&#xe601;</span>
@@ -44,7 +44,7 @@
 <script setup>
     import themeConfig from '../../theme.config';
     import { reactive, ref, onMounted } from 'vue';
-    import { usePageData, useSiteData } from '@vuepress/client';
+    import windowEvent from '../utils/windowEvent';
 
     const links = themeConfig.links || [];
     const linkHello = themeConfig.linkHello || '和我取得联系>>>';
@@ -53,10 +53,19 @@
     const menuItems = themeConfig.menus;
     const author = themeConfig.author || {};
 
+    function showMenu() {
+        isMenuPage.value = !isMenuPage.value;
+        if (isMenuPage.value) {
+            window.document.documentElement.style.overflow = 'hidden';
+        } else {
+            window.document.documentElement.style.overflow = 'auto';
+        }
+    }
+
     onMounted(() => {
         const scrollTop = window.document.body.scrollTop || window.document.documentElement.scrollTop;
         isPageTop.value = scrollTop <= 10;
-        window.addEventListener('scroll', (e) => {
+        windowEvent.add('scroll', () => {
             const scrollTop = window.document.body.scrollTop || window.document.documentElement.scrollTop;
             isPageTop.value = scrollTop <= 10;
         });
