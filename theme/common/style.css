@@ -1,18 +1,16 @@
 /* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
 @font-face {
-    font-family: 'iconfont';  /* Project id 4198141 */
-    src: url('//at.alicdn.com/t/c/font_4198141_h5yxcicceaf.woff2?t=1691482385353') format('woff2'),
-         url('//at.alicdn.com/t/c/font_4198141_h5yxcicceaf.woff?t=1691482385353') format('woff'),
-         url('//at.alicdn.com/t/c/font_4198141_h5yxcicceaf.ttf?t=1691482385353') format('truetype');
-  }
+    font-family: 'iconfont'; /* Project id 4198141 */
+    src: url('//at.alicdn.com/t/c/font_4198141_h5yxcicceaf.woff2?t=1691482385353') format('woff2'), url('//at.alicdn.com/t/c/font_4198141_h5yxcicceaf.woff?t=1691482385353') format('woff'), url('//at.alicdn.com/t/c/font_4198141_h5yxcicceaf.ttf?t=1691482385353') format('truetype');
+}
 
+/*********** 定义变量 ***********/
 * {
     padding: 0;
     margin: 0;
     font-family: iconfont;
     letter-spacing: 0.05em;
 }
-
 :root {
     font-size: 1vmin;
     --size1: 1.2rem;
@@ -27,10 +25,25 @@
     --color-white: #f7f7f7;
 }
 
+/************ 隐藏滚动跳 ************/
+html {
+    overflow: -moz-hidden-unscrollable;
+    height: 100%;
+}
+body {
+    width: calc(100vw + 18px);
+    height: 100%;
+    -ms-overflow-style: none;
+    overflow: auto;
+}
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/************ link动画定义 ************/
 .link-hover {
     transition: letter-spacing 0.3s;
 }
-
 .link-hover:hover {
     letter-spacing: 0.18em;
 }
