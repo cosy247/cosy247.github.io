@@ -5,6 +5,12 @@ export default {
         { name: '邮箱', icon: '&#xe600;', url: 'http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=al1aX1tTXlxdWSobG0QJBQc' },
         { name: 'github', icon: '&#xe673;', url: 'http://github.com/cosy247' },
     ],
+    cover: {
+        home: 'https://images.alphacoders.com/131/1311951.jpg',
+        tags: {
+
+        }
+    },
     menus: [
         { name: '首页', url: '' },
         { name: '标签', url: '' },

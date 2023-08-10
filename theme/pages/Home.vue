@@ -1,6 +1,6 @@
 <template>
     <div class="cover">
-        <img class="cover-back" src="https://i.loli.net/2021/02/07/HEhPAp6UQbLi7kZ.jpg" alt="" />
+        <img class="cover-back" src="https://images.alphacoders.com/131/1311951.jpg" alt="" />
         <p class="cover-title">{{ themeConfig.title }}</p>
     </div>
     <div class="list">
@@ -8,18 +8,9 @@
             <p class="list-item-title">{{ item.title }}</p>
             <p class="list-item-description">{{ item.description }}</p>
             <div class="list-item-info">
-                <p class="list-item-info-update" v-show="item.$.updatedTime">
-                    <span>&#xe6ad;更新时间：</span>
-                    {{ new Date(item.$.updatedTime).toLocaleString() }}
-                </p>
-                <p class="list-item-info-count">
-                    <span>&#xe689;更新次数：</span>
-                    {{ item.$.commitNumber }}
-                </p>
-                <p class="list-item-info-see">
-                    <span>&#xe636;</span>
-                    {{ item.$.commitNumber }}
-                </p>
+                <p class="list-item-info-update" v-show="item.$.updatedTime"><span>&#xe6ad;更新时间：</span>{{ new Date(item.$.updatedTime).toLocaleString() }}</p>
+                <p class="list-item-info-count"><span>&#xe689;更新次数：</span>{{ item.$.commitNumber }}</p>
+                <p class="list-item-info-see"><span>&#xe636;</span>{{ item.$.commitNumber }}</p>
             </div>
         </div>
     </div>
@@ -44,6 +35,11 @@
         margin: 15vh 0;
         object-fit: cover;
         z-index: 8;
+        filter: saturate(25%);
+        transition: 0.2s;
+    }
+    .cover-back:hover {
+        filter: none;
     }
     .cover-title {
         position: absolute;
@@ -54,24 +50,43 @@
         font-size: var(--size8);
         color: var(--color-white);
         font-weight: 900;
+        pointer-events: none;
     }
     .list {
         margin: auto;
         width: 95%;
         max-width: 800px;
     }
-    .list-item {
-        padding: 1rem 3rem;
-        border-radius: 5px;
-        box-shadow: 0 0 5px #8888;
-    }
     .list-item:nth-child(n +2) {
-        margin-top: 20px;
+        margin-top: 50px;
+        padding-top: 30px;
+        border-top: solid 1px #8883;
     }
     .list-item-title {
+        color: #1b2832;
         font-size: var(--size8);
     }
     .list-item-description {
+        color: #415462;
+        margin-top: 20px;
         font-size: var(--size5);
+    }
+    .list-item-info {
+        margin-top: 20px;
+        display: flex;
+    }
+    .list-item-info-update {
+
+    }
+
+    .list-item-info-count {
+        margin-left: 15px;
+    }
+    .list-item-info-see {
+        margin-left: 15px;
+    }
+    .list-item-info span {
+        color: #888;
+        margin-right: 5px;
     }
 </style>
