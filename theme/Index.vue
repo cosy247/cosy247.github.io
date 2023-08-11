@@ -3,14 +3,15 @@
     <div class="main">
         <Home />
     </div>
+    <Progress/>
     <Footer />
-    <div style="height: 200vh"></div>
 </template>
 
 <script setup>
     import './common/style.css';
     import Footer from './components/Footer.vue';
     import Menu from './components/Menu.vue';
+    import Progress from './components/Progress.vue';
     import Home from './pages/Home.vue';
 </script>
 

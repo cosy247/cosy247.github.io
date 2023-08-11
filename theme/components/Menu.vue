@@ -43,7 +43,7 @@
 
 <script setup>
     import themeConfig from '../../theme.config';
-    import { reactive, ref, onMounted } from 'vue';
+    import { reactive, ref, onMounted, onBeforeUnmount } from 'vue';
     import windowEvent from '../utils/windowEvent';
 
     const links = themeConfig.links || [];
@@ -62,14 +62,19 @@
         }
     }
 
-    onMounted(() => {
+    function checkPageTop() {
         const scrollTop = window.document.body.scrollTop || window.document.documentElement.scrollTop;
         isPageTop.value = scrollTop <= 10;
-        windowEvent.add('scroll', () => {
-            const scrollTop = window.document.body.scrollTop || window.document.documentElement.scrollTop;
-            isPageTop.value = scrollTop <= 10;
-        });
+    }
+
+    onMounted(() => {
+        checkPageTop();
+        windowEvent.add('scroll', checkPageTop);
     });
+
+    onBeforeUnmount(() => {
+        windowEvent.remove('scroll', checkPageTop);
+    })
 </script>
 
 <style>

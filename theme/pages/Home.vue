@@ -78,7 +78,6 @@
     .list-item-info-update {
 
     }
-
     .list-item-info-count {
         margin-left: 15px;
     }
