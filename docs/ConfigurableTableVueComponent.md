@@ -744,7 +744,56 @@ methods: {
 
 ## 单元格事件回调
 
-在一些特殊的情况下，需要对特殊的单元格进行事件绑定。
+在一些特殊的情况下，需要对特殊的单元格进行事件绑定。而且不同的组件支持的事件也有所不同。比如输入框支持`change`、`input`、`blur`和`focus`，而`checkbox`只支持`change`就可以了。再定义`events`对象为单元格属性，其中包含需要绑定的事件和函数或函数名。
+
+```html
+<td v-for="tdColumn in tdRow" :class="getItemClassName(tdColumn)">
+    // ...
+    <el-input
+        v-else-if="tdColumn.type == 'input'"
+        v-model="tdColumn.value"
+        :disabled="tdColumn.disabled"
+        @blur="runEvent('blur', tdColumn, rowIndex)"
+        @focus="runEvent('focus', tdColumn, rowIndex)"
+        @input="runEvent('input', tdColumn, rowIndex)"
+        @change="runEvent('change', tdColumn, rowIndex)" />
+    // ...
+</td>
+```
+
+```js
+data: () => ({
+    tableData: {
+        ths: [
+            {
+                // ...
+                events: {
+                    change(tdColumn, rowIndex, vm) {},
+                },
+            },
+            // ...
+        ]
+        // ...
+    }
+    // ...
+})
+methods: {
+    runEvent(eventName, tdColumn, rowIndex) {
+        if (tdColumn.events) {
+            if (typeof tdColumn.events[eventName] == 'function') {
+                tdColumn.events[eventName](tdColumn, rowIndex, this);
+            } else if (typeof tdColumn.events[eventName] == 'string') {
+                functionTotal[tdColumn.events[eventName]] && functionTotal[tdColumn.events[eventName]](tdColumn, rowIndex, this);
+            }
+        }
+    },
+    // ...
+}
+```
+
+现在标签中定义出支持的事件，这里实例给出了`input`的事件，其他类型单元格类似。事件都通过`runEvent`处理，先查看单元格的`events`下是否有对应的事件函数可以调用，再到统一定义函数集合`functionTotal`中查找，这里省略了引入。
+
+> 事件指定的可以是一个函数，也可以是一个在统一定义函数集合中的一个函数名。统一定义函数集合用来管理一些特殊的函数集合。
 
 # 参数说明
 
@@ -778,6 +827,13 @@ data = {
             option: '|edit|delete'，
             /** 编辑时替换的属性 */
             edit: {},
+            /** 绑定事件 */
+            events: {
+                /** 定义change事件并传入执行函数（当前单元格配置，行序号，组件实例） */
+                change(tdColumn, rowIndex, vm) {},
+                /** 定义input事件并传入函数名（当前单元格配置，行序号，组件实例） */
+                input: 'functionName',
+            }
         },
     ],
     tds: [
@@ -864,12 +920,44 @@ config = {
                             <span v-if="tdColumn.option.includes('|save')" @click="saveRow(tdRow, rowIndex)">保存</span>
                             <span v-if="tdColumn.option.includes('|cancel')" @click="cancelRow(tdRow, rowIndex)">取消</span>
                         </div>
-                        <el-input v-else-if="tdColumn.type == 'input'" v-model="tdColumn.value" :disabled="tdColumn.disabled" />
-                        <el-date-picker v-else-if="tdColumn.type == 'date'" v-model="tdColumn.value" :type="tdColumn.dateType" format="yyyy/M/d" :disabled="tdColumn.disabled" />
-                        <el-cascader v-else-if="tdColumn.type == 'select'" :options="tdColumn.typeData" v-model="tdColumn.value" :disabled="tdColumn.disabled" />
-                        <el-checkbox v-else-if="tdColumn.type == 'checkbox'" v-model="tdColumn.value" :disabled="tdColumn.disabled" />
-                        <el-switch v-else-if="tdColumn.type == 'switch'" v-model="tdColumn.value" :disabled="tdColumn.disabled" />
-                        <span v-else class="text">{{ getShowText(tdColumn) }}</span>
+                        <el-input
+                            v-else-if="tdColumn.type == 'input'"
+                            v-model="tdColumn.value"
+                            :disabled="tdColumn.disabled"
+                            @blur="runEvent('blur', tdColumn, rowIndex)"
+                            @focus="runEvent('focus', tdColumn, rowIndex)"
+                            @input="runEvent('input', tdColumn, rowIndex)"
+                            @change="runEvent('change', tdColumn, rowIndex)" />
+                        <el-date-picker
+                            v-else-if="tdColumn.type == 'date'"
+                            v-model="tdColumn.value"
+                            :type="tdColumn.dateType"
+                            format="yyyy/M/d"
+                            :disabled="tdColumn.disabled"
+                            @blur="runEvent('blur', tdColumn, rowIndex)"
+                            @focus="runEvent('focus', tdColumn, rowIndex)"
+                            @change="runEvent('change', tdColumn, rowIndex)" />
+                        <el-cascader
+                            v-else-if="tdColumn.type == 'select'"
+                            :options="tdColumn.typeData"
+                            v-model="tdColumn.value"
+                            :disabled="tdColumn.disabled"
+                            @blur="runEvent('blur', tdColumn, rowIndex)"
+                            @focus="runEvent('focus', tdColumn, rowIndex)"
+                            @change="runEvent('change', tdColumn, rowIndex)" />
+                        <el-checkbox
+                            v-else-if="tdColumn.type == 'checkbox'"
+                            v-model="tdColumn.value"
+                            :disabled="tdColumn.disabled"
+                            @change="runEvent('change', tdColumn, rowIndex)" />
+                        <el-switch
+                            v-else-if="tdColumn.type == 'switch'"
+                            v-model="tdColumn.value"
+                            :disabled="tdColumn.disabled"
+                            @change="runEvent('change', tdColumn, rowIndex)" />
+                        <span v-else class="text">
+                            {{ getShowText(tdColumn) }}
+                        </span>
                     </td>
                 </tr>
             </table>
@@ -881,6 +969,9 @@ config = {
 </template>
 
 <script>
+    import { deepClone } from '@/common/utils/public';
+    import functionTotal from '@/special/out';
+
     function isEmptyValue(value) {
         if (Object.prototype.toString.call(value) == '[object Array]') {
             return value.length !== 0;
@@ -932,11 +1023,13 @@ config = {
                             })
                         );
                     }
-                    this.tdInitData = structuredClone(this.tdData);
-                    this.addRowData = structuredClone(this.tdData[0]).map((item) => {
-                        item.value = '';
-                        return item;
-                    });
+                    this.tdInitData = deepClone(this.tdData);
+                    if (this.tdData[0]) {
+                        this.addRowData = deepClone(this.tdData[0]).map((item) => {
+                            item.value = '';
+                            return item;
+                        });
+                    }
                 },
                 immediate: true,
             },
@@ -962,8 +1055,24 @@ config = {
                     search: column.type == 'text' && String(column.value).includes(this.config.search),
                 };
             },
+            getEvents(tdColumn) {
+                console.log(tdColumn);
+            },
+            runEvent(eventName, tdColumn, rowIndex) {
+                if (tdColumn.events) {
+                    if (typeof tdColumn.events[eventName] == 'function') {
+                        tdColumn.events[eventName](tdColumn, rowIndex, this);
+                    } else if (typeof tdColumn.events[eventName] == 'string') {
+                        functionTotal[tdColumn.events[eventName]] && functionTotal[tdColumn.events[eventName]](tdColumn, rowIndex, this);
+                    }
+                }
+            },
             editRow(rowData, rowIndex) {
-                if (this.isEditing) return;
+                if (this.isEditing) {
+                    this.$message.warning('请先完成当前编辑');
+                    return;
+                }
+                this.isEditing = true;
                 this.$set(
                     this.tdData,
                     rowIndex,
@@ -996,11 +1105,11 @@ config = {
                 });
                 // 判断是否有保存回调函数，返回为true时继续执行
                 if (typeof this.config?.onSave == 'function') {
-                    if (!this.config.onSave.call(rowData, rowIndex, this.tdValues, vm)) {
+                    if (!this.config.onSave(rowData, rowIndex, this.tdValues, this)) {
                         return;
                     }
                 }
-                this.$set(this.tdData, rowIndex, structuredClone(this.tdInitData[rowIndex]));
+                this.$set(this.tdData, rowIndex, deepClone(this.tdInitData[rowIndex]));
             },
             cancelRow(rowData, rowIndex) {
                 this.isEditing = false;
@@ -1009,14 +1118,17 @@ config = {
                     this.tdInitData.pop();
                     this.isAdding = false;
                 } else {
-                    this.$set(this.tdData, rowIndex, structuredClone(this.tdInitData[rowIndex]));
+                    this.$set(this.tdData, rowIndex, deepClone(this.tdInitData[rowIndex]));
                 }
             },
             addRow() {
-                if (this.isEditing) return;
+                if (this.isEditing) {
+                    this.$message.warning('请先完成当前编辑');
+                    return;
+                }
                 this.isAdding = true;
-                this.tdData.push(structuredClone(this.addRowData));
-                this.tdInitData.push(structuredClone(this.addRowData));
+                this.tdData.push(deepClone(this.addRowData));
+                this.tdInitData.push(deepClone(this.addRowData));
                 const index = this.tdData.length - 1;
                 this.editRow(this.tdData[index], index);
             },
@@ -1113,6 +1225,8 @@ config = {
         height: 100%;
         border: 1px #6cb2ff solid;
         box-sizing: border-box;
+        background: transparent;
+        border-radius: 0;
     }
     /* type == select */
     /deep/ .table-content-table td.select .el-input__inner {
@@ -1150,7 +1264,7 @@ config = {
 <!-- TableDome.vue -->
 <template>
     <div class="tableDome-root">
-        <table :data="tableData" :config="tableConfig" :updateTime="updateTime" />
+        <Table :data="tableData" :config="tableConfig" :updateTime="updateTime" />
     </div>
 </template>
 
@@ -1163,10 +1277,18 @@ config = {
             updateTime: Date.now(),
             tableData: {
                 ths: [
-                    { name: '输入框', edit: { type: 'input', require: true } },
+                    {
+                        name: '输入框',
+                        edit: { type: 'input', require: true },
+                        events: {
+                            change(...ddd) {
+                                console.log(ddd, '输入框');
+                            },
+                        },
+                    },
                     {
                         name: '下拉框',
-                        showType: 'array-',
+                        showType: 'array-all',
                         edit: {
                             type: 'select',
                             typeData: [
@@ -1180,6 +1302,11 @@ config = {
                                 },
                                 { value: 33, label: 333 },
                             ],
+                        },
+                        events: {
+                            change(...ddd) {
+                                console.log(ddd, '下拉框');
+                            },
                         },
                     },
                     { name: '单选框', type: 'checkbox', disabled: true, edit: { disabled: false } },
@@ -1202,13 +1329,14 @@ config = {
                 addible: true,
                 search: 'ABC',
                 onSave(rowData, rowIndex, tdValues, vm) {
+                    console.log(rowData, rowIndex, tdValues, vm);
                     if (rowIndex != 0) {
                         vm.$message.warning('只可以对第一行数据进行保存');
                         return false;
                     }
                     return true;
                 },
-                setItemConfig(itemConfig, tdRow, rowIndex) {
+                getItemConfig(itemConfig, tdRow, rowIndex) {
                     if (new Date(tdRow[3].value) > Date.now()) {
                         itemConfig.disabled = true;
                         itemConfig.edit = {
