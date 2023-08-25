@@ -18,9 +18,9 @@
 
 <script setup>
     import themeConfig from '../../theme.config';
-    import { pageMateData, countMateData } from '@temp/blogMate';
+    import { pageDatas, countMateData } from '@temp/blogMate';
 
-    const pageList = pageMateData.slice(0, 10);
+    const pageList = pageDatas.blog.slice(0, 10);
 </script>
 
 <style>

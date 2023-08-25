@@ -64,7 +64,7 @@
 
     function checkPageTop() {
         const scrollTop = window.document.body.scrollTop || window.document.documentElement.scrollTop;
-        isPageTop.value = scrollTop <= 10;
+        isPageTop.value = scrollTop <= 50;
     }
 
     onMounted(() => {

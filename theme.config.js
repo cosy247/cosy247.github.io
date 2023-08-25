@@ -7,9 +7,6 @@ export default {
     ],
     cover: {
         home: 'https://images.alphacoders.com/131/1311951.jpg',
-        tags: {
-
-        }
     },
     menus: [
         { name: '首页', url: '' },
