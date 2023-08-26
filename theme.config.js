@@ -9,7 +9,7 @@ export default {
         home: 'https://images.alphacoders.com/131/1311951.jpg',
     },
     menus: [
-        { name: '首页', url: '' },
+        { name: '首页', url: '/' },
         { name: '标签', url: '' },
         { name: '图册', url: '' },
         { name: '访客留言', url: '' },

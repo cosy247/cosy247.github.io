@@ -9,7 +9,7 @@ module.exports = {
     cache: './.cache',
     public: './assets',
     description: '',
-    permalinkPattern: ':slug',
+    permalinkPattern: ':raw',
     plugins: [
         themeMaster(),
         gitPlugin(),

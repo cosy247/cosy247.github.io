@@ -1,17 +1,17 @@
 export default ({ initMateNames = [], countMateNames = [], isArrMateNames = [] }) => ({
-    name: 'plugins-blog-mate',
+    name: 'plugins-blog-meta',
     onPrepared(app) {
         const nowDate = Date.now();
 
-        const countMateData = countMateNames.reduce((countMateData, mateName) => {
-            countMateData[mateName] = {};
+        const countMateData = countMateNames.reduce((countMateData, metaName) => {
+            countMateData[metaName] = {};
             return countMateData;
         }, {});
 
         const pageDatas = app.pages.reduce((pageDatas, page) => {
             const {
                 filePathRelative,
-                frontmatter: mate,
+                frontmatter: meta,
                 data: { git = {} },
             } = page;
             const { createdTime = nowDate, updatedTime = nowDate, contributors = [] } = git;
@@ -19,33 +19,34 @@ export default ({ initMateNames = [], countMateNames = [], isArrMateNames = [] }
             const updatedTimeString = new Date(updatedTime).toLocaleString();
             const commitAmount = contributors.reduce((commitNumber, { commits }) => commitNumber + commits, 0);
             const [type, fileName, moreFlag] = filePathRelative ? filePathRelative.split('/') : [];
+            page.type = type;
 
             // 判断路径是否正确
             if (moreFlag || !fileName) return pageDatas;
 
             // 数组属性转化
-            isArrMateNames.forEach((mateName) => {
-                if (mate[mateName]) {
-                    mate[mateName] = mate[mateName].split(' ');
+            isArrMateNames.forEach((metaName) => {
+                if (meta[metaName]) {
+                    meta[metaName] = meta[metaName].split(' ');
                 }
             });
 
             // 属性计数
-            countMateNames.forEach((mateName) => {
-                const mateValue = mate[mateName];
-                if (mateValue) {
-                    if (isArrMateNames.includes(mateName)) {
-                        mateValue.forEach((value) => {
-                            if (!countMateData[mateName][value]) {
-                                countMateData[mateName][value] = 0;
+            countMateNames.forEach((metaName) => {
+                const metaValue = meta[metaName];
+                if (metaValue) {
+                    if (isArrMateNames.includes(metaName)) {
+                        metaValue.forEach((value) => {
+                            if (!countMateData[metaName][value]) {
+                                countMateData[metaName][value] = 0;
                             }
-                            countMateData[mateName][value]++;
+                            countMateData[metaName][value]++;
                         });
                     } else {
-                        if (!countMateData[mateName][mateValue]) {
-                            countMateData[mateName][mateValue] = 0;
+                        if (!countMateData[metaName][metaValue]) {
+                            countMateData[metaName][metaValue] = 0;
                         }
-                        countMateData[mateName][mateValue]++;
+                        countMateData[metaName][metaValue]++;
                     }
                 }
             });
@@ -55,8 +56,8 @@ export default ({ initMateNames = [], countMateNames = [], isArrMateNames = [] }
                 pageDatas[type] = [];
             }
             pageDatas[type].push({
-                fileName,
-                mate,
+                path: `/${filePathRelative.slice(0, -3)}`,
+                meta,
                 $: { createdTime: createdTimeString, updatedTime: updatedTimeString, commitAmount },
             });
 
