@@ -4,23 +4,25 @@
         <p class="cover-title">{{ themeConfig.title }}</p>
     </div>
     <div class="list">
-        <div class="list-item" v-for="item in pageList">
-            <p class="list-item-title">{{ item.title }}</p>
-            <p class="list-item-description">{{ item.description }}</p>
+        <a :href="item.path" class="list-item" v-for="item in pageList">
+            <p class="list-item-title">{{ item.meta.title }}</p>
+            <p class="list-item-description">{{ item.meta.description }}</p>
             <div class="list-item-info">
                 <p class="list-item-info-update" v-show="item.$.updatedTime"><span>&#xe6ad;更新时间：</span>{{ new Date(item.$.updatedTime).toLocaleString() }}</p>
                 <p class="list-item-info-count"><span>&#xe689;更新次数：</span>{{ item.$.commitNumber }}</p>
                 <p class="list-item-info-see"><span>&#xe636;</span>{{ item.$.commitNumber }}</p>
             </div>
-        </div>
+        </a>
     </div>
 </template>
 
 <script setup>
     import themeConfig from '../../theme.config';
+    // @ts-ignore
     import { pageDatas, countMateData } from '@temp/blogMate';
 
     const pageList = pageDatas.blog.slice(0, 10);
+    console.log(pageList);
 </script>
 
 <style>
@@ -56,6 +58,9 @@
         margin: auto;
         width: 95%;
         max-width: 800px;
+    }
+    .list-item {
+        display: block;
     }
     .list-item:nth-child(n +2) {
         margin-top: 50px;
