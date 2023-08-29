@@ -1,9 +1,10 @@
 <template>
+    <div></div>
     <Menu />
     <div class="main">
-        <Home />
+        <Home v-if="pageType == 'home'" />
+        <Blog v-else-if="pageType == 'blog'"/>
     </div>
-    <Progress/>
     <Footer />
 </template>
 
@@ -11,12 +12,19 @@
     import './common/style.css';
     import Footer from './components/Footer.vue';
     import Menu from './components/Menu.vue';
-    import Progress from './components/Progress.vue';
     import Home from './pages/Home.vue';
+    import Blog from './pages/Blog.vue';
+    import { usePageData } from '@vuepress/client';
+    import stroe from './store'
+
+    const { path } = usePageData().value;
+    const pageType = path == '/' ? 'home' : path.split('/')[1];
+    
+    stroe.pageType = pageType;
 </script>
 
 <style scoped>
-    main {
+    .main {
         width: 100%;
         min-height: 100%;
         background: white;

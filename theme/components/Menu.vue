@@ -1,6 +1,6 @@
 <template>
     <div class="rootMenu">
-        <div class="menu-outer" :class="!isPageTop && !isMenuPage ? 'open' : ''">
+        <div class="menu-outer" :class="!isShowMoreItems ? 'open' : ''">
             <div class="menu-logo link-hover" :class="isMenuPage ? 'rese' : ''" @click="showMenu">
                 <span class="menu-logo-left">&#xe883;</span>
                 Menu
@@ -9,14 +9,14 @@
             <div class="menu-search">
                 <input type="text" />
             </div>
-            <div class="menu-link" :class="!isPageTop && !isMenuPage ? 'hidden' : ''">
+            <div class="menu-link" :class="!isShowMoreItems ? 'hidden' : ''">
                 <p class="menu-link-item link-hover" v-for="item in links">
                     <span v-html="item.icon"></span>
                     {{ item.name }}
                 </p>
                 <p class="menu-link-hello">{{ linkHello }}</p>
             </div>
-            <div class="menu-count" :class="!isPageTop && !isMenuPage ? 'hidden' : ''">
+            <div class="menu-count" :class="!isShowMoreItems ? 'hidden' : ''">
                 <p>20</p>
                 <p>23</p>
                 <p class="menu-count-line">--</p>
@@ -31,7 +31,7 @@
         </div>
         <div class="menu-main" :class="isMenuPage ? 'show' : ''">
             <div class="menu-items">
-                <p class="menu-item link-hover" v-for="(item, index) in menuItems" :data-name="item.name">{{ item.name }}</p>
+                <a :href="item.url" class="menu-item link-hover" v-for="(item, index) in menuItems" :data-name="item.name">{{ item.name }}</a>
             </div>
             <div class="menu-author">
                 <img class="menu-author-avatar" :src="author.avatar" alt="" />
@@ -43,15 +43,18 @@
 
 <script setup>
     import themeConfig from '../../theme.config';
-    import { reactive, ref, onMounted, onBeforeUnmount } from 'vue';
+    import { computed, ref, onMounted, onBeforeUnmount } from 'vue';
     import windowEvent from '../utils/windowEvent';
+    import store from '../store';
 
     const links = themeConfig.links || [];
     const linkHello = themeConfig.linkHello || '和我取得联系>>>';
     const isPageTop = ref(false);
     const isMenuPage = ref(false);
     const menuItems = themeConfig.menus;
-    const author = themeConfig.author || {};
+    const author = themeConfig.author;
+
+    const isShowMoreItems = computed(() => (isPageTop.value && store.pageType == 'home') || isMenuPage.value);
 
     function showMenu() {
         isMenuPage.value = !isMenuPage.value;
@@ -64,8 +67,10 @@
 
     function checkPageTop() {
         const scrollTop = window.document.body.scrollTop || window.document.documentElement.scrollTop;
-        isPageTop.value = scrollTop <= 10;
+        isPageTop.value = scrollTop <= 50;
     }
+
+    function showMenuOuter() {}
 
     onMounted(() => {
         checkPageTop();
@@ -74,7 +79,7 @@
 
     onBeforeUnmount(() => {
         windowEvent.remove('scroll', checkPageTop);
-    })
+    });
 </script>
 
 <style>
@@ -270,6 +275,7 @@
     .menu-item {
         position: relative;
         line-height: 1.8em;
+        display: block;
         cursor: pointer;
     }
     .menu-item::before {
