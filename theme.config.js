@@ -21,4 +21,13 @@ export default {
         avatar: 'imgs/avatar.webp',
         about: '一个简单码农的个人博客。没有太多的兴趣爱好，无聊写个基于<a href="https://liubz.github.io/">vuepress2</a>的博客来记录并分享工作生活中的各种琐事，有问题欢迎探讨交流。',
     },
+    footer: {
+        content: [
+            {
+                title: '',
+                links: [{ name: '', url: '' }],
+            },
+        ],
+        copyright: 'cosy247.top 木兮兮',
+    },
 };
