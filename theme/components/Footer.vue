@@ -6,6 +6,7 @@
             <div class="main">
                 <div class="main-col" v-for="content in themeConfig.footer.content">
                     <p class="main-col-title">{{ content.title }}</p>
+                    <div class="main-col-line"></div>
                     <a :href="item.url" v-for="item in content.links" class="main-col-item">{{ item.name }}</a>
                 </div>
             </div>
@@ -18,6 +19,7 @@
             <div class="main">
                 <div class="main-col" v-for="content in themeConfig.footer.content">
                     <p class="main-col-title">{{ content.title }}</p>
+                    <div class="main-col-line"></div>
                     <a :href="item.url" v-for="item in content.links" class="main-col-item">{{ item.name }}</a>
                 </div>
             </div>
@@ -32,13 +34,14 @@
 
 <style scoped>
     .gap {
+        position: relative;
         height: 100px;
         background: white;
+        z-index: 1;
     }
     .root {
         width: 100%;
         padding: 30px 0;
-        z-index: -1;
         background: linear-gradient(30deg, #252525, #272025);
         color: #eee;
     }
@@ -49,6 +52,7 @@
     }
     .root-hidden {
         opacity: 0;
+        pointer-events: none;
     }
     .content {
         margin: auto;
@@ -70,7 +74,11 @@
     .main-col-title {
         color: #888;
         padding-bottom: 5px;
-        border-bottom: solid 1px #aaa;
+    }
+    .main-col-line {
+        height: 1px;
+        background: var(--color-red);
+        opacity: 0.7;
     }
     .main-col-item {
         display: block;

@@ -1,7 +1,7 @@
 <template>
-    <div class="rootMenu">
-        <div class="menu-outer" :class="!isShowMoreItems ? 'open' : ''">
-            <div class="menu-logo" :class="isMenuPage ? 'rese' : ''" @click="showMenu">
+    <div class="rootMenu" :class="isExpand ? 'open' : ''">
+        <div class="menu-outer">
+            <div class="menu-logo" @click="switchMenu">
                 <span class="menu-logo-left">&#xe883;</span>
                 Menu
                 <span class="menu-logo-right">&#xe601;</span>
@@ -9,14 +9,14 @@
             <div class="menu-search">
                 <input type="text" />
             </div>
-            <div class="menu-link" :class="!isShowMoreItems ? 'hidden' : ''">
+            <div class="menu-link">
                 <p class="menu-link-item" v-for="item in links">
                     <span v-html="item.icon"></span>
                     {{ item.name }}
                 </p>
                 <p class="menu-link-hello">{{ linkHello }}</p>
             </div>
-            <div class="menu-count" :class="!isShowMoreItems ? 'hidden' : ''">
+            <div class="menu-count">
                 <p>20</p>
                 <p>23</p>
                 <p class="menu-count-line">--</p>
@@ -49,28 +49,28 @@
 
     const links = themeConfig.links || [];
     const linkHello = themeConfig.linkHello || '和我取得联系>>>';
-    const isPageTop = ref(false);
-    const isMenuPage = ref(false);
     const menuItems = themeConfig.menus;
     const author = themeConfig.author;
 
-    const isShowMoreItems = computed(() => (isPageTop.value && store.pageType == 'home') || isMenuPage.value);
+    /** 是否在页面顶部 */
+    const isPageTop = ref(false);
+    /** 是否在菜单页面 */
+    const isMenuPage = ref(false);
+    /** 是否展开外部显示的内容 */
+    const isExpand = ref(false);
 
-    function showMenu() {
+    function switchMenu() {
         isMenuPage.value = !isMenuPage.value;
-        if (isMenuPage.value) {
-            window.document.documentElement.style.overflow = 'hidden';
-        } else {
-            window.document.documentElement.style.overflow = 'auto';
-        }
+        isExpand.value = !isPageTop.value && !isMenuPage.value;
+        window.document.documentElement.style.overflow = isMenuPage.value ? 'hidden' : 'auto';
     }
 
     function checkPageTop() {
         const scrollTop = window.document.body.scrollTop || window.document.documentElement.scrollTop;
         isPageTop.value = scrollTop <= 50;
+        isExpand.value = !isPageTop.value && !isMenuPage.value;
+        console.log(isExpand.value);
     }
-
-    function showMenuOuter() {}
 
     onMounted(() => {
         checkPageTop();
@@ -103,7 +103,7 @@
         transition: 0.3s;
         z-index: 555;
     }
-    .menu-outer.open {
+    .open > .menu-outer {
         width: 110%;
         height: 110%;
     }
@@ -189,15 +189,15 @@
         left: 10%;
         bottom: 10%;
         transition: 0.3s;
+        pointer-events: all;
     }
-    .menu-link.hidden {
+    .open > .menu-outer > .menu-link {
         opacity: 0;
         pointer-events: none;
     }
     .menu-link-item {
         font-size: var(--size2);
         cursor: pointer;
-        pointer-events: all;
     }
     .menu-link-item::after {
         content: '~';
@@ -214,6 +214,9 @@
         right: 10%;
         bottom: 10%;
         transition: 0.3s;
+    }
+    .open > .menu-outer > .menu-count {
+        opacity: 0;
     }
     .menu-count.hidden {
         opacity: 0;
