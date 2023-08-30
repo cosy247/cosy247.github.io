@@ -33,8 +33,6 @@ html {
     height: 100%;
 }
 body {
-    width: calc(100vw + 18px);
-    height: 100%;
     -ms-overflow-style: none;
     overflow: auto;
     min-width: 1080px;

@@ -1,13 +1,11 @@
 export default {
-    title: '木兮兮的博客',
+    title: '木兮兮🎶的博客',
     links: [
         { name: 'QQ', icon: '&#xe882;', url: '705194673@qq.com' },
         { name: '邮箱', icon: '&#xe600;', url: 'http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=al1aX1tTXlxdWSobG0QJBQc' },
         { name: 'github', icon: '&#xe673;', url: 'http://github.com/cosy247' },
     ],
-    cover: {
-        home: 'https://images.alphacoders.com/131/1311951.jpg',
-    },
+    cover: ['https://w.wallhaven.cc/full/9d/wallhaven-9d9g38.jpg'],
     menus: [
         { name: '首页', url: '/' },
         { name: '标签', url: '' },
