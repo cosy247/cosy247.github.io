@@ -1,35 +1,87 @@
 <template>
-    <div class="root">
-        <p class="title"></p>
-        <div class="links">
-            <a class="link-item" :href="item.url" v-for="item in links" v-html="item.icon"></a>
-        </div>
-        <hr class="line">
+    <div class="gap"></div>
+    <div class="root root-show">
         <div class="content">
-            <div class="content-support">
-                <p class="content-support-title">技术支持</p>
-                <a :href="item.url" v-for="item in support" class="content-support-item">{{item.name}}</a>
+            <p class="title">{{ themeConfig.title }}</p>
+            <div class="main">
+                <div class="main-col" v-for="content in themeConfig.footer.content">
+                    <p class="main-col-title">{{ content.title }}</p>
+                    <a :href="item.url" v-for="item in content.links" class="main-col-item">{{ item.name }}</a>
+                </div>
             </div>
-            <div class="menus">
-                <p class="content-support-title">导航</p>
-                <a class="menu-item" :href="item.url" v-for="item in links" v-html="item.icon"></a>
-            </div>
+            <p class="copyright">© {{ themeConfig.footer.copyright }}</p>
         </div>
-        <p class="copyright">© {{copyright}}</p>
+    </div>
+    <div class="root root-hidden">
+        <div class="content">
+            <p class="title">{{ themeConfig.title }}</p>
+            <div class="main">
+                <div class="main-col" v-for="content in themeConfig.footer.content">
+                    <p class="main-col-title">{{ content.title }}</p>
+                    <a :href="item.url" v-for="item in content.links" class="main-col-item">{{ item.name }}</a>
+                </div>
+            </div>
+            <p class="copyright">© {{ themeConfig.footer.copyright }}</p>
+        </div>
     </div>
 </template>
 
 <script setup>
     import themeConfig from '../../theme.config';
-
-    const links = themeConfig.links || [];
-    const support = themeConfig.footer?.support || [];
-    const copyright = themeConfig.footer?.copyright || '';
 </script>
 
 <style scoped>
+    .gap {
+        height: 100px;
+        background: white;
+    }
     .root {
         width: 100%;
-        height: 100%;
+        padding: 30px 0;
+        z-index: -1;
+        background: linear-gradient(30deg, #252525, #272025);
+        color: #eee;
+    }
+    .root-show {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+    }
+    .root-hidden {
+        opacity: 0;
+    }
+    .content {
+        margin: auto;
+        width: 100%;
+        max-width: var(--min-width);
+    }
+    .title {
+        font-size: var(--size7);
+    }
+    .main {
+        margin-top: 20px;
+        font-size: var(--size2);
+        display: flex;
+        width: 100%;
+    }
+    .main-col {
+        flex: 1;
+    }
+    .main-col-title {
+        color: #888;
+        padding-bottom: 5px;
+        border-bottom: solid 1px #aaa;
+    }
+    .main-col-item {
+        display: block;
+        width: fit-content;
+        color: #ccc;
+        margin-top: 5px;
+    }
+    .copyright {
+        margin-top: 10px;
+        text-align: right;
+        color: #aaa;
+        font-size: var(--size2);
     }
 </style>

@@ -1,5 +1,5 @@
 export default {
-    title: '木兮兮🎶的博客',
+    title: '木兮兮的博客',
     links: [
         { name: 'QQ', icon: '&#xe882;', url: '705194673@qq.com' },
         { name: '邮箱', icon: '&#xe600;', url: 'http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=al1aX1tTXlxdWSobG0QJBQc' },
@@ -24,8 +24,23 @@ export default {
     footer: {
         content: [
             {
-                title: '',
-                links: [{ name: '', url: '' }],
+                title: '导航',
+                links: [
+                    { name: '首页', url: '/' },
+                    { name: '标签', url: '' },
+                    { name: '图册', url: '' },
+                    { name: '访客留言', url: '' },
+                    { name: '独立应用', url: '' },
+                    { name: '一点猜想', url: '' },
+                    { name: '友情链接', url: '' },
+                ],
+            },
+            {
+                title: '技术支持',
+                links: [
+                    { name: 'Vuepress2', url: 'https://v2.vuepress.vuejs.org/zh/' },
+                    { name: 'Vue3', url: 'https://cn.vuejs.org/' },
+                ],
             },
         ],
         copyright: 'cosy247.top 木兮兮',
