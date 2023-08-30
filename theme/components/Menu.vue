@@ -1,7 +1,7 @@
 <template>
     <div class="rootMenu">
         <div class="menu-outer" :class="!isShowMoreItems ? 'open' : ''">
-            <div class="menu-logo link-hover" :class="isMenuPage ? 'rese' : ''" @click="showMenu">
+            <div class="menu-logo" :class="isMenuPage ? 'rese' : ''" @click="showMenu">
                 <span class="menu-logo-left">&#xe883;</span>
                 Menu
                 <span class="menu-logo-right">&#xe601;</span>
@@ -10,7 +10,7 @@
                 <input type="text" />
             </div>
             <div class="menu-link" :class="!isShowMoreItems ? 'hidden' : ''">
-                <p class="menu-link-item link-hover" v-for="item in links">
+                <p class="menu-link-item" v-for="item in links">
                     <span v-html="item.icon"></span>
                     {{ item.name }}
                 </p>
@@ -31,7 +31,7 @@
         </div>
         <div class="menu-main" :class="isMenuPage ? 'show' : ''">
             <div class="menu-items">
-                <a :href="item.url" class="menu-item link-hover" v-for="(item, index) in menuItems" :data-name="item.name">{{ item.name }}</a>
+                <a :href="item.url" class="menu-item" v-for="(item, index) in menuItems" :data-name="item.name">{{ item.name }}</a>
             </div>
             <div class="menu-author">
                 <img class="menu-author-avatar" :src="author.avatar" alt="" />
