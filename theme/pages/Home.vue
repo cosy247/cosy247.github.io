@@ -45,11 +45,7 @@
         margin: 15vh 0;
         object-fit: cover;
         z-index: 8;
-        filter: saturate(50%);
         transition: 0.2s;
-    }
-    .cover-back:hover {
-        filter: none;
     }
     .cover-title {
         position: absolute;
