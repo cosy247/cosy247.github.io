@@ -3,11 +3,11 @@ title: 可配置的表格Vue组件
 tags: vue vue组件 组件 可配置组件
 ---
 
-# 目的
+## 目的
 
 实现一个通用的表格`Vue`组件，通过对组件的`prop`的控制做到对组件内容的更改。【采用[element-ui](https://element.eleme.cn/#/zh-CN/component/installation)作为 ui】
 
-# 实现简单的一个 table
+## 实现简单的一个 table
 
 先对表头和表身的数据分割开来。表头对自身进行描述控制。表身的数据对单元格进行控制。
 
@@ -47,11 +47,11 @@ tags: vue vue组件 组件 可配置组件
 
 渲染结果：
 
-![Alt text](image-1.png)
+![Alt text](./assets/ConfigurableTableVueComponent/image-1.png)
 
 > `注：css可以在最后的完整代码中查看`
 
-# 实现输入框单元格
+## 实现输入框单元格
 
 目前单元格都是显示的普通文本，需要显示其他的特殊单元格需要添加一个字段`type`用来标识需要显示`input`类型。而其他的默认为`text`类型。
 
@@ -89,13 +89,13 @@ methods: {
 }
 ```
 
-![Alt text](image-2.png)
+![Alt text](./assets/ConfigurableTableVueComponent/image-2.png)
 
 对`thData`数据的处理比较简单。对`tdData`的处理过程是将对于列的`th`的配置内容写入到每一个单元格中，在渲染单元格的时候对其中的配置进行判断然后渲染为不同的单元格。当然也可以直接写到对应的单元格配置中，只是控制的权重不同，默认权重小于`th`配置权重小于单元格配置权重。这样方便配置列整体的单元格，也方便对单一单元格的配置进行特殊处理。进行处理后得到的`thData`为一个二维数组：`[[{type, name, value}]]`，其中`name`为列名来着表头，主要用于后面封装时的回调传值。添加`getItemClassName`方法用来设置单元格的类名，方便对单元格样式的控制。
 
 > 表格直接显示输入框显然不符合大多数的业务场景，更多的场景是默认显示普通文本信息，在每一列有编辑按钮，在点击编辑后讲对于的单元格切换为输入框。
 
-# 添加特殊功能按钮
+## 添加特殊功能按钮
 
 编辑按钮可以看作为一个特殊的控制功能，他需要对表格的其他单元格进行控制，之后还有保存，删除等。我们将这些可以改变其他单元格的功能统一使用`option`这一种`type`来做区分，再使用`option`属性用来表示操作的类型。
 
@@ -137,7 +137,7 @@ data: () => ({
 </tr>
 ```
 
-![Alt text](image-4.png)
+![Alt text](./assets/ConfigurableTableVueComponent/image-4.png)
 
 编辑按钮用了一个`div`包含起来是为了方便对`option`的显示进行统一管理。使用`includes`来判断是否添加按钮，这样方便一个操作栏中同时配置多个功能按钮。
 
@@ -168,7 +168,7 @@ data: () => ({
 }),
 ```
 
-![Alt text](image-5.png) ![Alt text](image-6.png)
+![Alt text](./assets/ConfigurableTableVueComponent/image-5.png) ![Alt text](./assets/ConfigurableTableVueComponent/image-6.png)
 
 其中输入框的`type`默认为`text`可以不写，操作的`type`为`option`，在编辑时`type`不变而把`option`改为保存和取消。在编辑事件中我们只需要把 edit 中的配置释放到外层配置即可。
 
@@ -247,7 +247,7 @@ methods: {
 
 目前已经对单元格的编辑相关功能已经完成，大致思想就是对单元格的配置进行修改以渲染出不同的单元格。当目前属性不足以完成目标功能时对属性进行添加，来保存需要的新属性即可。
 
-# 添加更多的特殊单元格
+## 添加更多的特殊单元格
 
 对应单元格的渲染类型我们使用 type 来控制，目前有默认的 text 和特殊的 input、option。通过添加更多的 type 来区分特殊单元格的类型，并使用 value 进行值保存，在必要时添加更多的属性。
 
@@ -291,7 +291,7 @@ data: () => ({
 });
 ```
 
-![Alt text](image-7.png) ![Alt text](image-8.png)
+![Alt text](./assets/ConfigurableTableVueComponent/image-7.png) ![Alt text](./assets/ConfigurableTableVueComponent/image-8.png)
 
 可以看到编辑是没有默认的值，是因为我们的 value 没有存在在数据中。但是保存后的 value 是一个数组，直接显示显然不满足我们的期望，那么需要我们对显示的数据进行类型判断来显示合适的。
 
@@ -333,11 +333,11 @@ methods: {
 }
 ```
 
-![Alt text](image-9.png)
+![Alt text](./assets/ConfigurableTableVueComponent/image-9.png)
 
 将 showType 设置为其他值时将用横线进行分割
 
-![Alt text](image-10.png)
+![Alt text](./assets/ConfigurableTableVueComponent/image-10.png)
 
 在获取显示文本时还是需要做一次数据类型的判断避免配置错误发生的 bug。在知道是数组时获取到数据后还需要再对其中的数据进行递归一次。再这个问题中可以不采用递归，但是数组中可以为`Date`类型，那么需要进行进一步的处理，在下面的事件选择器中将会遇到这个问题，但是我们已经提前解决了。
 
@@ -360,13 +360,13 @@ data: () => ({
 });
 ```
 
-![Alt text](image-11.png)
+![Alt text](./assets/ConfigurableTableVueComponent/image-11.png)
 
 `el-date-picker` 中有个`type`属性表示选择器类型，我们这里使用`dateType`表示。`dateType`可以不写在`edit`中，因为只有在`type`为`date`是`dateType`还有作用。这里选择后的值为`Date`类型，之前在`getShowText`已经对它处理掉了。
 
 > `el-date-picker`组件根据类型的不一样可以选择单一时间，也可以选择一个时间段。选择单一事件时的`value`为`Date`类型，选择事件段时的`value`为数组`[Date, Date]`
 
-![Alt text](image-12.png)
+![Alt text](./assets/ConfigurableTableVueComponent/image-12.png)
 
 ## 添加单选框
 
@@ -393,7 +393,7 @@ data: () => ({
 });
 ```
 
-![Alt text](image-13.png)
+![Alt text](./assets/ConfigurableTableVueComponent/image-13.png)
 
 > 这里只是给单选框和开关添加了 disabled 属性，当然也可以给其他类型的单元格添加这个属性进行统一管理。
 
@@ -401,7 +401,7 @@ data: () => ({
 
 单元格的类型是由`type`决定的，通过添加`type`类型来添加特殊单元格，再在对应的地方添加上组件即可。在需要更多控制属性时添加额外的属性保存其信息。
 
-# 添加列功能
+## 添加列功能
 
 添加功能可以作为一个特殊功能，因为它也相当于在改变单元格的状态。添加按钮应该不在表格中的已经存在的某一列中，而是单独成一行或者由单独的位置。
 
@@ -467,13 +467,13 @@ methods: {
 },
 ```
 
-![Alt text](image-14.png)
+![Alt text](./assets/ConfigurableTableVueComponent/image-14.png)
 
-![Alt text](image-15.png)
+![Alt text](./assets/ConfigurableTableVueComponent/image-15.png)
 
 表格是否添加是针对于表格而言的，所以可以添加的判断属性应该不在`tdData `或者`thData`中，这里声名了一个`config`用来对表格的整体描述，用于展示或者隐藏添加按钮。添加一列就是在`tdData`中添加数据，在`beforeMount`中生成添加列的模板，在添加时在数据末尾添加一个模板的复制即可。需要注意的是`tdInitData`也需要添加模板数据，并自动使其处于编辑状态。这里使用`isAdding`属性标识了目前是否在添加，避免多次点击出现多个添加框，并在保存和取消时对`isAdding`进行释放。使用`isEditing`属性表示是否有列在编辑，避免多行数据共同编辑，并在保存和取消时释放。
 
-# 属性必填功能
+## 属性必填功能
 
 在编辑时可以有的属性是必须填写的，其样式应该和其他的做区分，在保存时应该判断其是否填写。在单元格的中添加一个 require 表示是否必填。
 
@@ -532,11 +532,11 @@ methods: {
 }
 ```
 
-![Alt text](image-16.png)
+![Alt text](./assets/ConfigurableTableVueComponent/image-16.png)
 
 在 getItemClassName 中判断 require 值为单元格添加类名，并编写 css（这里没有写出 css）。在保存时判断是否有必填的单元格没有填写，并在没有完全填写时提示用户。这里判断是否填写单元格单独写了个函数，可以提供给其他地方使用，根据项目的不同可以对函数进行调整。
 
-# 搜索功能
+## 搜索功能
 
 搜索功能核心也是给符合条件的单元格添加样式，这里只对类型为 text 的进行搜索处理。搜索也是对表格整体的改变，搜索的关键词也放在 config 中。
 
@@ -558,9 +558,9 @@ methods: {
 }
 ```
 
-![Alt text](image-18.png)
+![Alt text](./assets/ConfigurableTableVueComponent/image-18.png)
 
-# 对单一单元格进行控制
+## 对单一单元格进行控制
 
 ## 在数据中修改单元格配置
 
@@ -576,7 +576,7 @@ data: () => ({
 });
 ```
 
-![Alt text](image-25.png)
+![Alt text](./assets/ConfigurableTableVueComponent/image-25.png)
 
 ## 通过筛选修改单元格配置
 
@@ -622,11 +622,11 @@ beforeMount() {
 },
 ```
 
-![Alt text](image-24.png)
+![Alt text](./assets/ConfigurableTableVueComponent/image-24.png)
 
 在`config`中定义`setItemConfig`函数用户修改单元格的配置，参数为当前作用目标单元格配置，这一行单元格的配置，这一行的下标。
 
-# Props 传递与数据更新
+## Props 传递与数据更新
 
 ## Props 传递
 
@@ -700,7 +700,7 @@ watch: {
 },
 ```
 
-# 事件回调
+## 事件回调
 
 ## 整体数据回调
 
@@ -739,7 +739,7 @@ methods: {
 }
 ```
 
-![Alt text](image-26.png)
+![Alt text](./assets/ConfigurableTableVueComponent/image-26.png)
 
 定义计算属性`tdValues`表示表格数据集并将当前组件作为参数传入回调。这里一共传递了 4 个参数，也后续开发中可能会传递更多的属性值，需要根据实际情况更改。
 
@@ -750,14 +750,7 @@ methods: {
 ```html
 <td v-for="tdColumn in tdRow" :class="getItemClassName(tdColumn)">
     // ...
-    <el-input
-        v-else-if="tdColumn.type == 'input'"
-        v-model="tdColumn.value"
-        :disabled="tdColumn.disabled"
-        @blur="runEvent('blur', tdColumn, rowIndex)"
-        @focus="runEvent('focus', tdColumn, rowIndex)"
-        @input="runEvent('input', tdColumn, rowIndex)"
-        @change="runEvent('change', tdColumn, rowIndex)" />
+    <el-input v-else-if="tdColumn.type == 'input'" v-model="tdColumn.value" :disabled="tdColumn.disabled" @blur="runEvent('blur', tdColumn, rowIndex)" @focus="runEvent('focus', tdColumn, rowIndex)" @input="runEvent('input', tdColumn, rowIndex)" @change="runEvent('change', tdColumn, rowIndex)" />
     // ...
 </td>
 ```
@@ -796,7 +789,7 @@ methods: {
 
 > 事件指定的可以是一个函数，也可以是一个在统一定义函数集合中的一个函数名。统一定义函数集合用来管理一些特殊的函数集合。
 
-# 参数说明
+## 参数说明
 
 目前组件有三个参数：`updateTime`用于控制数据更新，`tableData`用于控制数据展示，`config`用于控制表格的整体修改。
 
@@ -896,11 +889,11 @@ config = {
 },
 ```
 
-# 总结
+## 总结
 
 对表格的改变可以分为对单元格的改变和对表格整体的改变。如果是对单元格的改变只需要对单元格的配置信息进行修改即可，对表格整体的改变则需要在 config 中添加对应的控制属性并在合适的时候添加或者修改组件的标签属性内容。
 
-# 完整代码
+## 完整代码
 
 > 需要先引入 element-ui 使用`/deep/`对`element-ui`组件内部样式进行修改。
 
@@ -921,44 +914,12 @@ config = {
                             <span v-if="tdColumn.option.includes('|save')" @click="saveRow(tdRow, rowIndex)">保存</span>
                             <span v-if="tdColumn.option.includes('|cancel')" @click="cancelRow(tdRow, rowIndex)">取消</span>
                         </div>
-                        <el-input
-                            v-else-if="tdColumn.type == 'input'"
-                            v-model="tdColumn.value"
-                            :disabled="tdColumn.disabled"
-                            @blur="runEvent('blur', tdColumn, rowIndex)"
-                            @focus="runEvent('focus', tdColumn, rowIndex)"
-                            @input="runEvent('input', tdColumn, rowIndex)"
-                            @change="runEvent('change', tdColumn, rowIndex)" />
-                        <el-date-picker
-                            v-else-if="tdColumn.type == 'date'"
-                            v-model="tdColumn.value"
-                            :type="tdColumn.dateType"
-                            format="yyyy/M/d"
-                            :disabled="tdColumn.disabled"
-                            @blur="runEvent('blur', tdColumn, rowIndex)"
-                            @focus="runEvent('focus', tdColumn, rowIndex)"
-                            @change="runEvent('change', tdColumn, rowIndex)" />
-                        <el-cascader
-                            v-else-if="tdColumn.type == 'select'"
-                            :options="tdColumn.typeData"
-                            v-model="tdColumn.value"
-                            :disabled="tdColumn.disabled"
-                            @blur="runEvent('blur', tdColumn, rowIndex)"
-                            @focus="runEvent('focus', tdColumn, rowIndex)"
-                            @change="runEvent('change', tdColumn, rowIndex)" />
-                        <el-checkbox
-                            v-else-if="tdColumn.type == 'checkbox'"
-                            v-model="tdColumn.value"
-                            :disabled="tdColumn.disabled"
-                            @change="runEvent('change', tdColumn, rowIndex)" />
-                        <el-switch
-                            v-else-if="tdColumn.type == 'switch'"
-                            v-model="tdColumn.value"
-                            :disabled="tdColumn.disabled"
-                            @change="runEvent('change', tdColumn, rowIndex)" />
-                        <span v-else class="text">
-                            {{ getShowText(tdColumn) }}
-                        </span>
+                        <el-input v-else-if="tdColumn.type == 'input'" v-model="tdColumn.value" :disabled="tdColumn.disabled" @blur="runEvent('blur', tdColumn, rowIndex)" @focus="runEvent('focus', tdColumn, rowIndex)" @input="runEvent('input', tdColumn, rowIndex)" @change="runEvent('change', tdColumn, rowIndex)" />
+                        <el-date-picker v-else-if="tdColumn.type == 'date'" v-model="tdColumn.value" :type="tdColumn.dateType" format="yyyy/M/d" :disabled="tdColumn.disabled" @blur="runEvent('blur', tdColumn, rowIndex)" @focus="runEvent('focus', tdColumn, rowIndex)" @change="runEvent('change', tdColumn, rowIndex)" />
+                        <el-cascader v-else-if="tdColumn.type == 'select'" :options="tdColumn.typeData" v-model="tdColumn.value" :disabled="tdColumn.disabled" @blur="runEvent('blur', tdColumn, rowIndex)" @focus="runEvent('focus', tdColumn, rowIndex)" @change="runEvent('change', tdColumn, rowIndex)" />
+                        <el-checkbox v-else-if="tdColumn.type == 'checkbox'" v-model="tdColumn.value" :disabled="tdColumn.disabled" @change="runEvent('change', tdColumn, rowIndex)" />
+                        <el-switch v-else-if="tdColumn.type == 'switch'" v-model="tdColumn.value" :disabled="tdColumn.disabled" @change="runEvent('change', tdColumn, rowIndex)" />
+                        <span v-else class="text">{{ getShowText(tdColumn) }}</span>
                     </td>
                 </tr>
             </table>
@@ -1265,7 +1226,7 @@ config = {
 <!-- TableDome.vue -->
 <template>
     <div class="tableDome-root">
-        <Table :data="tableData" :config="tableConfig" :updateTime="updateTime" />
+        <table :data="tableData" :config="tableConfig" :updateTime="updateTime" />
     </div>
 </template>
 

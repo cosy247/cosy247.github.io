@@ -13,16 +13,16 @@ tags: 文件转换 md文档 pdf文件
 
 2. 在浏览器中预览md，不同软件方式不同。vscode中在预览中点击鼠标右键选择Open in Browser。
 
-![Alt text](image-23.png)
+![Alt text](./assets/MdTranslateToPdf/image-23.png)
 
 3. 在浏览器中右键选择打印
 
-![Alt text](image-20.png)
+![Alt text](./assets/MdTranslateToPdf/image-20.png)
 
 4. 在弹出的打印页面中选择Microsoft Print to PDF作为打印机
 
-![Alt text](image-21.png)
+![Alt text](./assets/MdTranslateToPdf/image-21.png)
 
 5. 点击打印，选择保存路径即可
 
-![Alt text](image-22.png)
+![Alt text](./assets/MdTranslateToPdf/image-22.png)
