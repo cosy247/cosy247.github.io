@@ -4,14 +4,16 @@
     src: url('//at.alicdn.com/t/c/font_4198141_h5yxcicceaf.woff2?t=1691482385353') format('woff2'), url('//at.alicdn.com/t/c/font_4198141_h5yxcicceaf.woff?t=1691482385353') format('woff'), url('//at.alicdn.com/t/c/font_4198141_h5yxcicceaf.ttf?t=1691482385353') format('truetype');
 }
 
-/*********** 定义变量 ***********/
 * {
     padding: 0;
     margin: 0;
     font-family: iconfont;
     letter-spacing: 0.05em;
 }
+
+/*********** 定义变量 ***********/
 :root {
+    --min-width: 1080px;
     font-size: 1vmin;
     --size1: 1.2rem;
     --size2: 1.4rem;
@@ -35,6 +37,7 @@ body {
     height: 100%;
     -ms-overflow-style: none;
     overflow: auto;
+    min-width: 1080px;
 }
 body::-webkit-scrollbar {
     display: none;
