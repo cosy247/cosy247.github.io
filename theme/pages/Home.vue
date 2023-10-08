@@ -1,6 +1,6 @@
 <template>
     <div class="cover">
-        <img class="cover-back" src="https://images.alphacoders.com/131/1311951.jpg" alt="" />
+        <img class="cover-back" :src="cover" alt="" />
         <p class="cover-title">{{ themeConfig.title }}</p>
     </div>
     <div class="list">
@@ -8,9 +8,18 @@
             <p class="list-item-title">{{ item.meta.title }}</p>
             <p class="list-item-description">{{ item.meta.description }}</p>
             <div class="list-item-info">
-                <p class="list-item-info-update" v-show="item.$.updatedTime"><span>&#xe6ad;更新时间：</span>{{ new Date(item.$.updatedTime).toLocaleString() }}</p>
-                <p class="list-item-info-count"><span>&#xe689;更新次数：</span>{{ item.$.commitNumber }}</p>
-                <p class="list-item-info-see"><span>&#xe636;</span>{{ item.$.commitNumber }}</p>
+                <p class="list-item-info-update" v-show="item.$.updatedTime">
+                    <span>&#xe6ad;更新时间：</span>
+                    {{ new Date(item.$.updatedTime).toLocaleString() }}
+                </p>
+                <p class="list-item-info-count">
+                    <span>&#xe689;更新次数：</span>
+                    {{ item.$.commitNumber }}
+                </p>
+                <p class="list-item-info-see">
+                    <span>&#xe636;</span>
+                    {{ item.$.commitNumber }}
+                </p>
             </div>
         </a>
     </div>
@@ -18,11 +27,10 @@
 
 <script setup>
     import themeConfig from '../../theme.config';
-    // @ts-ignore
     import { pageDatas, countMateData } from '@temp/blogMate';
 
+    const cover = themeConfig.cover[Date.now() % themeConfig.cover.length];
     const pageList = pageDatas.blog.slice(0, 10);
-    console.log(pageList);
 </script>
 
 <style>
@@ -37,11 +45,7 @@
         margin: 15vh 0;
         object-fit: cover;
         z-index: 8;
-        filter: saturate(25%);
         transition: 0.2s;
-    }
-    .cover-back:hover {
-        filter: none;
     }
     .cover-title {
         position: absolute;
@@ -62,7 +66,7 @@
     .list-item {
         display: block;
     }
-    .list-item:nth-child(n +2) {
+    .list-item:nth-child(n + 2) {
         margin-top: 50px;
         padding-top: 30px;
         border-top: solid 1px #8883;
@@ -81,7 +85,6 @@
         display: flex;
     }
     .list-item-info-update {
-
     }
     .list-item-info-count {
         margin-left: 15px;

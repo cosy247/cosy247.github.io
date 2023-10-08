@@ -69,7 +69,6 @@
         const scrollTop = window.document.body.scrollTop || window.document.documentElement.scrollTop;
         isPageTop.value = scrollTop <= 50;
         isExpand.value = !isPageTop.value && !isMenuPage.value;
-        console.log(isExpand.value);
     }
 
     onMounted(() => {
@@ -189,7 +188,7 @@
         left: 10%;
         bottom: 10%;
         transition: 0.3s;
-        pointer-events: all;
+        pointer-events: auto;
     }
     .open > .menu-outer > .menu-link {
         opacity: 0;
