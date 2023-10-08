@@ -37,7 +37,7 @@ draft: 存在这一行时表示在草稿箱中
 ```
 
 运行结果：
-
+``` html
 <div style="border: 1px solid #973;padding: 10px;border-radius: 10px;">
 	<style>
 		div.tempalate:has(> p) {
@@ -57,6 +57,7 @@ draft: 存在这一行时表示在草稿箱中
 		<p class='text'>我是类容</p>
 	</div>
 </div>
+```
 
 在判断是否选中时可以去除`:has()`来判断。如`div.tempalate:has(> p)`选择器只需要判断`div.tempalate > p`是否存在元素，存在时样式作用于`:has`之前的`div.tempalate`部分
 
@@ -65,4 +66,3 @@ draft: 存在这一行时表示在草稿箱中
 `:has`支持多个参数，参数之间使用逗号隔开。例如`div.tempalate:has(> .title, > .text)`，等同于`div.tempalate:has(> .title), div.tempalate:has(> .text)`，只要满足其中一个条件样式就可生效。
 
 # 混合使用
-
