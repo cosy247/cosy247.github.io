@@ -3,8 +3,6 @@ title: js数字取整
 tags: js
 ---
 
-# js 数字取整
-
 去掉小数部分
 
 ```js
