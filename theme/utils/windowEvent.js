@@ -1,5 +1,3 @@
-import getType from '.';
-
 const windowEvents = {};
 const timeInterval = 100;
 const intervalEvents = ['scroll']
@@ -7,9 +5,6 @@ let lastTimeValue = 0;
 
 export default {
     add(eventName, eventCallback) {
-        if (getType(eventName) !== 'String' || getType(eventCallback) !== 'Function') {
-            return;
-        }
         if (windowEvents.hasOwnProperty(eventName)) {
             windowEvents[eventName].add(eventCallback);
         } else {
@@ -29,9 +24,6 @@ export default {
         }
     },
     remove(eventName, eventCallback) {
-        if (getType(eventName) !== 'String' || getType(eventCallback) !== 'Function') {
-            return;
-        }
         if (windowEvents.hasOwnProperty(eventName)) {
             windowEvents[eventName].delete(eventCallback);
         }

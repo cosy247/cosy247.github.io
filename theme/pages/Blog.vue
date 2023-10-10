@@ -10,9 +10,9 @@
     import '../common/rainbow.css';
     import { usePageData } from '@vuepress/client';
     import themeConfig from '../../theme.config';
+    
     const pageData = usePageData().value;
     const cover = pageData.frontmatter.cover || themeConfig.cover[Date.now() % themeConfig.cover.length ];
-	console.log(cover);
 </script>
 
 <style scoped>
