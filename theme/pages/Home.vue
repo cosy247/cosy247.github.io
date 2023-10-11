@@ -49,13 +49,14 @@
     }
     .cover-title {
         position: absolute;
-        left: 50%;
         top: 45%;
-        transform: translate(-50%, -50%);
+        transform: translateY(-50%);
         z-index: 9;
         font-size: var(--size8);
         color: var(--color-white);
         font-weight: 900;
+        width: 100%;
+        text-align: center;
         pointer-events: none;
     }
     .list {

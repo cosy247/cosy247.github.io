@@ -1,5 +1,4 @@
 <template>
-    <div></div>
     <Menu />
     <div class="main">
         <Home v-if="pageType == 'home'" />

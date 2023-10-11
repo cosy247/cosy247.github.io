@@ -114,6 +114,7 @@
         font-size: var(--size5);
         font-weight: 900;
         pointer-events: all;
+        height: 24px;
     }
     .menu-logo-left {
         display: inline-block;
@@ -158,6 +159,9 @@
         position: absolute;
         right: 10%;
         top: 10%;
+        height: 24px;
+        display: flex;
+        align-items: center;
     }
     .menu-search::after {
         content: '';
