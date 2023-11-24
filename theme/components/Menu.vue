@@ -269,7 +269,7 @@
         left: 100%;
         width: 60%;
         height: 100%;
-        background: #999;
+        background: linear-gradient(rgb(133, 119, 170), rgb(153, 238, 153), rgb(238, 208, 153));
         z-index: -1;
     }
     .menu-items {
