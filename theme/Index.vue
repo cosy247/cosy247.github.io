@@ -4,38 +4,25 @@
         <Home v-if="pageType == 'home'" />
         <Blog v-else-if="pageType == 'blog'" />
     </div>
-    <Footer />
+    <Footer title="title" />
 </template>
 
 <script setup>
-    // 加载统一样式文件
     import './common/common.css';
-
-    // 加载组件
     import Footer from './components/Footer.vue';
     import Menu from './components/Menu.vue';
-    import Home from './pages/Home.vue';
-    import Blog from './pages/Blog.vue';
-
-    // 其他
+    import Home from './views/Home.vue';
+    import Blog from './views/Blog.vue';
     import { usePageData } from '@vuepress/client';
-    import stroe from './store';
 
     /** 页面类型 */
     const pageType = (() => {
         const { path } = usePageData().value;
         if (path == '/') {
-            stroe.pageType = 'home';
-        } else if (path == 'blog') {
-            stroe.pageType = 'blog';
-        } else if (path.match(/blog\//)) {
-            stroe.pageType = 'blog-item';
-        } else if (path == 'label') {
-            stroe.pageType = 'label';
-        } else if (path.match(/label\//)) {
-            stroe.pageType = 'label-item';
+            return 'home';
+        } else if (path.startsWith('/blog/')) {
+            return 'blog';
         }
-        return stroe.pageType;
     })();
 </script>
 

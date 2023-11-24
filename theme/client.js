@@ -1,6 +1,6 @@
 import { defineClientConfig } from '@vuepress/client';
 import Index from './Index.vue';
-import NotFound from './pages/NotFound.vue';
+import NotFound from './NotFound.vue';
 
 export default defineClientConfig({
     layouts: {

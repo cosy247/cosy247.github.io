@@ -2,7 +2,7 @@
     <div class="blog-root">
         <img class="blog-cover" :src="cover" alt="" />
         <p class="blog-title">{{ pageData.frontmatter.title }}</p>
-        <Content id="write" />
+        <slot/>
     </div>
 </template>
 
