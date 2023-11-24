@@ -251,13 +251,13 @@
         top: 0%;
         padding: 0 10%;
         box-sizing: border-box;
-        background: #f7f7f7;
         z-index: 500;
         display: flex;
         align-items: center;
         justify-content: space-evenly;
         pointer-events: all;
         transition: 0.9s;
+        backdrop-filter: blur(10px);
     }
     .menu-main.show {
         left: 0%;

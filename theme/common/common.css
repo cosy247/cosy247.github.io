@@ -13,24 +13,13 @@
 
 /*********** 定义变量 ***********/
 :root {
-    font-size: 10px;
-    --size1: 1.2rem;
-    --size2: 1.4rem;
-    --size3: 1.7rem;
-    --size4: 2.1rem;
-    --size5: 2.5rem;
-    --size6: 3rem;
-    --size7: 3.6rem;
-    --size8: 4.2rem;
-    --color-red: rgb(193, 20, 20);
+    --size1: 10px;
+    --size2: 14px;
+    --size3: 18px;
+    --size4: 22px;
+    --size5: 26px;
+    --color-red: #c11414;
     --color-white: #f7f7f7;
-}
-
-@media (width <= 500px) {
-    :root {
-        font-size: 20px;
-        --color-white: #ca2121;
-    }
 }
 
 /************ 隐藏滚动跳 ************/
