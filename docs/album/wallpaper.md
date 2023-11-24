@@ -1,5 +1,5 @@
 ---
-title: 可配置的表格Vue组件
+title: 壁纸
 ---
 
 ![Alt text](assets/wallpaper/image.png)
