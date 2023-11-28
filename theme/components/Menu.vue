@@ -34,8 +34,9 @@
                 <a :href="item.url" class="menu-item" v-for="(item, index) in menuItems" :data-name="item.name">{{ item.name }}</a>
             </div>
             <div class="menu-author">
-                <img class="menu-author-avatar" :src="author.avatar" alt="" />
-                <section class="menu-author-about" v-html="author.about"></section>
+                <Content :key="readmeKey"/>
+                <!-- <img class="menu-author-avatar" :src="author.avatar" alt="" />
+                <section class="menu-author-about" v-html="author.about"></section> -->
             </div>
         </div>
     </div>
@@ -46,6 +47,7 @@
     import { computed, ref, onMounted, onBeforeUnmount } from 'vue';
     import windowEvent from '../utils/windowEvent';
     import store from '../store';
+    import { readmeKey } from '@temp/blogMate';
 
     const links = themeConfig.links || [];
     const linkHello = themeConfig.linkHello || '和我取得联系>>>';

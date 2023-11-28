@@ -8,6 +8,8 @@ export default ({ initMateNames = [], countMateNames = [], isArrMateNames = [] }
             return countMateData;
         }, {});
 
+        const readmeKey = app.pages.find(page => page.filePathRelative == 'README.md').key;
+
         const pageDatas = app.pages.reduce((pageDatas, page) => {
             const {
                 filePathRelative,
@@ -64,6 +66,6 @@ export default ({ initMateNames = [], countMateNames = [], isArrMateNames = [] }
             return pageDatas;
         }, {});
 
-        app.writeTemp('blogMate.json', JSON.stringify({ pageDatas, countMateData }));
+        app.writeTemp('blogMate.json', JSON.stringify({ pageDatas, countMateData, readmeKey }));
     },
 });
