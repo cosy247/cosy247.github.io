@@ -14,7 +14,7 @@ description: Vue前端项目跨域
 3. 在目标这一列后面添加` --disable-web-security --user-data-dir="c:\temp\chromedev"`
 其中`c:\temp\chromedev`文件夹可以随便取名，将用来存储当前快捷方式浏览器的信息，不存在文件夹时将自动创建。注意`--disable`前面需要添加一个空格
 
-![Alt text](assets/Vue%E8%B7%A8%E5%9F%9F%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/image.png)
+![Alt text](assets/VueCrossDomainProxyConfiguration/image.png)
 
 # 使用vue代理
 
