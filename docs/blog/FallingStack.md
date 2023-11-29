@@ -1,6 +1,6 @@
 ---
 title: js实现球体下落并堆叠
-tags: js demo
+tags: 前端 demo
 draft: 存在这一行时表示在草稿箱中
 description: js实现球体下落并堆叠
 ---
