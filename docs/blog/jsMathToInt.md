@@ -1,6 +1,6 @@
 ---
 title: js数字取整
-tags: js
+lables: js
 ---
 
 去掉小数部分

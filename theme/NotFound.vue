@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-    import './common/common.css';
+    import './styles/common.css';
     import Footer from './components/Footer.vue';
     import Menu from './components/Menu.vue';
 </script>
