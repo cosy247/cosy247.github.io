@@ -56,8 +56,8 @@
     }
     .content {
         margin: auto;
-        width: 100%;
-        max-width: var(--min-width);
+        width: var(--content-width);
+        max-width: 1200px;
     }
     .title {
         font-size: var(--size7);

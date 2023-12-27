@@ -1,6 +1,6 @@
 ---
 title: css控制上级样式
-tags: css css伪类 css函数式伪类
+lables: css css伪类 css函数式伪类
 draft: 存在这一行时表示在草稿箱中
 ---
 

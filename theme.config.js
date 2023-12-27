@@ -1,5 +1,5 @@
 export default {
-    title: '三省🎶的博客',
+    title: '三省🍂的博客',
     links: [
         { name: 'QQ', icon: '&#xe882;', url: '705194673@qq.com' },
         { name: '邮箱', icon: '&#xe600;', url: 'http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=al1aX1tTXlxdWSobG0QJBQc' },

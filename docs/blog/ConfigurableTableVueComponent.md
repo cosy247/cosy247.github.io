@@ -1,6 +1,6 @@
 ---
 title: 可配置的表格Vue组件
-tags: vue vue组件 组件 可配置组件
+lables: vue vue组件 组件 可配置组件
 ---
 
 ## 目的

@@ -1,6 +1,6 @@
 <template>
     <div class="cover">
-        <img class="cover-back" :src="cover" alt="" />
+        <img class="cover-back" :src="cover" />
         <p class="cover-title">{{ themeConfig.title }}</p>
     </div>
     <div class="list">
@@ -27,10 +27,10 @@
 
 <script setup>
     import themeConfig from '../../theme.config';
-    import { pageDatas, countMateData } from '@temp/blogMate';
+    import { pageDatas } from '@temp/blogMate';
 
     const cover = themeConfig.cover[Date.now() % themeConfig.cover.length];
-    const pageList = pageDatas.blog.slice(0, 10);
+    const pageList = pageDatas.blog.sort((b1, b2) => new Date(b2.$.updatedTime) - new Date(b1.$.updatedTime));
 </script>
 
 <style>
@@ -45,15 +45,14 @@
         margin: 15vh 0;
         object-fit: cover;
         z-index: 8;
-        transition: 0.2s;
     }
     .cover-title {
         position: absolute;
         top: 45%;
         transform: translateY(-50%);
         z-index: 9;
-        font-size: var(--size8);
-        color: var(--color-white);
+        font-size: 8vmin;
+        color: #efefef;
         font-weight: 900;
         width: 100%;
         text-align: center;
@@ -61,25 +60,30 @@
     }
     .list {
         margin: auto;
-        width: 95%;
-        max-width: 800px;
+        width: var(--content-width);
+        max-width: var(--content-max-width);
     }
     .list-item {
         display: block;
+        padding: 1em 2em;
+        border-radius: 10px;
+        border: 1px solid #8888;
+        transition: 0.2s;
+    }
+    .list-item:hover {
+        background: #efefef;
     }
     .list-item:nth-child(n + 2) {
-        margin-top: 50px;
-        padding-top: 30px;
-        border-top: solid 1px #8883;
+        margin-top: 30px;
     }
     .list-item-title {
         color: #1b2832;
-        font-size: var(--size8);
+        font-size: var(--size5);
     }
     .list-item-description {
         color: #415462;
         margin-top: 20px;
-        font-size: var(--size5);
+        font-size: var(--size2);
     }
     .list-item-info {
         margin-top: 20px;

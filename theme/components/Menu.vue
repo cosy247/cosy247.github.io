@@ -34,9 +34,7 @@
                 <a :href="item.url" class="menu-item" v-for="(item, index) in menuItems" :data-name="item.name">{{ item.name }}</a>
             </div>
             <div class="menu-author">
-                <Content :key="readmeKey"/>
-                <!-- <img class="menu-author-avatar" :src="author.avatar" alt="" />
-                <section class="menu-author-about" v-html="author.about"></section> -->
+                <MdView :pageKey="readmeKey" />
             </div>
         </div>
     </div>
@@ -48,6 +46,7 @@
     import windowEvent from '../utils/windowEvent';
     import store from '../store';
     import { readmeKey } from '@temp/blogMate';
+    import MdView from './MdView.vue';
 
     const links = themeConfig.links || [];
     const linkHello = themeConfig.linkHello || '和我取得联系>>>';
@@ -59,18 +58,18 @@
     /** 是否在菜单页面 */
     const isMenuPage = ref(false);
     /** 是否展开外部显示的内容 */
-    const isExpand = ref(false);
+    const isExpand = ref(true);
 
     function switchMenu() {
         isMenuPage.value = !isMenuPage.value;
-        isExpand.value = !isPageTop.value && !isMenuPage.value;
+        isExpand.value = !(isPageTop.value || isMenuPage.value);
         window.document.documentElement.style.overflow = isMenuPage.value ? 'hidden' : 'auto';
     }
 
     function checkPageTop() {
         const scrollTop = window.document.body.scrollTop || window.document.documentElement.scrollTop;
         isPageTop.value = scrollTop <= 50;
-        isExpand.value = !isPageTop.value && !isMenuPage.value;
+        isExpand.value = !(isPageTop.value || isMenuPage.value);
     }
 
     onMounted(() => {
@@ -113,7 +112,7 @@
         left: 10%;
         top: 10%;
         cursor: pointer;
-        font-size: var(--size5);
+        font-size: var(--size4);
         font-weight: 900;
         pointer-events: all;
         height: 24px;
@@ -170,21 +169,21 @@
         position: absolute;
         right: -0.2rem;
         top: 50%;
-        width: 3rem;
-        height: 3rem;
+        width: 3em;
+        height: 3em;
         background: var(--color-red);
         transform: translate(0, -50%);
-        border-radius: 50%;
+        border-radius: 20% 20px;
         z-index: 1;
     }
     .menu-search input {
         position: relative;
         border: 1px solid #8888;
         border-radius: 20px;
-        font-size: var(--size3);
-        padding: 0 1rem;
-        width: 20rem;
-        height: 2rem;
+        font-size: var(--size2);
+        padding: 0 1em;
+        width: 10em;
+        height: 1.2em;
         outline: none;
         pointer-events: all;
         z-index: 2;
@@ -201,8 +200,9 @@
         pointer-events: none;
     }
     .menu-link-item {
-        font-size: var(--size2);
+        font-size: var(--size1);
         cursor: pointer;
+        margin-bottom: 0.3em;
     }
     .menu-link-item::after {
         content: '~';
@@ -230,7 +230,7 @@
     .menu-count p {
         text-align: center;
         width: 1.6em;
-        line-height: 1.2em;
+        line-height: 0.9em;
         margin-left: auto;
         font-size: var(--size2);
     }
@@ -251,15 +251,15 @@
         height: 100%;
         left: -160%;
         top: 0%;
-        padding: 0 10%;
+        padding: 0 25%;
         box-sizing: border-box;
         z-index: 500;
         display: flex;
         align-items: center;
-        justify-content: space-evenly;
+        justify-content: space-between;
         pointer-events: all;
         transition: 0.9s;
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(5px) grayscale(0.5);
     }
     .menu-main.show {
         left: 0%;
@@ -277,8 +277,8 @@
     .menu-items {
         position: relative;
         pointer-events: all;
-        font-size: var(--size8);
-        width: 5em;
+        font-size: var(--size6);
+        width: fit-content;
     }
     .menu-item {
         position: relative;
@@ -289,19 +289,19 @@
     .menu-item::before {
         content: attr(data-name);
         position: fixed;
-        left: 0%;
-        top: 0%;
-        width: 100%;
+        right: 40%;
+        top: 0;
+        width: 0;
         height: 100%;
-        line-height: 120vw;
-        /* text-indent: 50%; */
         text-align: center;
-        font-size: 15rem;
+        line-height: 0;
+        font-size: 18vh;
         opacity: 0;
         transition: 0.2s;
         writing-mode: vertical-lr;
         pointer-events: none;
         letter-spacing: 0.1em !important;
+        text-shadow: 1px 2px 2px white;
     }
     .menu-item:hover:before {
         opacity: 1;
@@ -316,13 +316,17 @@
         background: var(--color-red);
         transition: 0.2s;
     }
-    .menu-item:hover:after {
+    .menu-item:hover:after {    
         height: 1.2em;
         top: 0.3em;
     }
     .menu-author {
-        width: 50rem;
+        width: 50%;
         transition: 0.2s;
+        font-size: var(--size4);
+        border-radius: 10px;
+        padding: 0.5em;
+        background: #8888;
     }
     .menu-items:hover + .menu-author {
         opacity: 0;

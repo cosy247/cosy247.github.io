@@ -5,7 +5,7 @@ draft: 存在这一行时表示在草稿箱中
 description: css属性中的圆角borderRadius和溢出overflow的之间可能存在的冲突情况
 ---
 
-在 CSS 中[border-radius](https://developer.mozilla.org/zh-CN/docs/Web/CSS/border-radius)属性可以为元素添加圆角。行为圆角矩形或者椭圆（圆）。[overflow](https://developer.mozilla.org/zh-CN/docs/Web/CSS/overflow)属性可以设置元素溢出时所需的行为。一般设置为auto，自动显示或者隐藏滚动条。
+在 CSS 中[border-radius](https://developer.mozilla.org/zh-CN/docs/Web/CSS/border-radius)属性可以为元素添加圆角。行为圆角矩形或者椭圆（圆）。[overflow](https://developer.mozilla.org/zh-CN/docs/Web/CSS/overflow)属性可以设置元素溢出时所需的行为。一般设置为 auto，自动显示或者隐藏滚动条。
 
 # 问题描述
 
@@ -41,11 +41,11 @@ description: css属性中的圆角borderRadius和溢出overflow的之间可能�
 
 解决方式：
 
-1. 给父元素添加overflow属性，只要计算属性出不为visible即可。auto，scroll，clip，hidden都是可行的，都会将移除内容区域的部分隐藏掉。但是如果是文字溢出的话文字也会被隐藏超出部分。
+1. 给父元素添加 overflow 属性，只要计算属性出不为 visible 即可。auto，scroll，clip，hidden 都是可行的，都会将移除内容区域的部分隐藏掉。但是如果是文字溢出的话文字也会被隐藏超出部分。
 
-2. 给父元素添加padding，父元素的内容区域与圆角有一定的距离。
+2. 给父元素添加 padding，父元素的内容区域与圆角有一定的距离。
 
-3. 给可能溢出圆角的子元素添加margin或者margin，让子元素自身与圆角有一定的距离。
+3. 给可能溢出圆角的子元素添加 margin 或者 margin，让子元素自身与圆角有一定的距离。
 
 4. 给可能溢出圆角的子元素添加对应方向对应大小的圆角，但是如果是文字溢出的话是不能解决的。
 

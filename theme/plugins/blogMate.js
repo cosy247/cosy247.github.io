@@ -67,5 +67,6 @@ export default ({ initMateNames = [], countMateNames = [], isArrMateNames = [] }
         }, {});
 
         app.writeTemp('blogMate.json', JSON.stringify({ pageDatas, countMateData, readmeKey }));
+        app.writeTemp('app.json', JSON.stringify(app));
     },
 });

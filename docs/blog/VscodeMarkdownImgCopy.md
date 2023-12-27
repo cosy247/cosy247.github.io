@@ -1,6 +1,6 @@
 ---
 title: Vscode编写Mardown时复制图片自动保存到目标文件夹
-tags: 标签
+lables: 标签
 draft: 存在这一行时表示在草稿箱中
 ---
 

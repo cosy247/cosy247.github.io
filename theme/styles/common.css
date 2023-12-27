@@ -1,7 +1,9 @@
 /* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
 @font-face {
-    font-family: 'iconfont'; /* Project id 4198141 */
-    src: url('//at.alicdn.com/t/c/font_4198141_sbnnk348c2o.woff2?t=1700815573906') format('woff2'), url('//at.alicdn.com/t/c/font_4198141_sbnnk348c2o.woff?t=1700815573906') format('woff'), url('//at.alicdn.com/t/c/font_4198141_sbnnk348c2o.ttf?t=1700815573906') format('truetype');
+    font-family: 'iconfont';  /* Project id 4198141 */
+    src: url('//at.alicdn.com/t/c/font_4198141_c7h9z2w508d.woff2?t=1701444774094') format('woff2'),
+         url('//at.alicdn.com/t/c/font_4198141_c7h9z2w508d.woff?t=1701444774094') format('woff'),
+         url('//at.alicdn.com/t/c/font_4198141_c7h9z2w508d.ttf?t=1701444774094') format('truetype');
 }
 
 @font-face {
@@ -12,32 +14,36 @@
 * {
     padding: 0;
     margin: 0;
-    font-family: EVSxnrjqirKp, iconfont;
-    letter-spacing: 0.05em;
     scroll-behavior: smooth;
 }
 
 /*********** 定义变量 ***********/
 :root {
-    --size1: 10px;
-    --size2: 14px;
-    --size3: 18px;
-    --size4: 22px;
-    --size5: 26px;
+    --size1: 15px;
+    --size2: 20px;
+    --size3: 25px;
+    --size4: 30px;
+    --size5: 35px;
+    --size6: 40px;
+    --size7: 45px;
     --color-red: #c11414;
     --color-white: #f7f7f7;
+    --content-width: 95%;
+    --content-max-width: 1000px;
 }
 
 /************ 隐藏滚动跳 ************/
 html {
     overflow: -moz-hidden-unscrollable;
     height: 100vh;
+    font-size: var(--size3);
 }
 body {
     -ms-overflow-style: none;
     overflow: auto;
     height: 100vh;
-    color: #3a3a3a;
+    color: #1a1a1a;
+    font-family: EVSxnrjqirKp, iconfont;
 }
 body::-webkit-scrollbar {
     display: none;
@@ -48,7 +54,4 @@ a {
     text-decoration: none;
     color: inherit;
     transition: letter-spacing 0.3s;
-}
-a:hover {
-    letter-spacing: 0.18em;
 }

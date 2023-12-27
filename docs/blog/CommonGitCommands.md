@@ -1,6 +1,6 @@
 ---
 title: git常用命令
-tags: git
+lables: git
 ---
 
 # commit 提交

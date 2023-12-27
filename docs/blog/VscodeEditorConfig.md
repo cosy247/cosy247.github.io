@@ -1,10 +1,10 @@
 ---
 title: 格式化配置文件editorConfig属性说明
-tags: 配置文件
+lables: 配置文件
 draft: 存在这一行时表示在草稿箱中
 description: Vscode格式化配置文件editorConfig属性说明
 ---
-
+[[toc]]
 # editorConfig文件
 
 文件名为`.editorConfig`。其中属性为键值对形式`key = value`，结尾不用分号，注释使用井号`#`。当文件使用editorConfig格式化时会以当前文件同级开始由下向上查找，直到根目录或者配置root为true为止，多个配置文件为属性追加不覆盖形式合并。例如第一个文件配置a=1、第二个文件配置a=2，b=3，合并后为a=1，b=3，这只是做解释而不是真实的配置。
