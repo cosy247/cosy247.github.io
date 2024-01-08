@@ -33,20 +33,13 @@
 }
 
 /************ 隐藏滚动跳 ************/
-html {
-    overflow: -moz-hidden-unscrollable;
-    height: 100vh;
-    font-size: var(--size3);
-}
 body {
     -ms-overflow-style: none;
     overflow: auto;
     height: 100vh;
     color: #1a1a1a;
-    font-family: EVSxnrjqirKp, iconfont;
-}
-body::-webkit-scrollbar {
-    display: none;
+    font-family: iconfont;
+    font-size: var(--size3);
 }
 
 /************ 标签样式定义 ************/

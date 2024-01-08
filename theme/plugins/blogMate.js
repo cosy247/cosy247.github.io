@@ -1,25 +1,19 @@
 export default ({ initMateNames = [], countMateNames = [], isArrMateNames = [] }) => ({
     name: 'plugins-blog-meta',
     onPrepared(app) {
-        const nowDate = Date.now();
-
         const countMateData = countMateNames.reduce((countMateData, metaName) => {
             countMateData[metaName] = {};
             return countMateData;
         }, {});
 
-        const readmeKey = app.pages.find(page => page.filePathRelative == 'README.md').key;
+        const readmeKey = app.pages.find((page) => page.filePathRelative == 'README.md').key;
 
         const pageDatas = app.pages.reduce((pageDatas, page) => {
             const {
                 filePathRelative,
                 frontmatter: meta,
-                data: { git = {} },
+                data: {},
             } = page;
-            const { createdTime = nowDate, updatedTime = nowDate, contributors = [] } = git;
-            const createdTimeString = new Date(createdTime).toLocaleString();
-            const updatedTimeString = new Date(updatedTime).toLocaleString();
-            const commitAmount = contributors.reduce((commitNumber, { commits }) => commitNumber + commits, 0);
             const [type, fileName, moreFlag] = filePathRelative ? filePathRelative.split('/') : [];
             page.type = type;
 
@@ -60,7 +54,6 @@ export default ({ initMateNames = [], countMateNames = [], isArrMateNames = [] }
             pageDatas[type].push({
                 path: `/${filePathRelative.slice(0, -3)}`,
                 meta,
-                $: { createdTime: createdTimeString, updatedTime: updatedTimeString, commitAmount },
             });
 
             return pageDatas;
