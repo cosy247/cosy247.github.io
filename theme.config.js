@@ -1,10 +1,5 @@
 export default {
     title: '三省🍂的博客',
-    links: [
-        { name: 'QQ', icon: '&#xe882;', url: '705194673@qq.com' },
-        { name: '邮箱', icon: '&#xe600;', url: 'http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=al1aX1tTXlxdWSobG0QJBQc' },
-        { name: 'github', icon: '&#xe673;', url: 'http://github.com/cosy247' },
-    ],
     cover: ['/imgs/cover1.jpg', '/imgs/cover2.png', '/imgs/cover3.png', '/imgs/cover4.png'],
     menus: [
         { name: '首页', url: '/' },

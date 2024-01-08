@@ -8,17 +8,12 @@
             <p class="list-item-title">{{ item.meta.title }}</p>
             <p class="list-item-description">{{ item.meta.description }}</p>
             <div class="list-item-info">
-                <p class="list-item-info-update" v-show="item.$.updatedTime">
+                <p class="list-item-info-update" v-show="item.date">
                     <span>&#xe6ad;更新时间：</span>
-                    {{ new Date(item.$.updatedTime).toLocaleString() }}
-                </p>
-                <p class="list-item-info-count">
-                    <span>&#xe689;更新次数：</span>
-                    {{ item.$.commitNumber }}
+                    {{ new Date(item.date).toLocaleString() }}
                 </p>
                 <p class="list-item-info-see">
                     <span>&#xe636;</span>
-                    {{ item.$.commitNumber }}
                 </p>
             </div>
         </a>
@@ -30,7 +25,7 @@
     import { pageDatas } from '@temp/blogMate';
 
     const cover = themeConfig.cover[Date.now() % themeConfig.cover.length];
-    const pageList = pageDatas.blog.sort((b1, b2) => new Date(b2.$.updatedTime) - new Date(b1.$.updatedTime));
+    const pageList = pageDatas.blog.sort((b1, b2) => new Date(b2.date) - new Date(b1.date));
 </script>
 
 <style>
@@ -88,8 +83,6 @@
     .list-item-info {
         margin-top: 20px;
         display: flex;
-    }
-    .list-item-info-update {
     }
     .list-item-info-count {
         margin-left: 15px;

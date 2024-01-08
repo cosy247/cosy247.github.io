@@ -1,4 +1,5 @@
 ---
+date: 2023/10/21
 title: 可配置的表格Vue组件
 lables: vue vue组件 组件 可配置组件
 draft: 存在这一行时表示在草稿箱中
