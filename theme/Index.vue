@@ -1,13 +1,15 @@
 <template>
-  <Menu />
-  <div class="main">
-    <Home v-if="pageType == 'home'" />
-    <Blog v-else-if="pageType == 'blog'" />
+  <div class="Index">
+    <Menu />
+    <div class="main">
+      <Home v-if="pageType == 'home'" />
+      <Blog v-else-if="pageType == 'blog'" />
+    </div>
+    <Footer title="title" />
   </div>
-  <Footer title="title" />
 </template>
 
-<script setup>
+<script>
   import './styles/common.css';
   import Footer from './components/Footer.vue';
   import Menu from './components/Menu.vue';
@@ -15,18 +17,32 @@
   import Blog from './views/Blog.vue';
   import { usePageData } from '@vuepress/client';
 
-  /** 页面类型 */
-  const pageType = (() => {
-    const { path } = usePageData().value;
-    if (path == '/') {
-      return 'home';
-    } else if (path.startsWith('/blog/')) {
-      return 'blog';
-    }
-  })();
+  export default {
+    name: 'Index',
+    components: { Menu, Home, Blog, Footer },
+    data: () => ({}),
+    computed: {
+      pageType() {
+        const { path } = usePageData().value;
+        if (path == '/') {
+          return 'home';
+        } else if (path.startsWith('/blog/')) {
+          return 'blog';
+        }
+      },
+    },
+    watch: {},
+    methods: {},
+    created() {},
+    mounted() {},
+    destroy() {},
+  };
 </script>
 
 <style scoped>
+  .Index {
+    position: relative;
+  }
   .main {
     position: relative;
     width: 100%;

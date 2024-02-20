@@ -10,7 +10,7 @@ module.exports = {
     public: './assets',
     description: '',
     permalinkPattern: ':raw',
-    head: [['link', { rel: 'icon', href: '/imgs/icon.png' }]],
+    head: [['link', { rel: 'icon', href: '/imgs/logo.png' }]],
     plugins: [
         themeMaster(),
         blogMateData({

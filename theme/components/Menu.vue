@@ -9,9 +9,19 @@
         </div>
       </RouterLink>
       <div class="menus">
-        <div class="menu archive">
+        <div class="menu">
           &#xe69d;
           <span>归档</span>
+          <div class="menu-position">
+            <div class="menu-mask"></div>
+            <div class="menu-content">
+              <div class="title">
+                &#xe69d;
+                <span>归档</span>
+              </div>
+              <div class="list"></div>
+            </div>
+          </div>
         </div>
         <div class="menu">
           &#xe617;
@@ -28,17 +38,6 @@
         <div class="menu">
           &#xe66d;
           <span>友链</span>
-        </div>
-        <div class="menu-outer">
-          <div class="menu-content">
-            <div class="archive">
-              <div class="title">
-                 &#xe69d;
-                <span>归档</span>
-              </div>
-              <div class="list"></div>
-            </div>
-          </div>
         </div>
       </div>
       <div class="tools">
@@ -64,7 +63,7 @@
       changeTheme() {
         this.isSun = !this.isSun;
         localStorage.setItem('isSun', this.isSun);
-        this.changeThemeClass();
+        // this.changeThemeClass();
       },
       changeThemeClass() {
         if (typeof window === 'undefined') return;
@@ -95,8 +94,6 @@
     color: var(--theme-color);
     background: var(--theme-background);
     z-index: 500;
-    padding: 15px 0;
-    backdrop-filter: blur(5px);
   }
   .content {
     width: var(--content-max-width);
@@ -107,7 +104,17 @@
   }
   .menus {
     display: flex;
-    gap: 40px;
+    transition: color 0.1s;
+  }
+  .menus:hover {
+    color: #1a1a1a88;
+  }
+  .menu {
+    padding: 20px;
+    transition: color 0.1s;
+  }
+  .menu:hover {
+    color: var(--theme-color);
   }
   .logo {
     font-family: cursive;
@@ -127,6 +134,7 @@
   .menu {
     cursor: pointer;
     font-size: 15px;
+    z-index: 9;
   }
   .menu::first-letter {
     font-size: 1.2em;
@@ -136,27 +144,49 @@
     font-weight: 900;
     margin-left: 5px;
   }
-  .menu-outer {
+  .menu-position {
     position: absolute;
     left: 0;
+    top: 50px;
+    width: 100%;
+    background: transparent;
+    pointer-events: none;
+    transition: 0.3s;
+    z-index: 0;
+    transition-delay: 0.2s;
+  }
+  .menu-position:hover,
+  .menu:hover > .menu-position {
+    top: 60px;
+    pointer-events: all;
+    background: var(--theme-background);
+  }
+  .menu-mask {
+    position: absolute;
+    display: none;
     top: 100%;
     width: 100%;
-    z-index: -1;
-    background: var(--theme-background);
+    height: 100vh;
+    background: transparent;
+    pointer-events: none;
+    backdrop-filter: blur(3px);
+    transition-delay: 0.2s;
+  }
+  .menu-position:hover .menu-mask,
+  .menu:hover .menu-mask {
+    background: #1112;
+    display: block;
   }
   .menu-content {
     width: 500px;
-    margin: auto;
+    margin: 20px auto;
+    opacity: 0;
+    transition: opacity 0.2s;
+    transition-delay: 0.2s;
   }
-  .menu-content .archive {
-    line-height: 0;
-    padding: 0;
-    overflow: hidden;
-    transition: 0.2s;
-  }
-  .menu.archive:hover ~ .menu-outer .archive {
-    line-height: 1em;
-    padding: 20px 0;
+  .menu-position:hover .menu-content,
+  .menu:hover .menu-content {
+    opacity: 1;
   }
   .tools {
     display: flex;
