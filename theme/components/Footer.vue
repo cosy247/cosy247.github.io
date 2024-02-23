@@ -30,8 +30,12 @@
 
 <style scoped>
     .gap {
-        height: 500px;
-        background: transparent;
+        position: relative;
+        height: 100px;
+        background: white;
+        z-index: 1;
+        box-shadow: 0 10px #262225;
+        border-radius: 0 0 10px 10px;
     }
     .root {
         position: fixed;

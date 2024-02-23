@@ -1,45 +1,63 @@
 /* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
 @font-face {
-    font-family: 'iconfont';  /* Project id 4198141 */
-    src: url('//at.alicdn.com/t/c/font_4198141_ipc1osd0wwb.woff2?t=1707050292706') format('woff2'),
-         url('//at.alicdn.com/t/c/font_4198141_ipc1osd0wwb.woff?t=1707050292706') format('woff'),
-         url('//at.alicdn.com/t/c/font_4198141_ipc1osd0wwb.ttf?t=1707050292706') format('truetype');
-  }
+  font-family: 'iconfont'; /* Project id 4198141 */
+  src: url('//at.alicdn.com/t/c/font_4198141_2whxd91lfm7.woff2?t=1707187739024') format('woff2'), url('//at.alicdn.com/t/c/font_4198141_2whxd91lfm7.woff?t=1707187739024') format('woff'),
+    url('//at.alicdn.com/t/c/font_4198141_2whxd91lfm7.ttf?t=1707187739024') format('truetype');
+}
+
+@font-face {
+  font-family: 'EVSxnrjqirKp';
+  src: url('../assets//fonts/AlimamaDongFangDaKai-Regular.woff2') format('woff2'), url('../assets//fonts//AlimamaDongFangDaKai-Regular.woff') format('woff'),
+    url('../assets//fonts//AlimamaDongFangDaKai-Regular.ttf') format('truetype');
+}
 
 * {
-    padding: 0;
-    margin: 0;
-    scroll-behavior: smooth;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
 }
 
 /*********** 定义变量 ***********/
 :root {
-    --size1: 15px;
-    --size2: 20px;
-    --size3: 25px;
-    --size4: 30px;
-    --size5: 35px;
-    --size6: 40px;
-    --size7: 45px;
-    --color-red: #c11414;
-    --color-white: #f7f7f7;
-    --content-width: 95%;
-    --content-max-width: 1000px;
+  --size1: 15px;
+  --size2: 20px;
+  --size3: 25px;
+  --size4: 30px;
+  --size5: 35px;
+  --size6: 40px;
+  --size7: 45px;
+  --color-red: #c11414;
+  --color-white: #f7f7f7;
+  --content-width: 95%;
+  --content-max-width: 1000px;
+}
+
+:root.sun {
+  --theme-color: #1a1a1a;
+  --theme-background: #fff;
+}
+
+:root.moon {
+  --theme-color: #eee;
+  --theme-background: #02162b;
 }
 
 /************ 隐藏滚动跳 ************/
 body {
-    -ms-overflow-style: none;
-    overflow: auto;
-    height: 100vh;
-    color: #1a1a1a;
-    font-family: iconfont;
-    font-size: var(--size3);
+  color: #524a4a;
+  font-family: iconfont;
+  font-size: var(--size3);
 }
 
 /************ 标签样式定义 ************/
 a {
-    text-decoration: none;
-    color: inherit;
-    transition: letter-spacing 0.3s;
+  text-decoration: none;
+  color: inherit;
+  transition: letter-spacing 0.3s;
+}
+
+/*  */
+.mdView {
+  color: var(--theme-color);
+  background: var(--theme-background);
 }

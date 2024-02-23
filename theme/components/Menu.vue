@@ -1,40 +1,85 @@
 <template>
   <div class="Menu">
     <div class="content">
-      <img class="icon" src="../assets/images/icon.png" alt="" />
-      Cosy247
-      <div class="menuList"></div>
+      <RouterLink to="/">
+        <div class="logo">
+          C
+          <img src="../assets/images/icon.png" alt="" />
+          SY247
+        </div>
+      </RouterLink>
+      <div class="menus">
+        <div class="menu">
+          &#xe69d;
+          <span>归档</span>
+          <div class="menu-position">
+            <div class="menu-mask"></div>
+            <div class="menu-content">
+              <div class="title">
+                &#xe69d;
+                <span>归档</span>
+              </div>
+              <div class="list"></div>
+            </div>
+          </div>
+        </div>
+        <div class="menu">
+          &#xe617;
+          <span>标签</span>
+        </div>
+        <div class="menu">
+          &#xe67d;
+          <span>图册</span>
+        </div>
+        <div class="menu">
+          &#xe64f;
+          <span>独立</span>
+        </div>
+        <div class="menu">
+          &#xe66d;
+          <span>友链</span>
+        </div>
+      </div>
       <div class="tools">
-        ☀️
-        <Switch v-model="mode" />
-        🌒
+        <div class="tool search">&#xe618;</div>
+        <div class="tool sun" v-if="isSun" @click="changeTheme">&#xe63e;</div>
+        <div class="tool moon" v-else @click="changeTheme">&#xe6c2;</div>
+        <div class="tool info">&#xe650;</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import Switch from './Switch.vue';
-
   export default {
     name: 'Menu',
-    components: { Switch },
+    components: {},
     data: () => ({
-      mode: true,
-      menuList: [
-        { name: '首页', url: '/' },
-        { name: '标签', url: '' },
-        { name: '图册', url: '' },
-        { name: '访客留言', url: '' },
-        { name: '独立应用', url: '' },
-        { name: '一点猜想', url: '' },
-        { name: '友情链接', url: '' },
-      ],
+      isSun: true,
     }),
     computed: {},
     watch: {},
-    methods: {},
-    created() {},
+    methods: {
+      changeTheme() {
+        this.isSun = !this.isSun;
+        localStorage.setItem('isSun', this.isSun);
+        // this.changeThemeClass();
+      },
+      changeThemeClass() {
+        if (typeof window === 'undefined') return;
+        if (this.isSun) {
+          window.document.documentElement.classList.add('sun');
+          window.document.documentElement.classList.remove('moon');
+        } else {
+          window.document.documentElement.classList.add('moon');
+          window.document.documentElement.classList.remove('sun');
+        }
+      },
+    },
+    created() {
+      // this.isSun = localStorage.getItem('theme') === 'true';
+      this.changeThemeClass();
+    },
     mounted() {},
     destroy() {},
   };
@@ -43,33 +88,115 @@
 <style scoped>
   .Menu {
     position: fixed;
-    width: 100%;
     top: 0;
     left: 0;
-    box-shadow: 0 0 10px #8888;
-    z-index: 2;
-    backdrop-filter: blur(10px);
-    background: #fff8;
+    width: 100%;
+    color: var(--theme-color);
+    background: var(--theme-background);
+    z-index: 500;
+    border-radius: 10px;
   }
   .content {
-    margin: auto;
     width: var(--content-max-width);
+    margin: auto;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    font-size: 20px;
-    padding: 10px;
+  }
+  .menus {
+    display: flex;
+    transition: color 0.1s;
+  }
+  .menus:hover {
+    color: #1a1a1a88;
+  }
+  .menu {
+    padding: 20px;
+    transition: color 0.1s;
+  }
+  .menu:hover {
+    color: var(--theme-color);
+  }
+  .logo {
+    font-family: cursive;
+    cursor: pointer;
+    font-size: 26px;
+    background: linear-gradient(to right, red, blue);
     font-weight: 900;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
-  .icon {
-    height: 2em;
-    margin-right: 10px;
+  .logo img {
+    height: 1.25em;
+    vertical-align: bottom;
+    margin: 0 -12px;
   }
-  .flex {
-    flex: 1;
+  .menu {
+    cursor: pointer;
+    font-size: 15px;
+    z-index: 9;
   }
-  .modeSwitch {
+  .menu::first-letter {
+    font-size: 1.2em;
+    vertical-align: baseline;
+  }
+  .menu span {
+    font-weight: 900;
+    margin-left: 5px;
+  }
+  .menu-position {
+    position: absolute;
+    left: 0;
+    top: 50px;
+    width: 100%;
+    background: transparent;
+    pointer-events: none;
+    transition: 0.3s;
+    z-index: 0;
+    transition-delay: 0.2s;
+  }
+  .menu-position:hover,
+  .menu:hover > .menu-position {
+    top: 60px;
+    pointer-events: all;
+    background: var(--theme-background);
+  }
+  .menu-mask {
+    position: absolute;
+    display: none;
+    top: 100%;
+    width: 100%;
+    height: 100vh;
+    background: transparent;
+    pointer-events: none;
+    backdrop-filter: blur(3px);
+    transition-delay: 0.2s;
+  }
+  .menu-position:hover .menu-mask,
+  .menu:hover .menu-mask {
+    background: #1112;
+    display: block;
+  }
+  .menu-content {
+    width: 500px;
+    margin: 20px auto;
+    opacity: 0;
+    transition: opacity 0.2s;
+    transition-delay: 0.2s;
+  }
+  .menu-position:hover .menu-content,
+  .menu:hover .menu-content {
+    opacity: 1;
+  }
+  .tools {
     display: flex;
+    gap: 20px;
+    font-size: 18px;
     align-items: center;
-    color: white;
+    user-select: none;
+  }
+  .tool {
+    cursor: pointer;
   }
 </style>
