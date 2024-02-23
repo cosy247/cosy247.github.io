@@ -94,6 +94,7 @@
     color: var(--theme-color);
     background: var(--theme-background);
     z-index: 500;
+    border-radius: 10px;
   }
   .content {
     width: var(--content-max-width);

@@ -38,6 +38,8 @@
         height: 100px;
         background: white;
         z-index: 1;
+        box-shadow: 0 10px #262225;
+        border-radius: 0 0 10px 10px;
     }
     .root {
         width: 100%;

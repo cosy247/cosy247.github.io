@@ -44,10 +44,7 @@
 
 /************ 隐藏滚动跳 ************/
 body {
-  -ms-overflow-style: none;
-  overflow: auto;
-  height: 100vh;
-  color: #1a1a1a;
+  color: #524a4a;
   font-family: iconfont;
   font-size: var(--size3);
 }
