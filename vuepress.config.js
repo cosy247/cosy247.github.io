@@ -1,6 +1,7 @@
 import themeMaster from './theme';
 import blogMateData from './theme/plugins/blogMate';
 import { tocPlugin } from '@vuepress/plugin-toc';
+import { activeHeaderLinksPlugin } from '@vuepress/plugin-active-header-links';
 
 module.exports = {
     theme: 'master',
@@ -19,5 +20,9 @@ module.exports = {
             isArrMateNames: ['lables'],
         }),
         tocPlugin({}),
+        activeHeaderLinksPlugin({
+            headerLinkSelector: 'a.vuepress-toc-link',
+            delay: 0,
+        }),
     ],
 };

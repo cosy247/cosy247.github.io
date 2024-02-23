@@ -1,6 +1,6 @@
 <template>
     <div class="blog-root">
-        <div class="blog-infos">
+        <div class="blog-infos" :class="{ hidden: hiddenSide }">
             <div v-for="item in labels" class="blog-info">
                 <span class="blog-info-text">{{ item.name }}</span>
                 <span class="blog-info-icon">&#xe617;</span>
@@ -10,30 +10,44 @@
                 <span class="blog-info-text">{{ pageData.frontmatter.date }}</span>
                 <span class="blog-info-icon">&#xe6ad;</span>
             </div>
-            <div class="blog-info">
+            <div class="blog-info" @click="gotoComment">
                 <span class="blog-info-text">评论</span>
                 <span class="blog-info-icon">&#xe6b3;</span>
             </div>
-            <div class="blog-info">
+            <div class="blog-info" @click="gotoTop">
                 <span class="blog-info-text">顶部</span>
                 <span class="blog-info-icon">&#xe62b;</span>
             </div>
         </div>
         <div class="blog-main">
             <MdView class="blog-mdView" />
-            <CommentService />
+            <CommentService ref="comment" />
         </div>
-        <Toc class="blog-toc" />
+        <Toc class="blog-toc" :class="{ hidden: hiddenSide }" />
     </div>
 </template>
 
 <script setup>
     import { usePageData } from '@vuepress/client';
     import MdView from '../components/MdView.vue';
-    import { reactive } from 'vue';
+    import { ref, reactive } from 'vue';
 
     const pageData = usePageData().value;
     const labels = reactive((pageData.frontmatter.lables || '').split(' ').map((item) => ({ name: item })));
+    const comment = ref(null);
+    const hiddenSide = ref(window.document.documentElement.scrollHeight - window.document.documentElement.scrollTop - window.innerHeight < 300);
+
+    function gotoComment() {
+        window.document.documentElement.scrollTop = comment.value.offsetTop;
+    }
+
+    function gotoTop() {
+        window.document.documentElement.scrollTop = 0;
+    }
+
+    window.addEventListener('scroll', () => {
+        hiddenSide.value = window.document.documentElement.scrollHeight - window.document.documentElement.scrollTop - window.innerHeight < 300;
+    });
 </script>
 
 <style scoped>
@@ -54,6 +68,11 @@
         height: 100%;
         justify-content: center;
         align-items: flex-end;
+        transition: 0.5s;
+    }
+    .blog-infos.hidden {
+        opacity: 0;
+        pointer-events: none;
     }
     .blog-infos:hover .blog-info-text {
         opacity: 0.3;
@@ -64,9 +83,9 @@
     }
     .blog-info-br {
         font-size: var(--size2);
-        height: 1px ;
+        height: 1px;
         width: 2em;
-        background: #333;
+        background: var(--color-red);
         opacity: 0.2;
         transition: 0.5s;
     }
@@ -114,7 +133,7 @@
     }
     .blog-main {
     }
-    ::v-deep(.blog-mdView div > h1:first-child ){
+    ::v-deep(.blog-mdView div > h1:first-child) {
         margin-top: 0;
         border: none;
         font-size: var(--size6);
@@ -127,24 +146,29 @@
         overflow: auto;
         transform: translate(0, -50%);
         font-size: var(--size1);
+        transition: 0.5s;
     }
-    ::v-deep(.blog-toc:hover .vuepress-toc-item > a ){
+    .blog-toc.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+    ::v-deep(.blog-toc:hover .vuepress-toc-item > a) {
         color: inherit;
     }
-    ::v-deep(.blog-toc .vuepress-toc-item > a ){
+    ::v-deep(.blog-toc .vuepress-toc-item > a) {
         opacity: 0.2;
         transition: 0.5s;
         color: transparent;
     }
-    ::v-deep(.blog-toc .vuepress-toc-item > a:hover ){
+    ::v-deep(.blog-toc .vuepress-toc-item > a:hover) {
         opacity: 1;
         color: inherit;
     }
-    ::v-deep(.blog-toc .vuepress-toc-item > a.active ){
+    ::v-deep(.blog-toc .vuepress-toc-item > a.active) {
         opacity: 1;
         color: inherit;
     }
-    ::v-deep(.blog-toc .vuepress-toc-item > a::before ){
+    ::v-deep(.blog-toc .vuepress-toc-item > a::before) {
         content: '';
         width: 1em;
         height: 0.3em;
@@ -154,7 +178,10 @@
         margin-right: 0.5em;
         border-radius: 1em;
     }
-    ::v-deep(.blog-toc .vuepress-toc-list > .vuepress-toc-item > .vuepress-toc-list .vuepress-toc-item > a::before ){
+    ::v-deep(.blog-toc .vuepress-toc-item > a.active::before) {
+        background: var(--color-red);
+    }
+    ::v-deep(.blog-toc .vuepress-toc-list > .vuepress-toc-item > .vuepress-toc-list .vuepress-toc-item > a::before) {
         width: 1.5em;
     }
 </style>
