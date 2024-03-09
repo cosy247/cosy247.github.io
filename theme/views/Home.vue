@@ -2,6 +2,12 @@
     <div class="cover">
         <img class="cover-back" :src="cover" />
         <p class="cover-title">{{ themeConfig.title }}</p>
+        
+        <div class="logo">
+          C
+          <img src="../assets/images/icon.png" alt="" />
+          SY247
+        </div>
     </div>
     <div class="list">
         <a :href="item.path" class="list-item" v-for="item in pageList">

@@ -6,6 +6,10 @@ lables: 杂记
 description: js实现Blob、File、ArrayBuffer、base64、URL之间互转
 ---
 
+<pictrues>
+    iasjhfjahsfiljash
+</pictrues>
+
 # js 实现 Blob、File、ArrayBuffer、base64、URL 之间互转
 
 ## 引言
