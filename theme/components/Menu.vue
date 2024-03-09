@@ -29,7 +29,7 @@
         </div>
         <div class="menu">
           &#xe67d;
-          <span>图册</span>
+          <RouterLink to="/picture">图册</RouterLink>
         </div>
         <div class="menu">
           &#xe64f;
@@ -88,13 +88,15 @@
 <style scoped>
   .Menu {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    top: var(--outer-width);
+    left: var(--outer-width);
+    width: calc(100vw - 2 * var(--outer-width));
     color: var(--theme-color);
     background: var(--theme-background);
     z-index: 500;
-    border-radius: 10px;
+    box-shadow: 0 0 10px #8882;
+    transform: translateY(-1px);
+    border-radius: var(--outer-width) var(--outer-width) 0 0;
   }
   .content {
     width: var(--content-max-width);
@@ -141,7 +143,8 @@
     font-size: 1.2em;
     vertical-align: baseline;
   }
-  .menu span {
+  .menu span,
+  .menu a {
     font-weight: 900;
     margin-left: 5px;
   }

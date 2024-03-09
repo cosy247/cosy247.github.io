@@ -4,7 +4,25 @@
   </div>
 </template>
 
-<script setup>
+<script>
   import '../styles/rainbow.css';
-  const { pageKey } = defineProps(['pageKey']);
+
+  export default {
+    name: 'MdView',
+    components: {},
+    props: ['pageKey'],
+    data: () => ({}),
+    computed: {},
+    watch: {},
+    methods: {},
+    created() {},
+    mounted() {},
+    destroy() {},
+  };
 </script>
+
+<style scoped>
+  .MdView {
+    position: relative;
+  }
+</style>

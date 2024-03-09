@@ -324,7 +324,6 @@
         width: 50%;
         transition: 0.2s;
         font-size: var(--size4);
-        border-radius: 10px;
         padding: 0.5em;
         background: #8888;
     }
