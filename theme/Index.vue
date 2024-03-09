@@ -1,13 +1,18 @@
 <template>
   <div class="Index">
+    <OneSentence />
+    <Menu />
+    <Side />
     <div class="sroll-content">
-      <Menu />
-      <div class="router">
-        <Home v-if="pageType == 'home'" />
-        <Blog v-else-if="pageType == 'blog'" />
+      <Home v-if="pageType == 'home'" />
+      <Blog v-else-if="pageType == 'blog-item'" />
+      <Picture v-else-if="pageType == 'picture'" />
+      <div v-else class="notFound">
+        <span class="notFound-icon">&#xe6af;</span>
+        <span class="notFound-text">404</span>
       </div>
-      <Footer title="title" />
     </div>
+    <Footer title="title" />
   </div>
 </template>
 
@@ -15,21 +20,28 @@
   import './styles/common.css';
   import Footer from './components/Footer.vue';
   import Menu from './components/Menu.vue';
+  import OneSentence from './components/OneSentence.vue';
+  import Side from './components/Side.vue';
   import Home from './views/Home.vue';
   import Blog from './views/Blog.vue';
-  import { usePageData } from '@vuepress/client';
+  import Picture from './views/Picture.vue';
 
   export default {
     name: 'Index',
-    components: { Menu, Home, Blog, Footer },
+    components: { Menu, Home, Blog, Footer, OneSentence, Side, Picture },
+    props: ['is404'],
     data: () => ({}),
     computed: {
       pageType() {
-        const { path } = usePageData().value;
+        const { path } = this.$route;
         if (path == '/') {
           return 'home';
         } else if (path.startsWith('/blog/')) {
-          return 'blog';
+          return 'blog-item';
+        } else if (path === '/picture') {
+          return 'picture';
+        } else {
+          return '404';
         }
       },
     },
@@ -46,9 +58,8 @@
     position: relative;
     height: 100vh;
     width: 100vw;
-    border: 10px solid #1a232c;
+    border: var(--outer-width) solid #1a232c;
     box-sizing: border-box;
-    transform: translate(0);
   }
   .Index::before {
     content: '';
@@ -58,26 +69,28 @@
     top: 0;
     width: 100%;
     height: 100%;
-    outline: 10px solid #1a232c;
+    outline: var(--outer-width) solid #1a232c;
     z-index: 600;
     pointer-events: none;
-    border-radius: 10px;
+    border-radius: var(--outer-width);
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
   .sroll-content {
     height: 100%;
-    width: calc(100% + 10px);
+    width: calc(100vw - var(--outer-width));
     overflow-y: scroll;
+    padding: 60px 0 160px;
+    box-sizing: border-box;
   }
   .sroll-content::-webkit-scrollbar {
-    width: 10px;
+    width: var(--outer-width);
     background: #1a232c;
   }
   .sroll-content::-webkit-scrollbar-thumb {
     background: #8a78;
-    width: 10px;
+    width: var(--outer-width);
     margin: 2px;
-    border-radius: 10px;
+    border-radius: var(--outer-width);
   }
   .router {
     position: relative;
@@ -85,5 +98,20 @@
     min-height: 100%;
     background: var(--theme-background);
     z-index: 1;
+    padding-bottom: 100px;
+  }
+  .notFound {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .notFound-icon {
+    font-size: 40vmin;
+  }
+  .notFound-text {
+    font-size: 10vmin;
   }
 </style>
+·
