@@ -6,7 +6,6 @@
     <div class="sroll-content">
       <Home v-if="pageType == 'home'" />
       <Blog v-else-if="pageType == 'blog-item'" />
-      <Picture v-else-if="pageType == 'picture'" />
       <div v-else class="notFound">
         <span class="notFound-icon">&#xe6af;</span>
         <span class="notFound-text">404</span>
@@ -18,18 +17,17 @@
 
 <script>
   import './styles/common.css';
-  import Footer from './components/Footer.vue';
-  import Menu from './components/Menu.vue';
   import OneSentence from './components/OneSentence.vue';
   import Side from './components/Side.vue';
+  import Footer from './components/Footer.vue';
+  import Menu from './components/Menu.vue';
   import Home from './views/Home.vue';
   import Blog from './views/Blog.vue';
-  import Picture from './views/Picture.vue';
 
   export default {
     name: 'Index',
-    components: { Menu, Home, Blog, Footer, OneSentence, Side, Picture },
-    props: ['is404'],
+    components: { Menu, Home, Footer, OneSentence, Side, Blog },
+    props: [],
     data: () => ({}),
     computed: {
       pageType() {
@@ -38,8 +36,6 @@
           return 'home';
         } else if (path.startsWith('/blog/')) {
           return 'blog-item';
-        } else if (path === '/picture') {
-          return 'picture';
         } else {
           return '404';
         }
@@ -79,7 +75,7 @@
     height: 100%;
     width: calc(100vw - var(--outer-width));
     overflow-y: scroll;
-    padding: 60px 0 160px;
+    padding: 60px 0 0;
     box-sizing: border-box;
   }
   .sroll-content::-webkit-scrollbar {

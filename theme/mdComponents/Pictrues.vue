@@ -1,6 +1,5 @@
 <template>
 	<div class='Pictrues'>Pictrues
-		<slot></slot>
 	</div>
 </template>
 
@@ -13,7 +12,8 @@ export default {
 	watch: {},
 	methods: {},
 	created() {
-		console.log(this);
+		console.log(123123);
+		console.log(this.$slots);
 	},
 	mounted() {},
 	destroy() {},

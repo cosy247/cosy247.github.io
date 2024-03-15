@@ -29,7 +29,7 @@
         </div>
         <div class="menu">
           &#xe67d;
-          <RouterLink to="/picture">图册</RouterLink>
+          <RouterLink to="/album">图册</RouterLink>
         </div>
         <div class="menu">
           &#xe64f;
