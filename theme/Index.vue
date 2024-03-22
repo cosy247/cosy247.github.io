@@ -3,9 +3,9 @@
     <OneSentence />
     <Menu />
     <Side />
-    <div class="sroll-content">
-      <Home v-if="pageType == 'home'" />
-      <Blog v-else-if="pageType == 'blog-item'" />
+    <div class="sroll-content" @scroll="handelScroll">
+      <Home v-if="pageType == 'home'" @addScrollCallback="addScrollCallback" />
+      <Blog v-else-if="pageType == 'blog-item'"  @addScrollCallback="addScrollCallback" />
       <div v-else class="notFound">
         <span class="notFound-icon">&#xe6af;</span>
         <span class="notFound-text">404</span>
@@ -28,7 +28,9 @@
     name: 'Index',
     components: { Menu, Home, Footer, OneSentence, Side, Blog },
     props: [],
-    data: () => ({}),
+    data: () => ({
+      scrollCallbacks: [],
+    }),
     computed: {
       pageType() {
         const { path } = this.$route;
@@ -42,10 +44,18 @@
       },
     },
     watch: {},
-    methods: {},
-    created() {},
-    mounted() {},
-    destroy() {},
+    methods: {
+      addScrollCallback(callback) {
+        this.scrollCallbacks.push(callback);
+      },
+      handelScroll() {
+        this.scrollCallbacks.forEach(callback => callback(event));
+      }
+    },
+    created() { },
+    mounted() {
+    },
+    destroy() { },
   };
 </script>
 
@@ -57,6 +67,7 @@
     border: var(--outer-width) solid #1a232c;
     box-sizing: border-box;
   }
+
   .Index::before {
     content: '';
     display: block;
@@ -71,6 +82,7 @@
     border-radius: var(--outer-width);
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
+
   .sroll-content {
     height: 100%;
     width: calc(100vw - var(--outer-width));
@@ -78,16 +90,19 @@
     padding: 60px 0 0;
     box-sizing: border-box;
   }
+
   .sroll-content::-webkit-scrollbar {
     width: var(--outer-width);
     background: #1a232c;
   }
+
   .sroll-content::-webkit-scrollbar-thumb {
     background: #8a78;
     width: var(--outer-width);
     margin: 2px;
     border-radius: var(--outer-width);
   }
+
   .router {
     position: relative;
     width: 100%;
@@ -96,16 +111,19 @@
     z-index: 1;
     padding-bottom: 100px;
   }
+
   .notFound {
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
+
   .notFound-icon {
     font-size: 40vmin;
   }
+
   .notFound-text {
     font-size: 10vmin;
   }

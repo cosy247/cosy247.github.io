@@ -2,7 +2,7 @@
 date: 2024/01/30
 draft: 存在这一行时表示在草稿箱中
 title: 前端实现打字键盘
-lables: 前端 dome
+tags: 前端 dome
 description: 前端实现打字键盘
 ---
 

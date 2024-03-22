@@ -661,7 +661,7 @@
 	cursor: pointer
 }
 
-.mdView :checked+.radio-label {
+.mdView :checked+.radio-tag {
 	border-color: #0366d6;
 	position: relative;
 	z-index: 1

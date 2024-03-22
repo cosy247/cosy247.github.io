@@ -1,7 +1,7 @@
 ---
 date: 2023/10/21
 title: 可配置的表格Vue组件
-lables: vue vue组件 组件 可配置组件
+tags: vue vue组件 组件 可配置组件
 draft: 存在这一行时表示在草稿箱中
 description: 可配置的表格Vue组件
 ---
@@ -279,13 +279,13 @@ data: () => ({
                     typeData: [
                         {
                             value: 22,
-                            label: 222,
+                            tag: 222,
                             children: [
-                                { value: 22, label: 222 },
-                                { value: 33, label: 333 },
+                                { value: 22, tag: 222 },
+                                { value: 33, tag: 333 },
                             ],
                         },
-                        { value: 33, label: 333 },
+                        { value: 33, tag: 333 },
                     ],
                 },
             },
@@ -1261,13 +1261,13 @@ config = {
                             typeData: [
                                 {
                                     value: 22,
-                                    label: 222,
+                                    tag: 222,
                                     children: [
-                                        { value: 22, label: 222 },
-                                        { value: 33, label: 333 },
+                                        { value: 22, tag: 222 },
+                                        { value: 33, tag: 333 },
                                     ],
                                 },
-                                { value: 33, label: 333 },
+                                { value: 33, tag: 333 },
                             ],
                         },
                         events: {

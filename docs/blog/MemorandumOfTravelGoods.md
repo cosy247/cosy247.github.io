@@ -2,7 +2,7 @@
 date: 2024/01/17
 draft: 存在这一行时表示在草稿箱中
 title: 出行物品备忘录
-lables: 杂记
+tags: 杂记
 description: 出行物品备忘录
 ---
 

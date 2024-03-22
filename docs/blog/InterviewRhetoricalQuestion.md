@@ -2,7 +2,7 @@
 date: 2024/02/19
 draft: 存在这一行时表示在草稿箱中
 title: 面试时需要问清楚的问题
-lables: 杂记
+tags: 杂记
 description: 面试时需要问清楚的问题
 ---
 

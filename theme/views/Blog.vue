@@ -1,7 +1,7 @@
 <template>
   <div class="blog-root">
     <div class="blog-infos" :class="{ hidden: hiddenSide }">
-      <div v-for="item in labels" class="blog-info">
+      <div v-for="item in tags" class="blog-info">
         <span class="blog-info-text">{{ item.name }}</span>
         <span class="blog-info-icon">&#xe617;</span>
       </div>
@@ -37,7 +37,7 @@
     data: () => ({
       date: '',
       hiddenSide: false,
-      labels: [],
+      tags: [],
       srollRef: null,
     }),
     computed: {},
@@ -52,7 +52,7 @@
     },
     created() {
       const pageData = usePageData().value;
-      this.labels = (pageData.frontmatter.lables || '').split(' ').map((item) => ({ name: item }));
+      this.tags = (pageData.frontmatter.tags || '').split(' ').map((item) => ({ name: item }));
       this.date = pageData.frontmatter.date;
     },
     mounted() {
@@ -130,11 +130,11 @@
   .blog-info:hover .blog-info-icon {
     color: #333;
   }
-  .blog-lables {
+  .blog-tags {
     margin-top: 20px;
     flex-wrap: wrap;
   }
-  .blog-lable {
+  .blog-tag {
     font-size: var(--size1);
     padding: 0.1em 0.7em;
     border-radius: 0.5em;

@@ -2,7 +2,7 @@
 date: 2023/10/11
 draft: 存在这一行时表示在草稿箱中
 title: js实现Blob、File、ArrayBuffer、base64、URL之间互转
-lables: 杂记
+tags: 杂记
 description: js实现Blob、File、ArrayBuffer、base64、URL之间互转
 ---
 

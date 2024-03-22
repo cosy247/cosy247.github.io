@@ -2,7 +2,7 @@
 date: 2024/01/11
 draft: 存在这一行时表示在草稿箱中
 title: html标签元素的继承关系
-lables: 杂记
+tags: 杂记
 description: html标签元素的继承关系
 ---
 

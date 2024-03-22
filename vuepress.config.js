@@ -15,9 +15,9 @@ module.exports = {
     plugins: [
         themeMaster(),
         blogMateData({
-            initMateNames: ['title', 'description', 'lables'],
-            countMateNames: ['lables'],
-            isArrMateNames: ['lables'],
+            initMateNames: ['title', 'description', 'tags'],
+            countMateNames: ['tags','archive'],
+            isArrMateNames: ['tags'],
         }),
         tocPlugin({}),
         activeHeaderLinksPlugin({
