@@ -2,7 +2,7 @@
 date: 2024/03/26
 draft: 存在这一行时表示在草稿箱中
 title: window自定义开机自启动程序
-lables: 杂记
+lables: 使用window系统
 description: window自定义开机自启动程序
 ---
 
@@ -10,30 +10,30 @@ description: window自定义开机自启动程序
 
 ## 引言
 
-在公司上班的时候开机总是要启动很多很多程序（Vscode,微信等），但是这些程序有没有开机启动的选项，便寻求其他的自启动方法。
+在日常工作中，我们经常需要在开机时自动启动一些常用程序（如Vscode、微信等），但并非所有程序都提供了开机启动的选项。为了解决这个问题，我们可以使用Windows系统的自启动功能来实现。
 
-## 添加自启动
+## 设置自启动
 
-设置自启动的方法非常简单，打开文件夹
+为程序设置自启动其实非常简单。首先，需要打开以下文件夹路径：
 
 ```
 C:\Users\用户名\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
 ```
 
-将对应查询的快捷方式添加到文件夹中即可，`win + r`输入`shell:startup`可以快速打开此文件夹。
+将你想要开机自动启动的程序的快捷方式复制或移动到该文件夹中即可。另外，你也可以通过`win + r`快捷键输入`shell:startup`快速打开这个自启动文件夹。
 
-![alt text](assets/AutoStartOnWindows/image-2.png)
+![自启动文件夹示例](assets/AutoStartOnWindows/image-2.png)
 
-添加后参考如图：
+完成上述操作后，你的程序快捷方式会出现在该文件夹中，如图所示：
 
-![alt text](assets/AutoStartOnWindows/image-1.png)
+![添加自启动程序后的文件夹](assets/AutoStartOnWindows/image-1.png)
 
 ## 关闭自启动
 
-如果是用上面的方法添加的自启动，那么可以通过删除对应的快捷方式来关闭自启动。
+如果你之前通过上述方法添加了自启动程序，想要关闭自启动，只需从该文件夹中删除对应的快捷方式即可。
 
-另外系统的全部自启动程序（包括用上面方式开启的自启动程序）都可以在任务管理器中进行关闭。
+此外，Windows系统可以通过任务管理器来管理所有自启动程序（包括通过快捷方式添加的自启动程序）。你可以通过任务管理器来查看和关闭这些自启动项。
 
-![alt text](assets/AutoStartOnWindows/image-3.png)
+![任务管理器中的自启动管理页面](assets/AutoStartOnWindows/image-3.png)
 
-需要注意，通过上面添加快捷方式添加自启动程序后再关闭后，任务管理器的自启动管理页面是不会显示该程序的。
+需要注意的是，通过添加快捷方式方式设置的自启动程序，一旦你在任务管理器中关闭了它，那么任务管理器中将不会再显示改该程序的自启动情况，只能再将快捷方式添加到上方文件夹中来开启自启动功能。
