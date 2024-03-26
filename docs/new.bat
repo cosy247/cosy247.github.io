@@ -13,7 +13,9 @@ if exist %toFile% (
 	for /f "tokens=*" %%a in (.md) do (
 		set line=%%a
 		set line=!line:{title}=%title%!
+		set line=!line:{ title }=%title%!
 		set line=!line:{date}=%date:~3,14%!
+		set line=!line:{ date }=%date:~3,14%!
 		echo !line!>>%toFile%
 	)
 	echo 生成%1.md文件成功!
