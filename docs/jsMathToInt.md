@@ -1,4 +1,5 @@
 ---
+id: 13
 title: js数字取整
 tags: js
 ---

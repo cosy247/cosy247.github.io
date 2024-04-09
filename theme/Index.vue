@@ -1,45 +1,30 @@
 <template>
-  <div class="Index">
-    <OneSentence />
-    <Menu />
-    <Side />
-    <div class="sroll-content" @scroll="handelScroll">
-      <Home v-if="pageType == 'home'" @addScrollCallback="addScrollCallback" />
-      <Blog v-else-if="pageType == 'blog-item'"  @addScrollCallback="addScrollCallback" />
-      <div v-else class="notFound">
-        <span class="notFound-icon">&#xe6af;</span>
-        <span class="notFound-text">404</span>
-      </div>
-    </div>
-    <Footer title="title" />
-  </div>
+  <PageOuter />
+  <Home v-if="pageType == 'home'" @addScrollCallback="addScrollCallback" />
+  <Blog v-else-if="pageType == 'blog-item'" @addScrollCallback="addScrollCallback" />
+  <UserInfo v-else-if="pageType == 'userinfo'" @addScrollCallback="addScrollCallback" />
 </template>
 
 <script>
   import './styles/common.css';
-  import OneSentence from './components/OneSentence.vue';
-  import Side from './components/Side.vue';
-  import Footer from './components/Footer.vue';
-  import Menu from './components/Menu.vue';
   import Home from './views/Home.vue';
   import Blog from './views/Blog.vue';
+  import PageOuter from './components/PageOuter.vue';
 
   export default {
     name: 'Index',
-    components: { Menu, Home, Footer, OneSentence, Side, Blog },
+    components: { Home, Blog, PageOuter },
     props: [],
     data: () => ({
       scrollCallbacks: [],
     }),
     computed: {
       pageType() {
-        const { path } = this.$route;
+        const { path, query } = this.$route;
         if (path == '/') {
-          return 'home';
-        } else if (path.startsWith('/blog/')) {
-          return 'blog-item';
+          return typeof query.userinfo === 'undefined' ? 'home' : 'userinfo';
         } else {
-          return '404';
+          return 'blog-item';
         }
       },
     },
@@ -49,13 +34,12 @@
         this.scrollCallbacks.push(callback);
       },
       handelScroll() {
-        this.scrollCallbacks.forEach(callback => callback(event));
-      }
+        this.scrollCallbacks.forEach((callback) => callback(event));
+      },
     },
-    created() { },
-    mounted() {
-    },
-    destroy() { },
+    created() {},
+    mounted() {},
+    destroy() {},
   };
 </script>
 
@@ -81,26 +65,6 @@
     pointer-events: none;
     border-radius: var(--outer-width);
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  }
-
-  .sroll-content {
-    height: 100%;
-    width: calc(100vw - var(--outer-width));
-    overflow-y: scroll;
-    padding: 60px 0 0;
-    box-sizing: border-box;
-  }
-
-  .sroll-content::-webkit-scrollbar {
-    width: var(--outer-width);
-    background: #1a232c;
-  }
-
-  .sroll-content::-webkit-scrollbar-thumb {
-    background: #8a78;
-    width: var(--outer-width);
-    margin: 2px;
-    border-radius: var(--outer-width);
   }
 
   .router {

@@ -1,8 +1,9 @@
 ---
+id: 1
 date: 2024/03/26
-draft: 存在这一行时表示在草稿箱中
 title: window自定义开机自启动程序
-lables: 使用window系统
+tags: window使用
+recommendations: 3 5 2
 description: window自定义开机自启动程序
 ---
 
@@ -10,7 +11,7 @@ description: window自定义开机自启动程序
 
 ## 引言
 
-在日常工作中，我们经常需要在开机时自动启动一些常用程序（如Vscode、微信等），但并非所有程序都提供了开机启动的选项。为了解决这个问题，我们可以使用Windows系统的自启动功能来实现。
+在日常工作中，我们经常需要在开机时自动启动一些常用程序（如 Vscode、微信等），但并非所有程序都提供了开机启动的选项。为了解决这个问题，我们可以使用 Windows 系统的自启动功能来实现。
 
 ## 设置自启动
 
@@ -32,7 +33,7 @@ C:\Users\用户名\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
 
 如果你之前通过上述方法添加了自启动程序，想要关闭自启动，只需从该文件夹中删除对应的快捷方式即可。
 
-此外，Windows系统可以通过任务管理器来管理所有自启动程序（包括通过快捷方式添加的自启动程序）。你可以通过任务管理器来查看和关闭这些自启动项。
+此外，Windows 系统可以通过任务管理器来管理所有自启动程序（包括通过快捷方式添加的自启动程序）。你可以通过任务管理器来查看和关闭这些自启动项。
 
 ![任务管理器中的自启动管理页面](assets/AutoStartOnWindows/image-3.png)
 

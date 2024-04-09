@@ -1,8 +1,9 @@
 ---
+id: 24
 date: 2024/03/26
 draft: 存在这一行时表示在草稿箱中
 title: window重新打开已经关闭的应用通知
-lables: 杂记
+tags: 杂记
 description: window重新打开已经关闭的应用通知
 ---
 

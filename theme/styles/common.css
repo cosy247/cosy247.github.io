@@ -27,7 +27,7 @@
   --size5: 35px;
   --size6: 40px;
   --size7: 45px;
-  --color-red: #c11414;
+  --color-theme: #591ece;
   --color-white: #f7f7f7;
   --outer-width: 15px;
   --content-width: 95%;
@@ -58,8 +58,12 @@ a {
   transition: letter-spacing 0.3s;
 }
 
-/*  */
-.mdView {
-  color: var(--theme-color);
-  background: var(--theme-background);
+.mdView h1[id],
+.mdView h2[id],
+.mdView h3[id],
+.mdView h4[id],
+.mdView h4[id],
+.mdView h6[id]{
+  padding-top: 90px;
+  margin-top: -90px;
 }

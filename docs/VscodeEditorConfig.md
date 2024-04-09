@@ -1,4 +1,5 @@
 ---
+id: 21
 title: 格式化配置文件editorConfig属性说明
 tags: 配置文件
 draft: 存在这一行时表示在草稿箱中

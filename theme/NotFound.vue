@@ -1,7 +1,6 @@
 <template>
-  <Index :is404="true"/>
+  404
 </template>
 
 <script setup>
-  import Index from './Index.vue';
 </script>

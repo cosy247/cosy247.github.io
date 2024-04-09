@@ -1,7 +1,7 @@
 ---
+id: 7
 title: Element-ui，el-table组件自定义排序
 tags: 杂记
-draft: 存在这一行时表示在草稿箱中
 description: Element-ui，el-table组件自定义排序
 ---
 

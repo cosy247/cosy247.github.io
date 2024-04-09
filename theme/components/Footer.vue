@@ -2,7 +2,7 @@
   <div class="button">cosy247</div>
   <div class="Footer">
     <div class="content">
-      <p class="title">{{ themeConfig.title }}</p>
+      <!-- <p class="title">{{ themeConfig.title }}</p>
       <div class="main">
         <div class="main-col" v-for="content in themeConfig.footer.content">
           <p class="main-col-title">{{ content.title }}</p>
@@ -10,13 +10,12 @@
           <a :href="item.url" v-for="item in content.links" class="main-col-item">{{ item.name }}</a>
         </div>
       </div>
-      <p class="copyright">© {{ themeConfig.footer.copyright }}</p>
+      <p class="copyright">© {{ themeConfig.footer.copyright }}</p> -->
     </div>
   </div>
 </template>
 
 <script setup>
-  import themeConfig from '../../theme.config';
 </script>
 
 <style scoped>
@@ -27,7 +26,7 @@
     background: #125fd388;
     border-radius: 10px;
     transform: translateX(-50%) scale(0.7);
-    z-index: 1;
+    z-index: 650;
     font-size: var(--outer-width);
     line-height: var(--outer-width);
     padding: 0px 10px;
@@ -41,11 +40,13 @@
   .Footer {
     position: fixed;
     bottom: 0;
+    height: 100px;
     width: 100%;
     background: linear-gradient(30deg, #252525, #272025);
     color: #eee;
     transform: translateY(100%);
     transition: 0.3s;
+    z-index: 620;
   }
   .Footer:hover {
     transform: translateY(0);

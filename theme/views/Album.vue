@@ -1,7 +1,7 @@
 <template>
   <div class="Album">
 	<div class="album-item" @click="$router.push(item.path)" v-for="item in albums">
-		{{ item.meta.title }}
+		{{ item.frontmatter.title }}
 	</div>
   </div>
 </template>

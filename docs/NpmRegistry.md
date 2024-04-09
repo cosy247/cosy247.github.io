@@ -1,4 +1,5 @@
 ---
+id: 18
 title: npm使用代理
 tags: npm 代理
 draft: 存在这一行时表示在草稿箱中
