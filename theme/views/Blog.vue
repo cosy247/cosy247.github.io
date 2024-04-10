@@ -46,7 +46,7 @@
 </template>
 
 <script>
-  import { usePageData } from '@vuepress/client';
+  import {usePageData} from '@vuepress/client';
   import { pageDatas } from '@temp/blogMate';
   import MdView from '../components/MdView.vue';
   import Giscus from '@giscus/vue';
@@ -70,7 +70,7 @@
         window.document.documentElement.scrollTop = 0;
       },
     },
-    created() {
+  created() {
       const pageData = usePageData().value;
       this.tags = (pageData.frontmatter.tags || '').split(' ').filter((i) => i);
       this.archive = pageData.frontmatter.archive;
