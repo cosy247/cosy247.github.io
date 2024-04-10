@@ -80,13 +80,13 @@ Host cosy
 
 ![alt text](assets/VsSecretFreeSsh/image-3.png)
 
-打开服务器文件：
+打开服务器文件，没有的话就创建一个：
 
 ```
 /root/.ssh/authorized_keys
 ```
 
-将刚刚生成的公钥文件内容复制到文件中。
+将刚刚生成的公钥文件内容复制到文件中，文件中有内容的话想换行在复制。
 
 ![alt text](assets/VsSecretFreeSsh/image-2.png)
 
