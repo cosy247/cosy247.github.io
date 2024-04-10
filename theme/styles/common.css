@@ -63,7 +63,7 @@ a {
 .mdView h3[id],
 .mdView h4[id],
 .mdView h4[id],
-.mdView h6[id]{
+.mdView h6[id] {
   padding-top: 90px;
   margin-top: -90px;
 }

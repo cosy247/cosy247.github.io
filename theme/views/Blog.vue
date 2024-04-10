@@ -24,29 +24,31 @@
   </div>
   <MdView class="blog-mdView" />
   <div class="recoms">
-    <a :href="item.path" class="recom" v-for="(item, index) in recommendations" :key="index">{{ item.frontmatter.title }}</a>
+    <a :href="item.path" class="recom" v-for="(item, index) in recommendations" :key="index">
+      {{ item.frontmatter.title }}
+    </a>
   </div>
   <div class="blog-comment" ref="comment">
     <div class="blog-comment-main">
-    <Giscus
-      repo="cosy247/CosyBlog"
-      repoId="R_kgDOJI48fw"
-      category="Announcements"
-      categoryId="DIC_kwDOJI48f84Ceg84"
-      mapping="pathname"
-      term="Welcome to @giscus/react component!"
-      reactionsEnabled="1"
-      emitMetadata="0"
-      inputPosition="top"
-      theme="light"
-      lang="zh-CN" />
+      <Giscus
+        repo="cosy247/CosyBlog"
+        repoId="R_kgDOJI48fw"
+        category="Announcements"
+        categoryId="DIC_kwDOJI48f84Ceg84"
+        mapping="pathname"
+        term="Welcome to @giscus/react component!"
+        reactionsEnabled="1"
+        emitMetadata="0"
+        inputPosition="top"
+        theme="light"
+        lang="zh-CN" />
     </div>
   </div>
   <Toc class="blog-toc" />
 </template>
 
 <script>
-  import {usePageData} from '@vuepress/client';
+  import { usePageData } from '@vuepress/client';
   import { pageDatas } from '@temp/blogMate';
   import MdView from '../components/MdView.vue';
   import Giscus from '@giscus/vue';
@@ -70,12 +72,14 @@
         window.document.documentElement.scrollTop = 0;
       },
     },
-  created() {
+    created() {
       const pageData = usePageData().value;
       this.tags = (pageData.frontmatter.tags || '').split(' ').filter((i) => i);
       this.archive = pageData.frontmatter.archive;
       this.recommendations = Array.from(new Set((pageData.frontmatter.recommendations || '').split(' ')));
-      this.recommendations = this.recommendations.map((id) => pageDatas.find((i) => i.frontmatter.id === +id)).filter((i) => i);
+      this.recommendations = this.recommendations
+        .map((id) => pageDatas.find((i) => i.frontmatter.id === +id))
+        .filter((i) => i);
       this.date = pageData.frontmatter.date;
     },
     mounted() {},
@@ -203,7 +207,8 @@
 
 <style>
   .blog-mdView div > h1:first-child {
-    font-size: var(--size6);
+    font-size: var(--size7);
+    margin-bottom: 20px;
   }
   .blog-toc .vuepress-toc-item > a {
     opacity: 0.5;

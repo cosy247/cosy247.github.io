@@ -1,6 +1,6 @@
 <template>
   <div class="mdView">
-    <Content :page-key="pageKey" />
+    <Content :page-key="pageKey" class="mdContent"/>
   </div>
 </template>
 
