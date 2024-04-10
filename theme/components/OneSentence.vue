@@ -11,14 +11,14 @@
     watch: {},
     methods: {},
     created() {
-      const httpRequest = new XMLHttpRequest();
-      httpRequest.open('GET', 'https://tenapi.cn/v2/yiyan', true);
-      httpRequest.send();
-      httpRequest.onreadystatechange = () => {
-        if (httpRequest.readyState == 4 && httpRequest.status == 200) {
-          this.oneText = httpRequest.responseText;
-        }
-      };
+      // const httpRequest = new XMLHttpRequest();
+      // httpRequest.open('GET', 'https://tenapi.cn/v2/yiyan', true);
+      // httpRequest.send();
+      // httpRequest.onreadystatechange = () => {
+      //   if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+      //     this.oneText = httpRequest.responseText;
+      //   }
+      // };
     },
     mounted() {},
     destroy() {},
@@ -39,6 +39,6 @@
     letter-spacing: 0.1em;
     transition: 0.2s;
     background: black;
-    z-index: 500;
+    z-index: 650;
   }
 </style>

@@ -1,73 +1,89 @@
 <template>
-  <div class="blog-root">
-    <div class="blog-infos" :class="{ hidden: hiddenSide }">
-      <div v-for="item in tags" class="blog-info">
-        <span class="blog-info-text">{{ item.name }}</span>
-        <span class="blog-info-icon">&#xe617;</span>
-      </div>
-      <div class="blog-info-br"></div>
-      <div class="blog-info">
-        <span class="blog-info-text">{{ date }}</span>
-        <span class="blog-info-icon">&#xe6ad;</span>
-      </div>
-      <div class="blog-info" @click="gotoComment">
-        <span class="blog-info-text">评论</span>
-        <span class="blog-info-icon">&#xe6b3;</span>
-      </div>
-      <div class="blog-info" @click="gotoTop">
-        <span class="blog-info-text">顶部</span>
-        <span class="blog-info-icon">&#xe62b;</span>
-      </div>
+  <div class="blog-infos">
+    <a :href="`/?tag=${item}`" class="blog-info" v-for="item in tags">
+      <span class="blog-info-text">{{ item }}</span>
+      <span class="blog-info-icon">&#xe617;</span>
+    </a>
+    <a v-if="archive" :href="`/?tag=${archive}`" class="blog-info">
+      <span class="blog-info-text">{{ archive }}</span>
+      <span class="blog-info-icon">&#xe69d;</span>
+    </a>
+    <div class="blog-info-br"></div>
+    <div class="blog-info">
+      <span class="blog-info-text">{{ date }}</span>
+      <span class="blog-info-icon">&#xe6ad;</span>
     </div>
-    <div class="blog-main">
-      <MdView class="blog-mdView" />
-      <CommentService ref="comment" />
+    <div class="blog-info" @click="gotoComment">
+      <span class="blog-info-text">评论</span>
+      <span class="blog-info-icon">&#xe6b3;</span>
     </div>
-    <Toc class="blog-toc" :class="{ hidden: hiddenSide }" />
+    <div class="blog-info" @click="gotoTop">
+      <span class="blog-info-text">顶部</span>
+      <span class="blog-info-icon">&#xe62b;</span>
+    </div>
   </div>
+  <MdView class="blog-mdView" />
+  <div class="recoms">
+    <a :href="item.path" class="recom" v-for="(item, index) in recommendations" :key="index">{{ item.frontmatter.title }}</a>
+  </div>
+  <div class="blog-comment" ref="comment">
+    <div class="blog-comment-main">
+    <Giscus
+      repo="cosy247/CosyBlog"
+      repoId="R_kgDOJI48fw"
+      category="Announcements"
+      categoryId="DIC_kwDOJI48f84Ceg84"
+      mapping="pathname"
+      term="Welcome to @giscus/react component!"
+      reactionsEnabled="1"
+      emitMetadata="0"
+      inputPosition="top"
+      theme="light"
+      lang="zh-CN" />
+    </div>
+  </div>
+  <Toc class="blog-toc" />
 </template>
 
 <script>
   import { usePageData } from '@vuepress/client';
+  import { pageDatas } from '@temp/blogMate';
   import MdView from '../components/MdView.vue';
+  import Giscus from '@giscus/vue';
 
   export default {
-    name: 'Menu',
-    components: { MdView },
+    name: 'Blog',
+    components: { MdView, Giscus },
     data: () => ({
       date: '',
-      hiddenSide: false,
       tags: [],
-      srollRef: null,
+      archive: '',
+      recommendations: [],
     }),
     computed: {},
     watch: {},
     methods: {
       gotoComment() {
-        this.srollRef.scrollTop = this.$refs.comment.offsetTop;
+        window.document.documentElement.scrollTop = this.$refs.comment.offsetTop;
       },
       gotoTop() {
-        this.srollRef.scrollTop = 0;
+        window.document.documentElement.scrollTop = 0;
       },
     },
     created() {
       const pageData = usePageData().value;
-      this.tags = (pageData.frontmatter.tags || '').split(' ').map((item) => ({ name: item }));
+      this.tags = (pageData.frontmatter.tags || '').split(' ').filter((i) => i);
+      this.archive = pageData.frontmatter.archive;
+      this.recommendations = Array.from(new Set((pageData.frontmatter.recommendations || '').split(' ')));
+      this.recommendations = this.recommendations.map((id) => pageDatas.find((i) => i.frontmatter.id === +id)).filter((i) => i);
       this.date = pageData.frontmatter.date;
     },
-    mounted() {
-    },
+    mounted() {},
     destroy() {},
   };
 </script>
 
 <style scoped>
-  .blog-root {
-    min-height: 100vh;
-    margin: 15vh auto 0;
-    width: 95%;
-    max-width: 660px;
-  }
   .blog-infos {
     position: fixed;
     top: 50%;
@@ -80,6 +96,7 @@
     justify-content: center;
     align-items: flex-end;
     transition: 0.5s;
+    z-index: 10;
   }
   .blog-infos.hidden {
     opacity: 0;
@@ -91,12 +108,13 @@
   .blog-info {
     padding: 10px 0;
     cursor: pointer;
+    white-space: nowrap;
   }
   .blog-info-br {
     font-size: var(--size2);
     height: 1px;
     width: 2em;
-    background: var(--color-red);
+    background: var(--color-theme);
     opacity: 0.2;
     transition: 0.5s;
   }
@@ -142,12 +160,34 @@
     margin-right: 0.5em;
     cursor: pointer;
   }
-  .blog-main {
+  .blog-mdView {
+    margin: 20vh auto 0;
+    width: 95%;
+    max-width: 700px;
   }
-  ::v-deep(.blog-mdView div > h1:first-child) {
-    margin-top: 0;
-    border: none;
-    font-size: var(--size6);
+  .recoms {
+    display: flex;
+    gap: 20px;
+  }
+  .recom {
+    margin-top: 100px;
+    border: 1px solid #1979df88;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: var(--size2);
+  }
+  .blog-comment {
+    position: relative;
+    padding-top: 150px;
+    min-height: 50vh;
+    padding-bottom: 300px;
+    background: linear-gradient(#fff0, #fff 100px);
+    z-index: 1;
+  }
+  .blog-comment-main {
+    width: 95%;
+    max-width: 700px;
+    margin: auto;
   }
   .blog-toc {
     position: fixed;
@@ -159,27 +199,29 @@
     font-size: var(--size1);
     transition: 0.5s;
   }
-  .blog-toc.hidden {
-    opacity: 0;
-    pointer-events: none;
+</style>
+
+<style>
+  .blog-mdView div > h1:first-child {
+    font-size: var(--size6);
   }
-  ::v-deep(.blog-toc:hover .vuepress-toc-item > a) {
-    color: inherit;
-  }
-  ::v-deep(.blog-toc .vuepress-toc-item > a) {
-    opacity: 0.2;
+  .blog-toc .vuepress-toc-item > a {
+    opacity: 0.5;
     transition: 0.5s;
     color: transparent;
   }
-  ::v-deep(.blog-toc .vuepress-toc-item > a:hover) {
+  .blog-toc:hover .vuepress-toc-item > a {
+    color: inherit;
+    opacity: 0.4;
+  }
+  .blog-toc .vuepress-toc-item > a:hover {
+    opacity: 1;
+  }
+  .blog-toc .vuepress-toc-item > a.active {
     opacity: 1;
     color: inherit;
   }
-  ::v-deep(.blog-toc .vuepress-toc-item > a.active) {
-    opacity: 1;
-    color: inherit;
-  }
-  ::v-deep(.blog-toc .vuepress-toc-item > a::before) {
+  .blog-toc .vuepress-toc-item > a::before {
     content: '';
     width: 1em;
     height: 0.3em;
@@ -189,10 +231,15 @@
     margin-right: 0.5em;
     border-radius: 1em;
   }
-  ::v-deep(.blog-toc .vuepress-toc-item > a.active::before) {
-    background: var(--color-red);
+  .blog-toc .vuepress-toc-item > a:hover::before {
+    opacity: 0.5;
+    background: var(--color-theme);
   }
-  ::v-deep(.blog-toc .vuepress-toc-list > .vuepress-toc-item > .vuepress-toc-list .vuepress-toc-item > a::before) {
+  .blog-toc .vuepress-toc-item > a.active::before {
+    opacity: 1;
+    background: var(--color-theme);
+  }
+  .blog-toc .vuepress-toc-list > .vuepress-toc-item > .vuepress-toc-list .vuepress-toc-item > a::before {
     width: 1.5em;
   }
 </style>

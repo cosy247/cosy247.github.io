@@ -12,6 +12,8 @@ if exist %toFile% (
 ) else (
 	for /f "tokens=*" %%a in (.md) do (
 		set line=%%a
+		set line=!line:{id}=%date:~5,2%%date:~8,2%%date:~11,2%%time:~0,2%%time:~3,2%%time:~6,2%%time:~9,2%!
+		set line=!line:{ id }=%date:~5,2%%date:~8,2%%date:~11,2%%time:~0,2%%time:~3,2%%time:~6,2%%time:~9,2%!
 		set line=!line:{title}=%title%!
 		set line=!line:{ title }=%title%!
 		set line=!line:{date}=%date:~3,14%!

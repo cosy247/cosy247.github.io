@@ -1,16 +1,25 @@
 <template>
-  <div class="cover">
+  <div class="cover" :class="{ filter: tag || archive }">
     <div class="cover-content">
-      <p class="cover-title">
-        C
-        <img src="../assets/images/icon.png" alt="" />
-        SY247
+      <p class="cover-title" v-if="tag || archive">
+        {{ tag ? 'tag' : 'archive' }}
+        <span class="cover-title-value">.{{ tag || archive }}</span>
       </p>
-      <p class="cover-dictum">痛苦在所难免，磨难可以选择。</p>
-      <p class="cover-dictum-en">Suffering is inevitable, but tribulations can be chosen.</p>
+      <template v-else>
+        <p class="cover-title">
+          C
+          <img src="../assets/images/icon.png" alt="" />
+          SY247
+        </p>
+        <p class="cover-dictum">痛苦在所难免，磨难可以选择。</p>
+        <p class="cover-dictum-en">Suffering is inevitable, but tribulations can be chosen.</p>
+      </template>
       <div class="cover-links">
         <a class="cover-link" href="https://github.com/cosy247" target="_blank">&#xe673;github</a>
-        <a class="cover-link" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=al1aX1tTXlxdWSobG0QJBQc" target="_blank">
+        <a
+          class="cover-link"
+          href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=al1aX1tTXlxdWSobG0QJBQc"
+          target="_blank">
           &#xe600;邮箱
         </a>
         <a class="cover-link" href="https://github.com/cosy247" target="_blank">&#xe87e;codepen</a>
@@ -20,11 +29,11 @@
   </div>
   <div class="list">
     <a :href="item.path" class="list-item" v-for="item in pageList">
-      <p class="list-item-title">{{ item.meta.title }}</p>
+      <p class="list-item-title">{{ item.frontmatter.title }}</p>
       <div class="list-item-infos">
-        <p class="list-item-info" v-show="item.meta.date">
+        <p class="list-item-info" v-show="item.frontmatter.date">
           &#xe6ad;
-          {{ new Date(item.meta.date).toLocaleDateString() }}
+          {{ new Date(item.frontmatter.date).toLocaleDateString() }}
         </p>
       </div>
     </a>
@@ -33,7 +42,6 @@
 </template>
 
 <script>
-  import themeConfig from '../../theme.config';
   import { pageDatas } from '@temp/blogMate';
 
   export default {
@@ -41,49 +49,70 @@
     components: {},
     props: [],
     data: () => ({
+      tag: '',
+      archive: '',
       pageList: [],
       remainPageList: [],
       pageSize: 10,
       isAddingPageList: false,
     }),
-    computed: {
-    },
+    computed: {},
     watch: {},
-    methods: {},
+    methods: {
+      initPageList() {
+        this.tag = this.$route.query.tag;
+        this.archive = this.$route.query.archive;
+        console.log(this.$route.query);
+        if (this.tag) {
+          this.remainPageList = pageDatas.filter((item) => item.frontmatter.tags?.includes(this.tag));
+        } else if (this.archive) {
+          this.remainPageList = pageDatas.filter((item) => item.frontmatter.archive === this.archive);
+        } else {
+          this.remainPageList = pageDatas;
+        }
+        this.pageList = this.remainPageList.splice(0, this.pageSize);
+      },
+    },
     created() {
-      this.remainPageList = pageDatas.blog.sort((b1, b2) => new Date(b2.date) - new Date(b1.date));
-      this.pageList = this.remainPageList.splice(0, this.pageSize);
+      this.initPageList();
     },
     mounted() {
       this.$emit('addScrollCallback', ({ target: { clientHeight, scrollTop, scrollHeight } }) => {
         if (this.isAddingPageList || this.remainPageList.length === 0) return;
         if (scrollHeight - clientHeight - scrollTop < 200) {
-          console.log(123);
           this.isAddingPageList = true;
-          this.pageList.push(...this.remainPageList.splice(0, this.pageSize))
+          this.pageList.push(...this.remainPageList.splice(0, this.pageSize));
           this.$nextTick(() => {
             this.isAddingPageList = false;
-          })
+          });
         }
-      })
+      });
     },
-    destroy() { },
+    destroy() {},
   };
 </script>
 
-<style>
+<style scoped>
   .cover {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: calc(100vh - 60px - var(--outer-width));
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
+  .cover.filter {
+    height: calc(40vh - 60px - var(--outer-width));
+  }
+
   .cover-content {
     box-sizing: border-box;
     padding-bottom: 10vh;
+  }
+
+  .cover.filter .cover-content {
+    padding-bottom: 5vh;
   }
 
   .cover-title {
@@ -95,6 +124,20 @@
     color: transparent;
     display: flex;
     align-items: center;
+    animation: outFromBottom 0.5s;
+  }
+
+  @keyframes outFromBottom {
+    0% {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+  }
+
+  .cover-title-value {
+    line-height: 0;
+    font-size: 0.4em;
+    margin-top: 1em;
   }
 
   .cover-title img {
@@ -144,7 +187,7 @@
     opacity: 1;
   }
 
-  .list-item+.list-item {
+  .list-item + .list-item {
     margin-top: 50px;
   }
 
@@ -180,7 +223,7 @@
   }
 
   .list-item-info {
-    margin-right: 15px;
+    margin-left: 15px;
   }
 
   .list-over {

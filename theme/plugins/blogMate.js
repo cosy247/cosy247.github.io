@@ -6,60 +6,52 @@ export default ({ countMateNames = [], isArrMateNames = [] }) => ({
       return countMateData;
     }, {});
 
-    const readmeKey = app.pages.find((page) => page.filePathRelative == 'README.md').key;
+    const themeConfig = app.pages.find((page) => page.filePathRelative === 'README.md').frontmatter;
 
-    const pageDatas = app.pages.reduce((pageDatas, page) => {
-      const {
-        filePathRelative,
-        frontmatter: meta,
-        data: {},
-      } = page;
-      const [type, fileName, moreFlag] = filePathRelative ? filePathRelative.split('/') : [];
-      page.type = type;
+    const pageDatas = app.pages
+      .reduce((pageDatas, page) => {
+        const { htmlFilePathRelative, frontmatter } = page;
 
-      // 判断路径是否正确
-      if (moreFlag || !fileName) return pageDatas;
+        if (!htmlFilePathRelative || htmlFilePathRelative == 'index.html') return pageDatas;
 
-      // 数组属性转化
-      isArrMateNames.forEach((metaName) => {
-        if (meta[metaName]) {
-          meta[metaName] = meta[metaName].split(' ');
-        }
-      });
-
-      // 属性计数
-      countMateNames.forEach((metaName) => {
-        const metaValue = meta[metaName];
-        if (metaValue) {
-          if (isArrMateNames.includes(metaName)) {
-            metaValue.forEach((value) => {
-              if (!countMateData[metaName][value]) {
-                countMateData[metaName][value] = 0;
-              }
-              countMateData[metaName][value]++;
-            });
-          } else {
-            if (!countMateData[metaName][metaValue]) {
-              countMateData[metaName][metaValue] = 0;
-            }
-            countMateData[metaName][metaValue]++;
+        // 数组属性转化
+        isArrMateNames.forEach((metaName) => {
+          if (frontmatter[metaName]) {
+            frontmatter[metaName] = frontmatter[metaName].split(' ');
           }
-        }
-      });
+        });
 
-      // 记录数据
-      if (!pageDatas[type]) {
-        pageDatas[type] = [];
-      }
-      pageDatas[type].push({
-        path: `/${filePathRelative.slice(0, -3)}`,
-        meta,
-      });
+        // 属性计数
+        countMateNames.forEach((metaName) => {
+          const metaValue = frontmatter[metaName];
+          if (metaValue) {
+            if (isArrMateNames.includes(metaName)) {
+              metaValue.forEach((value) => {
+                if (!countMateData[metaName][value]) {
+                  countMateData[metaName][value] = 0;
+                }
+                countMateData[metaName][value]++;
+              });
+            } else {
+              if (!countMateData[metaName][metaValue]) {
+                countMateData[metaName][metaValue] = 0;
+              }
+              countMateData[metaName][metaValue]++;
+            }
+          }
+        });
 
-      return pageDatas;
-    }, {});
+        // 记录数据
+        pageDatas.push({
+          path: htmlFilePathRelative,
+          frontmatter,
+        });
 
-    app.writeTemp('blogMate.json', JSON.stringify({ pageDatas, countMateData, readmeKey }));
+        return pageDatas;
+      }, [])
+      .sort((b1, b2) => new Date(b2.date) - new Date(b1.date));
+
     app.writeTemp('app.json', JSON.stringify(app));
+    app.writeTemp('blogMate.json', JSON.stringify({ pageDatas: pageDatas, countMateData, themeConfig }));
   },
 });

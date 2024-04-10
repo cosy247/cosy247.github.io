@@ -1,10 +1,12 @@
 <template>
-  <div class="Pictrues">Pictrues</div>
+  <div class="UserInfo">
+    你好呀
+  </div>
 </template>
 
 <script>
   export default {
-    name: 'Pictrues',
+    name: 'UserInfo',
     components: {},
     data: () => ({}),
     computed: {},
@@ -17,7 +19,7 @@
 </script>
 
 <style scoped>
-  .Pictrues {
+  .UserInfo {
     position: relative;
   }
 </style>
