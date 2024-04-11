@@ -172,9 +172,12 @@
   .recoms {
     display: flex;
     gap: 20px;
+    width: 95%;
+    max-width: 700px;
+    margin: auto;
   }
   .recom {
-    margin-top: 100px;
+    margin-top: 50px;
     border: 1px solid #1979df88;
     padding: 10px;
     border-radius: 10px;
@@ -182,7 +185,7 @@
   }
   .blog-comment {
     position: relative;
-    padding-top: 150px;
+    padding-top: 100px;
     min-height: 50vh;
     padding-bottom: 300px;
     background: linear-gradient(#fff0, #fff 100px);

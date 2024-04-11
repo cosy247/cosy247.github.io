@@ -3,6 +3,8 @@ import blogMateData from './theme/plugins/blogMate';
 import { tocPlugin } from '@vuepress/plugin-toc';
 import { activeHeaderLinksPlugin } from '@vuepress/plugin-active-header-links';
 import { viteBundler } from '@vuepress/bundler-vite';
+import { copyCodePlugin } from '@vuepress/plugin-copy-code';
+import { shikiPlugin } from '@vuepress/plugin-shiki';
 
 export default {
   theme: 'master',
@@ -29,5 +31,14 @@ export default {
       headerLinkSelector: 'a.vuepress-toc-link',
       delay: 0,
     }),
+    copyCodePlugin({
+      selector: '.mdContent div[class*="language-"] pre',
+      locales: {
+        '/': {
+          copied: '😘',
+        },
+      },
+    }),
+    shikiPlugin({}),
   ],
 };

@@ -244,7 +244,7 @@
   box-sizing: border-box;
 }
 
-.mdContent a:hover {
+.mdContent p a:hover {
   text-decoration: underline;
 }
 
@@ -797,46 +797,59 @@
 /***************** diy *****************/
 
 .mdContent > h1 a::before {
-	content: '🐲';
-  }
-  
-  .mdContent > h2 a::before {
-	content: '🦄';
-  }
-  
-  .mdContent > h3 a::before {
-	content: '🐳';
-  }
-  
-  .mdContent > h4 a::before {
-	content: '🦋';
-  }
-  
-  .mdContent > p > img:only-child {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-  }
-  
-  .mdContent > blockquote {
-	  padding: 10px 20px;
-	  background: rgba(27, 31, 35, 0.05);
-  }
-  
-  .mdContent > blockquote > p::before {
-	content: '✨';
-  }
-  
-  .mdContent > blockquote code{
-	background: transparent;
-  }
+  content: '🐲';
+}
 
-  .mdContent code {
-	background: #c3cfdc45;
-  }
+.mdContent > h2 a::before {
+  content: '🦄';
+}
 
-  .mdContent > p > code {
-	margin: 0 0.2em;
-  }
-  
-  /***************** end *****************/
+.mdContent > h3 a::before {
+  content: '🐳';
+}
+
+.mdContent > h4 a::before {
+  content: '🦋';
+}
+
+.mdContent > p > img:only-child {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mdContent > blockquote {
+  padding: 10px 20px;
+  background: rgba(27, 31, 35, 0.05);
+}
+
+.mdContent > blockquote > p::before {
+  content: '✨';
+}
+
+.mdContent > blockquote code {
+  background: transparent;
+}
+
+.mdContent code {
+  background: #c3cfdc45;
+}
+
+.mdContent > p > code {
+  margin: 0 0.2em;
+}
+
+.mdContent > div {
+  position: relative;
+}
+
+/* .mdContent .vp-copy-code-button.copied,
+.mdContent .vp-copy-code-button:hover,
+.mdContent .vp-copy-code-button::after {
+  background: #cfdeef !important;
+}
+ */
+.mdContent .vp-copy-icon {
+  margin: auto;
+}
+/***************** end *****************/

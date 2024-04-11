@@ -5,9 +5,11 @@ tags: 杂记
 description: Element-ui，el-table组件自定义排序
 ---
 
-# 前言
+# Element-ui，el-table组件自定义排序
 
-在[el-table](https://element.eleme.cn/#/zh-CN/component/table)组件的 el-table-column 中添加 sortable 属性为 true 即可支持列数据排序。如果需要自定义排序则需要将 sortable 属性设置为 custom 属性，并在对应的 el-table 中添加@sort-change 事件用来处理排序回调。如果这样做，那么列表的默认排序效果将会失效，列表的数据变化将通过改变 el-table 指定的 data 数据来实现。
+## 前言
+
+在[el-table](https://element.eleme.cn/##/zh-CN/component/table)组件的 el-table-column 中添加 sortable 属性为 true 即可支持列数据排序。如果需要自定义排序则需要将 sortable 属性设置为 custom 属性，并在对应的 el-table 中添加@sort-change 事件用来处理排序回调。如果这样做，那么列表的默认排序效果将会失效，列表的数据变化将通过改变 el-table 指定的 data 数据来实现。
 
 ```vue
 <el-table :data="tableData" @sort-change="handleSortChange">
@@ -16,7 +18,7 @@ description: Element-ui，el-table组件自定义排序
 </el-table>
 ```
 
-# sort-change 回调
+## sort-change 回调
 
 在 sort-change 指定的函数中会传入一个对象参数：
 
