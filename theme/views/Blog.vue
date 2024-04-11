@@ -166,7 +166,7 @@
     cursor: pointer;
   }
   .blog-mdView {
-    margin: 20vh auto 0;
+    margin: 5vh auto 0;
     width: 95%;
     max-width: 700px;
   }
@@ -213,6 +213,7 @@
   .blog-mdView div > h1:first-child {
     font-size: var(--size7);
     margin-bottom: 20px;
+    word-break: break-all;
   }
   .blog-toc .vuepress-toc-item > a {
     opacity: 0.5;

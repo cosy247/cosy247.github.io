@@ -8,13 +8,13 @@ import { shikiPlugin } from '@vuepress/plugin-shiki';
 
 export default {
   theme: 'master',
-  dest: './dist',
+  dest: './_CosyBlog',
   temp: './.temp',
   cache: './.cache',
-  public: './assets',
+  public: './docs',
   description: 'cosy247的个人博客 master',
   permalinkPattern: ':raw',
-  head: [['link', { rel: 'icon', href: '/imgs/logo.png' }]],
+  head: [['link', { rel: 'icon', href: '/assets/logo.png' }]],
   bundler: viteBundler({
     viteOptions: {},
     vuePluginOptions: {},

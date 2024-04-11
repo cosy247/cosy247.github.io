@@ -20,26 +20,11 @@
     ],
   blogFriends:
     [
-      {
-        name: 'DrinkWater',
-        url: 'https://github.com/cosy247/DrinkWater',
-        icon: 'assets/README/DrinkWater.png',
-      },
-      {
-        name: 'DrinkWater',
-        url: 'https://github.com/cosy247/DrinkWater',
-        icon: 'assets/README/DrinkWater.png',
-      },
-      {
-        name: 'Sevg',
-        url: 'https://cosy247.top/sevg',
-        icon: 'assets/README/Sevg.png',
-      },
-      {
-        name: 'VsBackground',
-        url: 'https://marketplace.visualstudio.com/items?itemName=cosy247.vsBackground',
-        icon: 'assets/README/VsBackground.png',
-      },
+      # {
+      #   name: 'DrinkWater',
+      #   url: 'https://github.com/cosy247/DrinkWater',
+      #   icon: 'assets/README/DrinkWater.png',
+      # },
     ],
 }
 ---

@@ -1,5 +1,5 @@
 <template>
-  <div class="cover" :class="{ filter: tag || archive }">
+  <div class="cover" ref="cover">
     <div class="cover-content">
       <p class="cover-title" v-if="tag || archive">
         {{ tag ? 'tag' : 'archive' }}
@@ -56,13 +56,31 @@
       pageSize: 10,
       isAddingPageList: false,
     }),
-    computed: {},
-    watch: {},
+    computed: {
+      cover() {
+        return [this.$route.query.tag, this.$route.query.archive];
+      },
+    },
+    watch: {
+      cover: {
+        handler([tag, archive]) {
+          this.tag = tag;
+          this.archive = archive;
+          this.$nextTick(() => {
+            if (!this.$refs.cover) return;
+            if (tag || archive) {
+              this.$refs.cover.classList.add('filter');
+            } else {
+              this.$refs.cover.classList.remove('filter');
+            }
+          });
+          this.initPageList();
+        },
+        immediate: true,
+      },
+    },
     methods: {
       initPageList() {
-        this.tag = this.$route.query.tag;
-        this.archive = this.$route.query.archive;
-        console.log(this.$route.query);
         if (this.tag) {
           this.remainPageList = pageDatas.filter((item) => item.frontmatter.tags?.includes(this.tag));
         } else if (this.archive) {
@@ -73,9 +91,7 @@
         this.pageList = this.remainPageList.splice(0, this.pageSize);
       },
     },
-    created() {
-      this.initPageList();
-    },
+    created() {},
     mounted() {
       this.$emit('addScrollCallback', ({ target: { clientHeight, scrollTop, scrollHeight } }) => {
         if (this.isAddingPageList || this.remainPageList.length === 0) return;
