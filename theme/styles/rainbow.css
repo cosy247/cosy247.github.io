@@ -843,12 +843,21 @@
   position: relative;
 }
 
+.mdContent > div[data-title]::before {
+  content: attr(data-title);
+  position: absolute;
+  right: 15px;
+  top: 0px;
+  line-height: 50px;
+  color: #A8A9A9;
+}
+
 /* .mdContent .vp-copy-code-button.copied,
 .mdContent .vp-copy-code-button:hover,
 .mdContent .vp-copy-code-button::after {
-  background: #cfdeef !important;
-}
- */
+  background: #edf3fa !important;
+} */
+
 .mdContent .vp-copy-icon {
   margin: auto;
 }

@@ -38,33 +38,3 @@ C:\Users\用户名\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
 ![任务管理器中的自启动管理页面](assets/AutoStartOnWindows/image-3.png)
 
 需要注意的是，通过添加快捷方式方式设置的自启动程序，一旦你在任务管理器中关闭了它，那么任务管理器中将不会再显示改该程序的自启动情况，只能再将快捷方式添加到上方文件夹中来开启自启动功能。
-```html
-<template>
-  <div class="AlbumItem">
-    <MdView />
-  </div>
-</template>
-
-<script>
-  import MdView from '../components/MdView.vue';
-
-  export default {
-    name: 'AlbumItem',
-    components: { MdView },
-    data: () => ({}),
-    computed: {},
-    watch: {},
-    methods: {},
-    created() {},
-    mounted() {},
-    destroy() {},
-  };
-</script>
-
-<style scoped>
-  .AlbumItem {
-    position: relative;
-  }
-</style>
-
-```

@@ -130,6 +130,7 @@
     font-size: var(--size1);
     margin-right: 10px;
     opacity: 0;
+    font-weight: 900;
     transition: 0.5s;
   }
   .blog-info:hover > .blog-info-text {
@@ -185,7 +186,7 @@
   }
   .blog-comment {
     position: relative;
-    padding-top: 100px;
+    margin-top: 100px;
     min-height: 50vh;
     padding-bottom: 300px;
     background: linear-gradient(#fff0, #fff 100px);
@@ -220,7 +221,7 @@
   }
   .blog-toc:hover .vuepress-toc-item > a {
     color: inherit;
-    opacity: 0.4;
+    opacity: 0.6;
   }
   .blog-toc .vuepress-toc-item > a:hover {
     opacity: 1;
@@ -228,11 +229,12 @@
   .blog-toc .vuepress-toc-item > a.active {
     opacity: 1;
     color: inherit;
+    font-weight: 900;
   }
   .blog-toc .vuepress-toc-item > a::before {
     content: '';
     width: 1em;
-    height: 0.3em;
+    height: 0.25em;
     background: #c1c2c4;
     display: inline-block;
     vertical-align: middle;

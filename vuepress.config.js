@@ -39,6 +39,8 @@ export default {
         },
       },
     }),
-    shikiPlugin({}),
+    shikiPlugin({
+      theme: 'one-dark-pro'
+    }),
   ],
 };
