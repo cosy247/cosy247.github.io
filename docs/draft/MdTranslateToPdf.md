@@ -1,14 +1,16 @@
 ---
 id: 15
 title: md文档转pdf
-tags: 文件转换 md文档 pdf文件
+tags: 文件转换
 ---
 
-# 原理
+# md文档转pdf
+
+## 原理
 
 通过md查看工具将其在浏览器中渲染出来，再利用浏览器的打印功能将其直接转换为pdf文件。
 
-# 过程
+## 实现
 
 1. 打开md，这里使用vscode并安装了Markdown Preview Enhanced插件。
 

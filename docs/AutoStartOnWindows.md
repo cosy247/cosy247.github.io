@@ -3,7 +3,7 @@ id: 1
 date: 2024/03/26
 title: window自定义开机自启动程序
 tags: window使用
-recommendations: 3 5 2
+recommendations:
 description: window自定义开机自启动程序
 ---
 
