@@ -2,7 +2,7 @@
 id: 4
 date: 2023/10/21
 title: 可配置的表格Vue组件
-tags: vue vue组件 组件 可配置组件
+tags: vue
 description: 可配置的表格Vue组件
 ---
 

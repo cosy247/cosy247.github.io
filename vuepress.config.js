@@ -30,6 +30,7 @@ export default {
     activeHeaderLinksPlugin({
       headerLinkSelector: 'a.vuepress-toc-link',
       delay: 0,
+      offset: 100
     }),
     copyCodePlugin({
       selector: '.mdContent div[class*="language-"] pre',
@@ -40,7 +41,7 @@ export default {
       },
     }),
     shikiPlugin({
-      theme: 'one-dark-pro'
+      theme: 'one-dark-pro',
     }),
   ],
 };

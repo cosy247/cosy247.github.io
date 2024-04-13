@@ -1,8 +1,8 @@
 <template>
   <div class="PageOuter"></div>
-  <OneSentence />
+  <!-- <OneSentence /> -->
   <Menu />
-  <Side />
+  <!-- <Side /> -->
   <Footer title="title" />
 </template>
 
@@ -28,7 +28,7 @@
 <style>
   body {
     overflow-y: scroll;
-    padding: 60px 0 0;
+    padding: calc(60px + var(--outer-width)) 0 0;
     box-sizing: border-box;
   }
 

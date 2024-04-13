@@ -96,8 +96,8 @@
       </div>
       <div class="tools">
         <div class="tool" @click="showSearchBox">&#xe618;</div>
-        <div class="tool" v-if="isSun" @click="changeTheme">&#xe63e;</div>
-        <div class="tool" v-else @click="changeTheme">&#xe6c2;</div>
+        <!-- <div class="tool" v-if="isSun" @click="changeTheme">&#xe63e;</div>
+        <div class="tool" v-else @click="changeTheme">&#xe6c2;</div> -->
         <a class="tool" href="/userinfo.html">&#xe650;</a>
       </div>
     </div>
@@ -109,7 +109,6 @@
           class="search-input-text"
           type="text"
           @input="search"
-          @keydown="searchKey"
           v-model="searchText"
           placeholder="输入关键词进行搜索"
           ref="searchInput" />
@@ -151,28 +150,27 @@
     computed: {},
     watch: {},
     methods: {
-      searchKey() {},
       showSearchBox() {
         this.isShowSearch = true;
         this.$nextTick(() => {
           this.$refs.searchInput.focus();
         });
       },
-      changeTheme() {
-        this.isSun = !this.isSun;
-        localStorage.setItem('isSun', this.isSun);
-        // this.changeThemeClass();
-      },
-      changeThemeClass() {
-        if (typeof window === 'undefined') return;
-        if (this.isSun) {
-          window.document.documentElement.classList.add('sun');
-          window.document.documentElement.classList.remove('moon');
-        } else {
-          window.document.documentElement.classList.add('moon');
-          window.document.documentElement.classList.remove('sun');
-        }
-      },
+      // changeTheme() {
+      //   this.isSun = !this.isSun;
+      //   localStorage.setItem('isSun', this.isSun);
+      //   this.changeThemeClass();
+      // },
+      // changeThemeClass() {
+      //   if (typeof window === 'undefined') return;
+      //   if (this.isSun) {
+      //     window.document.documentElement.classList.add('sun');
+      //     window.document.documentElement.classList.remove('moon');
+      //   } else {
+      //     window.document.documentElement.classList.add('moon');
+      //     window.document.documentElement.classList.remove('sun');
+      //   }
+      // },
       search() {
         const searchText = this.searchText.trim();
         if (searchText === '') {
@@ -183,7 +181,8 @@
       },
     },
     created() {
-      this.changeThemeClass();
+      // this.isSun = localStorage.getItem('isSun') === 'true';
+      // this.changeThemeClass();
     },
     mounted() {},
     destroy() {},
@@ -194,10 +193,9 @@
   .Menu {
     position: fixed;
     top: var(--outer-width);
-    left: var(--outer-width);
-    width: calc(100vw - 2 * var(--outer-width));
-    color: var(--theme-color);
-    background: var(--theme-background);
+    left: calc(var(--outer-width) - 1px);
+    width: calc(100vw - 2 * var(--outer-width) + 2px);
+    background: white;
     z-index: 500;
     box-shadow: 0 0 10px #8882;
     transform: translateY(-1px);
@@ -210,24 +208,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-
-  .menus {
-    display: flex;
-    transition: color 0.1s;
-  }
-
-  .menus:hover {
-    color: #1a1a1a88;
-  }
-
-  .menu {
-    padding: 20px;
-    transition: color 0.1s;
-  }
-
-  .menu:hover {
-    color: var(--theme-color);
   }
 
   .logo {
@@ -250,10 +230,26 @@
     margin: 0 0.1em;
   }
 
+  .menus {
+    display: flex;
+    transition: color 0.1s;
+    color: #1a1a1a;
+  }
+
+  .menus:hover{
+    color: #1a1a1a88;
+  }
+
   .menu {
     cursor: pointer;
+    padding: 20px;
+    transition: color 0.1s;
     font-size: 15px;
     z-index: 9;
+  }
+
+  .menu:hover {
+    color: #1a1a1a;
   }
 
   .menu::first-letter {
@@ -279,7 +275,7 @@
   .menu-position:hover,
   .menu:hover > .menu-position {
     pointer-events: all;
-    background: var(--theme-background);
+    background: white;
   }
 
   .menu-mask {

@@ -3,6 +3,7 @@
   <Home v-if="path === 'home'" />
   <Blog v-else-if="path === 'blog'" />
   <UserInfo v-else-if="path === 'userinfo'" />
+  <NotFound v-else-if="path === 'notFound'" />
 </template>
 
 <script>
@@ -11,11 +12,12 @@
   import Blog from './views/Blog.vue';
   import PageOuter from './components/PageOuter.vue';
   import UserInfo from './views/UserInfo.vue';
+  import NotFound from './views/NotFound.vue';
 
   export default {
     name: 'Index',
-    components: { Home, Blog, UserInfo, PageOuter },
-    props: [],
+    components: { Home, Blog, UserInfo, NotFound, PageOuter },
+    props: ['isNotFound'],
     data: () => ({
       scrollCallbacks: [],
     }),
@@ -26,6 +28,8 @@
           return 'userinfo';
         } else if (path === '/') {
           return 'home';
+        } else if (this.isNotFound) {
+          return 'notFound';
         } else {
           return 'blog';
         }
@@ -67,7 +71,6 @@
     position: relative;
     width: 100%;
     min-height: 100%;
-    background: var(--theme-background);
     z-index: 1;
     padding-bottom: 100px;
   }
