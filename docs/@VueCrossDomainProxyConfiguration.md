@@ -2,7 +2,6 @@
 id: 23
 title: Vue前端项目跨域
 tags: 前端 跨域
-draft: 存在这一行时表示在草稿箱中
 description: Vue前端项目跨域
 ---
 

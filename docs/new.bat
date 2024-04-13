@@ -2,7 +2,7 @@
 chcp 65001
 setlocal EnableDelayedExpansion
 
-set toFile=.\%1.md
+set toFile=@%1.md
 set title=%1
 
 if "%2" neq "" set title=%2
@@ -20,5 +20,5 @@ if exist %toFile% (
 		set line=!line:{ date }=%date:~3,14%!
 		echo !line!>>%toFile%
 	)
-	echo 生成%1.md文件成功!
+	echo 🐲生成草稿文件成功：%toFile%
 )

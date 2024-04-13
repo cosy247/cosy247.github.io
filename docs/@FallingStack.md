@@ -1,10 +1,12 @@
 ---
 id: 8
+date: 2023/10/21
 title: js实现球体下落并堆叠
-tags: 前端 demo
-draft: 存在这一行时表示在草稿箱中
+tags: 前端demo
 description: js实现球体下落并堆叠
 ---
+
+# js实现球体下落并堆叠
 
 > 可在线预览最终效果：
 
