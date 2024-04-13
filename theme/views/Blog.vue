@@ -178,11 +178,14 @@
     margin: auto;
   }
   .recom {
-    margin-top: 50px;
+    margin-top: 100px;
     border: 1px solid #1979df88;
     padding: 10px;
     border-radius: 10px;
     font-size: var(--size2);
+  }
+  .recom:hover {
+    border: 1px solid #1979df;
   }
   .blog-comment {
     position: relative;
@@ -201,11 +204,14 @@
     position: fixed;
     top: 50%;
     left: calc(50% + 420px);
+    width: calc(50% - 450px);
     max-height: 80%;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: clip;
     transform: translate(0, -50%);
     font-size: var(--size1);
     transition: 0.5s;
+    white-space: nowrap;
   }
 </style>
 
@@ -219,6 +225,11 @@
     opacity: 0.5;
     transition: 0.5s;
     color: transparent;
+    display: block;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
   .blog-toc:hover .vuepress-toc-item > a {
     color: inherit;

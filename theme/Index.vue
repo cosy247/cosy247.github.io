@@ -1,8 +1,8 @@
 <template>
   <PageOuter />
-  <Home v-if="pageType == 'home'" @addScrollCallback="addScrollCallback" />
-  <Blog v-else-if="pageType == 'blog-item'" @addScrollCallback="addScrollCallback" />
-  <UserInfo v-else-if="pageType == 'userinfo'" @addScrollCallback="addScrollCallback" />
+  <Home v-if="path === 'home'" />
+  <Blog v-else-if="path === 'blog'" />
+  <UserInfo v-else-if="path === 'userinfo'" />
 </template>
 
 <script>
@@ -10,33 +10,29 @@
   import Home from './views/Home.vue';
   import Blog from './views/Blog.vue';
   import PageOuter from './components/PageOuter.vue';
+  import UserInfo from './views/UserInfo.vue';
 
   export default {
     name: 'Index',
-    components: { Home, Blog, PageOuter },
+    components: { Home, Blog, UserInfo, PageOuter },
     props: [],
     data: () => ({
       scrollCallbacks: [],
     }),
     computed: {
-      pageType() {
-        const { path, query } = this.$route;
-        if (path == '/') {
-          return typeof query.userinfo === 'undefined' ? 'home' : 'userinfo';
+      path() {
+        const { path } = this.$route;
+        if (path === '/userinfo.html') {
+          return 'userinfo';
+        } else if (path === '/') {
+          return 'home';
         } else {
-          return 'blog-item';
+          return 'blog';
         }
       },
     },
     watch: {},
-    methods: {
-      addScrollCallback(callback) {
-        this.scrollCallbacks.push(callback);
-      },
-      handelScroll() {
-        this.scrollCallbacks.forEach((callback) => callback(event));
-      },
-    },
+    methods: {},
     created() {},
     mounted() {},
     destroy() {},

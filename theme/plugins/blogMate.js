@@ -10,9 +10,9 @@ export default ({ countMateNames = [], isArrMateNames = [] }) => ({
 
     const pageDatas = app.pages
       .reduce((pageDatas, page) => {
-        const { htmlFilePathRelative, frontmatter } = page;
+        const { htmlFilePathRelative: path, frontmatter } = page;
 
-        if (!htmlFilePathRelative || htmlFilePathRelative == 'index.html') return pageDatas;
+        if (!path || path == 'index.html' || path[0] === '@') return pageDatas;
 
         // 数组属性转化
         isArrMateNames.forEach((metaName) => {
@@ -42,10 +42,7 @@ export default ({ countMateNames = [], isArrMateNames = [] }) => ({
         });
 
         // 记录数据
-        pageDatas.push({
-          path: htmlFilePathRelative,
-          frontmatter,
-        });
+        pageDatas.push({ path, frontmatter });
 
         return pageDatas;
       }, [])

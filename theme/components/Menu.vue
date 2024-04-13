@@ -1,13 +1,11 @@
 <template>
   <div class="Menu">
     <div class="content">
-      <RouterLink to="/">
-        <div class="logo">
-          C
-          <img src="../assets/images/icon.png" alt="" />
-          SY247
-        </div>
-      </RouterLink>
+      <a href="/" class="logo">
+        C
+        <img src="../assets/images/icon.png" alt="" />
+        SY247
+      </a>
       <div class="menus">
         <div class="menu">
           &#xe617;
@@ -18,10 +16,14 @@
               <div class="menu-content-title">
                 &#xe617;
                 <span class="menu-content-title-main">标签</span>
-                <span class="menu-content-title-describe">tag&nbsp;∈&nbsp;[1,&nbsp;N]&nbsp;·&nbsp;one;&nbsp;&nbsp;&nbsp;one&nbsp;∈&nbsp;[0,&nbsp;5]&nbsp;·&nbsp;tag</span>
+                <span class="menu-content-title-describe">
+                  tag&nbsp;∈&nbsp;[1,&nbsp;N]&nbsp;·&nbsp;one;&nbsp;&nbsp;&nbsp;one&nbsp;∈&nbsp;[0,&nbsp;5]&nbsp;·&nbsp;tag
+                </span>
               </div>
               <div class="menu-content-list">
-                <a :href="`/?tag=${key}`" class="menu-content-item" v-for="item,key in tags">{{key}}({{item}})</a>
+                <a :href="`/?tag=${key}`" class="menu-content-item" v-for="(item, key) in tags">
+                  {{ key }}({{ item }})
+                </a>
               </div>
             </div>
           </div>
@@ -35,10 +37,14 @@
               <div class="menu-content-title">
                 &#xe69d;
                 <span class="menu-content-title-main">归档</span>
-                <span class="menu-content-title-describe">archive&nbsp;∈&nbsp;[1,&nbsp;N]&nbsp;·&nbsp;one;&nbsp;&nbsp;&nbsp;one&nbsp;∈&nbsp;[0,&nbsp;1]&nbsp;·&nbsp;archive</span>
+                <span class="menu-content-title-describe">
+                  archive&nbsp;∈&nbsp;[1,&nbsp;N]&nbsp;·&nbsp;one;&nbsp;&nbsp;&nbsp;one&nbsp;∈&nbsp;[0,&nbsp;1]&nbsp;·&nbsp;archive
+                </span>
               </div>
               <div class="menu-content-list">
-                <a :href="`/?archive=${key}`" class="menu-content-item" v-for="item,key in archive">{{key}}[{{item}}]</a>
+                <a :href="`/?archive=${key}`" class="menu-content-item" v-for="(item, key) in archive">
+                  {{ key }}[{{ item }}]
+                </a>
               </div>
             </div>
           </div>
@@ -60,8 +66,8 @@
               </div>
               <div class="menu-alone-list">
                 <a :href="item.url" class="menu-alone-item" v-for="item in alones">
-                  <img v-if="item.icon" class="menu-alone-icon" :src="item.icon" :alt="item.name">
-                  {{item.name}}
+                  <img v-if="item.icon" class="menu-alone-icon" :src="item.icon" :alt="item.name" />
+                  {{ item.name }}
                 </a>
               </div>
             </div>
@@ -80,8 +86,8 @@
               </div>
               <div class="menu-alone-list">
                 <a :href="item.url" class="menu-alone-item" v-for="item in blogFriends">
-                  <img v-if="item.icon" class="menu-alone-icon" :src="item.icon" :alt="item.name">
-                  {{item.name}}
+                  <img v-if="item.icon" class="menu-alone-icon" :src="item.icon" :alt="item.name" />
+                  {{ item.name }}
                 </a>
               </div>
             </div>
@@ -89,18 +95,24 @@
         </div>
       </div>
       <div class="tools">
-        <div class="tool" @click="isShowSearch = true">&#xe618;</div>
+        <div class="tool" @click="showSearchBox">&#xe618;</div>
         <div class="tool" v-if="isSun" @click="changeTheme">&#xe63e;</div>
         <div class="tool" v-else @click="changeTheme">&#xe6c2;</div>
-        <a class="tool" href="/?userinfo">&#xe650;</a>
+        <a class="tool" href="/userinfo.html">&#xe650;</a>
       </div>
     </div>
   </div>
   <div class="search-box" v-show="isShowSearch" @click.self="isShowSearch = false">
     <div class="search-main">
       <div class="search-input">
-        <input class="search-input-text" type="text" @keydown.enter="search" v-model="searchText" placeholder="输入关键词进行搜索">
-        <span class="search-button" @click="search">&#xe618;</span>
+        <input
+          class="search-input-text"
+          type="text"
+          @input="search"
+          @keydown="searchKey"
+          v-model="searchText"
+          placeholder="输入关键词进行搜索"
+          ref="searchInput" />
       </div>
       <div class="search-result" @click.self="isShowSearch = false">
         <div class="search-list">
@@ -139,6 +151,13 @@
     computed: {},
     watch: {},
     methods: {
+      searchKey() {},
+      showSearchBox() {
+        this.isShowSearch = true;
+        this.$nextTick(() => {
+          this.$refs.searchInput.focus();
+        });
+      },
       changeTheme() {
         this.isSun = !this.isSun;
         localStorage.setItem('isSun', this.isSun);
@@ -156,15 +175,18 @@
       },
       search() {
         const searchText = this.searchText.trim();
-        if (searchText === '') return;
-        this.searchList = pageDatas.filter(item => item.frontmatter.title?.match(new RegExp(searchText, 'i')));
-      }
+        if (searchText === '') {
+          this.searchList = [];
+        } else {
+          this.searchList = pageDatas.filter((item) => item.frontmatter.title?.match(new RegExp(searchText, 'i')));
+        }
+      },
     },
     created() {
       this.changeThemeClass();
     },
-    mounted() { },
-    destroy() { },
+    mounted() {},
+    destroy() {},
   };
 </script>
 
@@ -255,7 +277,7 @@
   }
 
   .menu-position:hover,
-  .menu:hover>.menu-position {
+  .menu:hover > .menu-position {
     pointer-events: all;
     background: var(--theme-background);
   }
@@ -328,7 +350,7 @@
     justify-content: flex-start;
   }
 
-  .menu-alone-list:hover>.menu-alone-item {
+  .menu-alone-list:hover > .menu-alone-item {
     opacity: 0.5;
   }
 
@@ -393,16 +415,16 @@
     border-radius: 8px;
     background: white;
     box-shadow: 0 0 5px #7898;
-    display: flex;
-    align-items: center;
   }
 
   .search-input-text {
     border: none;
     outline: none;
+    width: 100%;
     flex: 1;
     border-bottom: 1px solid #9a88;
     padding: 5px 10px;
+    box-sizing: border-box;
     font-size: var(--size3);
     font-weight: 100;
     font-family: inherit;
@@ -455,7 +477,7 @@
     opacity: 1;
   }
 
-  .search-result-item+.search-result-item {
+  .search-result-item + .search-result-item {
     margin-top: 20px;
   }
 

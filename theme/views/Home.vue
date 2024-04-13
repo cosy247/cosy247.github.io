@@ -15,15 +15,12 @@
         <p class="cover-dictum-en">Suffering is inevitable, but tribulations can be chosen.</p>
       </template>
       <div class="cover-links">
-        <a class="cover-link" href="https://github.com/cosy247" target="_blank">&#xe673;github</a>
         <a
+          v-for="item in themeConfig.links"
           class="cover-link"
-          href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=al1aX1tTXlxdWSobG0QJBQc"
-          target="_blank">
-          &#xe600;邮箱
-        </a>
-        <a class="cover-link" href="https://github.com/cosy247" target="_blank">&#xe87e;codepen</a>
-        <a class="cover-link" href="https://github.com/cosy247" target="_blank">&#xe603;bilibili</a>
+          :href="item.href"
+          target="_blank"
+          v-html="item.name"></a>
       </div>
     </div>
   </div>
@@ -33,7 +30,7 @@
       <div class="list-item-infos">
         <p class="list-item-info" v-show="item.frontmatter.date">
           &#xe6ad;
-          {{ new Date(item.frontmatter.date).toLocaleDateString() }}
+          {{ item.frontmatter.date }}
         </p>
       </div>
     </a>
@@ -42,7 +39,7 @@
 </template>
 
 <script>
-  import { pageDatas } from '@temp/blogMate';
+  import { pageDatas, themeConfig } from '@temp/blogMate';
 
   export default {
     name: 'Home',
@@ -55,6 +52,7 @@
       remainPageList: [],
       pageSize: 10,
       isAddingPageList: false,
+      themeConfig,
     }),
     computed: {
       cover() {
@@ -93,9 +91,10 @@
     },
     created() {},
     mounted() {
-      this.$emit('addScrollCallback', ({ target: { clientHeight, scrollTop, scrollHeight } }) => {
+      window.addEventListener('scroll', () => {
+        const { clientHeight, scrollTop, scrollHeight } = document.documentElement;
         if (this.isAddingPageList || this.remainPageList.length === 0) return;
-        if (scrollHeight - clientHeight - scrollTop < 200) {
+        if (scrollHeight - clientHeight - scrollTop < 400) {
           this.isAddingPageList = true;
           this.pageList.push(...this.remainPageList.splice(0, this.pageSize));
           this.$nextTick(() => {
