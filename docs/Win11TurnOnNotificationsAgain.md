@@ -1,7 +1,6 @@
 ---
 id: 24
 date: 2024/03/26
-draft: 存在这一行时表示在草稿箱中
 title: window重新打开已经关闭的应用通知
 tags: window使用
 description: window重新打开已经关闭的应用通知

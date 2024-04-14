@@ -1,14 +1,15 @@
 /* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
 @font-face {
-  font-family: 'iconfont';  /* Project id 4198141 */
+  font-family: 'iconfont'; /* Project id 4198141 */
   src: url('//at.alicdn.com/t/c/font_4198141_uzcwnbpsrag.woff2?t=1710520569787') format('woff2'),
-       url('//at.alicdn.com/t/c/font_4198141_uzcwnbpsrag.woff?t=1710520569787') format('woff'),
-       url('//at.alicdn.com/t/c/font_4198141_uzcwnbpsrag.ttf?t=1710520569787') format('truetype');
+    url('//at.alicdn.com/t/c/font_4198141_uzcwnbpsrag.woff?t=1710520569787') format('woff'),
+    url('//at.alicdn.com/t/c/font_4198141_uzcwnbpsrag.ttf?t=1710520569787') format('truetype');
 }
 
 @font-face {
   font-family: 'EVSxnrjqirKp';
-  src: url('../assets//fonts/AlimamaDongFangDaKai-Regular.woff2') format('woff2'), url('../assets//fonts//AlimamaDongFangDaKai-Regular.woff') format('woff'),
+  src: url('../assets//fonts/AlimamaDongFangDaKai-Regular.woff2') format('woff2'),
+    url('../assets//fonts//AlimamaDongFangDaKai-Regular.woff') format('woff'),
     url('../assets//fonts//AlimamaDongFangDaKai-Regular.ttf') format('truetype');
 }
 
@@ -34,19 +35,8 @@
   --content-max-width: 1000px;
 }
 
-:root.sun {
-  --theme-color: #1a1a1a;
-  --theme-background: #fff;
-}
-
-:root.moon {
-  --theme-color: #eee;
-  --theme-background: #02162b;
-}
-
 /************ 隐藏滚动跳 ************/
 body {
-  color: #524a4a;
   font-family: iconfont;
   font-size: var(--size3);
 }
@@ -63,7 +53,7 @@ a {
 .mdView h3[id],
 .mdView h4[id],
 .mdView h4[id],
-.mdView h6[id]{
+.mdView h6[id] {
   padding-top: 90px;
   margin-top: -90px;
 }

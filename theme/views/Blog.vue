@@ -24,29 +24,31 @@
   </div>
   <MdView class="blog-mdView" />
   <div class="recoms">
-    <a :href="item.path" class="recom" v-for="(item, index) in recommendations" :key="index">{{ item.frontmatter.title }}</a>
+    <a :href="item.path" class="recom" v-for="(item, index) in recommendations" :key="index">
+      {{ item.frontmatter.title }}
+    </a>
   </div>
   <div class="blog-comment" ref="comment">
     <div class="blog-comment-main">
-    <Giscus
-      repo="cosy247/CosyBlog"
-      repoId="R_kgDOJI48fw"
-      category="Announcements"
-      categoryId="DIC_kwDOJI48f84Ceg84"
-      mapping="pathname"
-      term="Welcome to @giscus/react component!"
-      reactionsEnabled="1"
-      emitMetadata="0"
-      inputPosition="top"
-      theme="light"
-      lang="zh-CN" />
+      <Giscus
+        repo="cosy247/CosyBlog"
+        repoId="R_kgDOJI48fw"
+        category="Announcements"
+        categoryId="DIC_kwDOJI48f84Ceg84"
+        mapping="pathname"
+        term="Welcome to @giscus/react component!"
+        reactionsEnabled="1"
+        emitMetadata="0"
+        inputPosition="top"
+        theme="light"
+        lang="zh-CN" />
     </div>
   </div>
   <Toc class="blog-toc" />
 </template>
 
 <script>
-  import {usePageData} from '@vuepress/client';
+  import { usePageData } from '@vuepress/client';
   import { pageDatas } from '@temp/blogMate';
   import MdView from '../components/MdView.vue';
   import Giscus from '@giscus/vue';
@@ -70,12 +72,14 @@
         window.document.documentElement.scrollTop = 0;
       },
     },
-  created() {
+    created() {
       const pageData = usePageData().value;
       this.tags = (pageData.frontmatter.tags || '').split(' ').filter((i) => i);
       this.archive = pageData.frontmatter.archive;
       this.recommendations = Array.from(new Set((pageData.frontmatter.recommendations || '').split(' ')));
-      this.recommendations = this.recommendations.map((id) => pageDatas.find((i) => i.frontmatter.id === +id)).filter((i) => i);
+      this.recommendations = this.recommendations
+        .map((id) => pageDatas.find((i) => i.frontmatter.id === +id))
+        .filter((i) => i);
       this.date = pageData.frontmatter.date;
     },
     mounted() {},
@@ -126,6 +130,7 @@
     font-size: var(--size1);
     margin-right: 10px;
     opacity: 0;
+    font-weight: 900;
     transition: 0.5s;
   }
   .blog-info:hover > .blog-info-text {
@@ -161,13 +166,16 @@
     cursor: pointer;
   }
   .blog-mdView {
-    margin: 20vh auto 0;
+    margin: 5vh auto 0;
     width: 95%;
     max-width: 700px;
   }
   .recoms {
     display: flex;
     gap: 20px;
+    width: 95%;
+    max-width: 700px;
+    margin: auto;
   }
   .recom {
     margin-top: 100px;
@@ -176,9 +184,12 @@
     border-radius: 10px;
     font-size: var(--size2);
   }
+  .recom:hover {
+    border: 1px solid #1979df;
+  }
   .blog-comment {
     position: relative;
-    padding-top: 150px;
+    margin-top: 100px;
     min-height: 50vh;
     padding-bottom: 300px;
     background: linear-gradient(#fff0, #fff 100px);
@@ -193,26 +204,36 @@
     position: fixed;
     top: 50%;
     left: calc(50% + 420px);
+    width: calc(50% - 450px);
     max-height: 80%;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: clip;
     transform: translate(0, -50%);
     font-size: var(--size1);
     transition: 0.5s;
+    white-space: nowrap;
   }
 </style>
 
 <style>
   .blog-mdView div > h1:first-child {
-    font-size: var(--size6);
+    font-size: var(--size7);
+    margin-bottom: 20px;
+    word-break: break-all;
   }
   .blog-toc .vuepress-toc-item > a {
     opacity: 0.5;
     transition: 0.5s;
     color: transparent;
+    display: block;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
   .blog-toc:hover .vuepress-toc-item > a {
     color: inherit;
-    opacity: 0.4;
+    opacity: 0.6;
   }
   .blog-toc .vuepress-toc-item > a:hover {
     opacity: 1;
@@ -220,11 +241,12 @@
   .blog-toc .vuepress-toc-item > a.active {
     opacity: 1;
     color: inherit;
+    font-weight: 900;
   }
   .blog-toc .vuepress-toc-item > a::before {
     content: '';
     width: 1em;
-    height: 0.3em;
+    height: 0.25em;
     background: #c1c2c4;
     display: inline-block;
     vertical-align: middle;

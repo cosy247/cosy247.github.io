@@ -1,8 +1,8 @@
 ---
 id: 21
+date: 2024/02/01
 title: 格式化配置文件editorConfig属性说明
 tags: 配置文件
-draft: 存在这一行时表示在草稿箱中
 description: Vscode格式化配置文件editorConfig属性说明
 ---
 

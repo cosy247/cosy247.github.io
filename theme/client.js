@@ -1,10 +1,10 @@
 import { defineClientConfig } from '@vuepress/client';
-import Index from './Index.vue';
+import Layout from './Layout.vue';
 import NotFound from './NotFound.vue';
 
 export default defineClientConfig({
   layouts: {
-    Layout: Index,
+    Layout,
     NotFound,
   },
   // enhance: ({ app }) => {

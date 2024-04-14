@@ -1,8 +1,9 @@
 <template>
   <PageOuter />
-  <Home v-if="pageType == 'home'" @addScrollCallback="addScrollCallback" />
-  <Blog v-else-if="pageType == 'blog-item'" @addScrollCallback="addScrollCallback" />
-  <UserInfo v-else-if="pageType == 'userinfo'" @addScrollCallback="addScrollCallback" />
+  <Home v-if="path === 'home'" />
+  <Blog v-else-if="path === 'blog'" />
+  <UserInfo v-else-if="path === 'userinfo'" />
+  <NotFound v-else-if="path === 'notFound'" />
 </template>
 
 <script>
@@ -10,33 +11,32 @@
   import Home from './views/Home.vue';
   import Blog from './views/Blog.vue';
   import PageOuter from './components/PageOuter.vue';
+  import UserInfo from './views/UserInfo.vue';
+  import NotFound from './views/NotFound.vue';
 
   export default {
     name: 'Index',
-    components: { Home, Blog, PageOuter },
-    props: [],
+    components: { Home, Blog, UserInfo, NotFound, PageOuter },
+    props: ['isNotFound'],
     data: () => ({
       scrollCallbacks: [],
     }),
     computed: {
-      pageType() {
-        const { path, query } = this.$route;
-        if (path == '/') {
-          return typeof query.userinfo === 'undefined' ? 'home' : 'userinfo';
+      path() {
+        const { path } = this.$route;
+        if (path === '/userinfo.html') {
+          return 'userinfo';
+        } else if (path === '/') {
+          return 'home';
+        } else if (this.isNotFound) {
+          return 'notFound';
         } else {
-          return 'blog-item';
+          return 'blog';
         }
       },
     },
     watch: {},
-    methods: {
-      addScrollCallback(callback) {
-        this.scrollCallbacks.push(callback);
-      },
-      handelScroll() {
-        this.scrollCallbacks.forEach((callback) => callback(event));
-      },
-    },
+    methods: {},
     created() {},
     mounted() {},
     destroy() {},
@@ -71,7 +71,6 @@
     position: relative;
     width: 100%;
     min-height: 100%;
-    background: var(--theme-background);
     z-index: 1;
     padding-bottom: 100px;
   }

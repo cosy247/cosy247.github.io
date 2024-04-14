@@ -1,5 +1,5 @@
 <template>
-  <div class="cover" :class="{ filter: tag || archive }">
+  <div class="cover" ref="cover">
     <div class="cover-content">
       <p class="cover-title" v-if="tag || archive">
         {{ tag ? 'tag' : 'archive' }}
@@ -15,15 +15,12 @@
         <p class="cover-dictum-en">Suffering is inevitable, but tribulations can be chosen.</p>
       </template>
       <div class="cover-links">
-        <a class="cover-link" href="https://github.com/cosy247" target="_blank">&#xe673;github</a>
         <a
+          v-for="item in themeConfig.links"
           class="cover-link"
-          href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=al1aX1tTXlxdWSobG0QJBQc"
-          target="_blank">
-          &#xe600;邮箱
-        </a>
-        <a class="cover-link" href="https://github.com/cosy247" target="_blank">&#xe87e;codepen</a>
-        <a class="cover-link" href="https://github.com/cosy247" target="_blank">&#xe603;bilibili</a>
+          :href="item.href"
+          target="_blank"
+          v-html="item.name"></a>
       </div>
     </div>
   </div>
@@ -33,7 +30,7 @@
       <div class="list-item-infos">
         <p class="list-item-info" v-show="item.frontmatter.date">
           &#xe6ad;
-          {{ new Date(item.frontmatter.date).toLocaleDateString() }}
+          {{ item.frontmatter.date }}
         </p>
       </div>
     </a>
@@ -42,7 +39,7 @@
 </template>
 
 <script>
-  import { pageDatas } from '@temp/blogMate';
+  import { pageDatas, themeConfig } from '@temp/blogMate';
 
   export default {
     name: 'Home',
@@ -55,14 +52,33 @@
       remainPageList: [],
       pageSize: 10,
       isAddingPageList: false,
+      themeConfig,
     }),
-    computed: {},
-    watch: {},
+    computed: {
+      cover() {
+        return [this.$route.query.tag, this.$route.query.archive];
+      },
+    },
+    watch: {
+      cover: {
+        handler([tag, archive]) {
+          this.tag = tag;
+          this.archive = archive;
+          this.$nextTick(() => {
+            if (!this.$refs.cover) return;
+            if (tag || archive) {
+              this.$refs.cover.classList.add('filter');
+            } else {
+              this.$refs.cover.classList.remove('filter');
+            }
+          });
+          this.initPageList();
+        },
+        immediate: true,
+      },
+    },
     methods: {
       initPageList() {
-        this.tag = this.$route.query.tag;
-        this.archive = this.$route.query.archive;
-        console.log(this.$route.query);
         if (this.tag) {
           this.remainPageList = pageDatas.filter((item) => item.frontmatter.tags?.includes(this.tag));
         } else if (this.archive) {
@@ -73,13 +89,12 @@
         this.pageList = this.remainPageList.splice(0, this.pageSize);
       },
     },
-    created() {
-      this.initPageList();
-    },
+    created() {},
     mounted() {
-      this.$emit('addScrollCallback', ({ target: { clientHeight, scrollTop, scrollHeight } }) => {
+      window.addEventListener('scroll', () => {
+        const { clientHeight, scrollTop, scrollHeight } = document.documentElement;
         if (this.isAddingPageList || this.remainPageList.length === 0) return;
-        if (scrollHeight - clientHeight - scrollTop < 200) {
+        if (scrollHeight - clientHeight - scrollTop < 400) {
           this.isAddingPageList = true;
           this.pageList.push(...this.remainPageList.splice(0, this.pageSize));
           this.$nextTick(() => {

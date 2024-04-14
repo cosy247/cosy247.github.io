@@ -1,5 +1,6 @@
 ---
 id: 6
+date: 2023/12/11
 title: css控制上级样式
 tags: css css伪类 css函数式伪类
 ---

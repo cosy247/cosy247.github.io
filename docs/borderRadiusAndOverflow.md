@@ -1,8 +1,8 @@
 ---
 id: 3
+date: 2023/11/21
 title: CSS圆角borderRadius的内容溢出问题
 tags: css
-draft: 存在这一行时表示在草稿箱中
 description: css属性中的圆角borderRadius和溢出overflow的之间可能存在的冲突情况
 ---
 

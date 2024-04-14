@@ -1,13 +1,11 @@
 <template>
   <div class="Menu">
     <div class="content">
-      <RouterLink to="/">
-        <div class="logo">
-          C
-          <img src="../assets/images/icon.png" alt="" />
-          SY247
-        </div>
-      </RouterLink>
+      <a href="/" class="logo">
+        C
+        <img src="../assets/images/icon.png" alt="" />
+        SY247
+      </a>
       <div class="menus">
         <div class="menu">
           &#xe617;
@@ -18,10 +16,14 @@
               <div class="menu-content-title">
                 &#xe617;
                 <span class="menu-content-title-main">标签</span>
-                <span class="menu-content-title-describe">tag&nbsp;∈&nbsp;[1,&nbsp;N]&nbsp;·&nbsp;one;&nbsp;&nbsp;&nbsp;one&nbsp;∈&nbsp;[0,&nbsp;5]&nbsp;·&nbsp;tag</span>
+                <span class="menu-content-title-describe">
+                  tag&nbsp;∈&nbsp;[1,&nbsp;N]&nbsp;·&nbsp;one;&nbsp;&nbsp;&nbsp;one&nbsp;∈&nbsp;[0,&nbsp;5]&nbsp;·&nbsp;tag
+                </span>
               </div>
               <div class="menu-content-list">
-                <a :href="`/?tag=${key}`" class="menu-content-item" v-for="item,key in tags">{{key}}({{item}})</a>
+                <a :href="`/?tag=${key}`" class="menu-content-item" v-for="(item, key) in tags">
+                  {{ key }}({{ item }})
+                </a>
               </div>
             </div>
           </div>
@@ -35,10 +37,14 @@
               <div class="menu-content-title">
                 &#xe69d;
                 <span class="menu-content-title-main">归档</span>
-                <span class="menu-content-title-describe">archive&nbsp;∈&nbsp;[1,&nbsp;N]&nbsp;·&nbsp;one;&nbsp;&nbsp;&nbsp;one&nbsp;∈&nbsp;[0,&nbsp;1]&nbsp;·&nbsp;archive</span>
+                <span class="menu-content-title-describe">
+                  archive&nbsp;∈&nbsp;[1,&nbsp;N]&nbsp;·&nbsp;one;&nbsp;&nbsp;&nbsp;one&nbsp;∈&nbsp;[0,&nbsp;1]&nbsp;·&nbsp;archive
+                </span>
               </div>
               <div class="menu-content-list">
-                <a :href="`/?archive=${key}`" class="menu-content-item" v-for="item,key in archive">{{key}}[{{item}}]</a>
+                <a :href="`/?archive=${key}`" class="menu-content-item" v-for="(item, key) in archive">
+                  {{ key }}[{{ item }}]
+                </a>
               </div>
             </div>
           </div>
@@ -60,8 +66,8 @@
               </div>
               <div class="menu-alone-list">
                 <a :href="item.url" class="menu-alone-item" v-for="item in alones">
-                  <img v-if="item.icon" class="menu-alone-icon" :src="item.icon" :alt="item.name">
-                  {{item.name}}
+                  <img v-if="item.icon" class="menu-alone-icon" :src="item.icon" :alt="item.name" />
+                  {{ item.name }}
                 </a>
               </div>
             </div>
@@ -80,8 +86,8 @@
               </div>
               <div class="menu-alone-list">
                 <a :href="item.url" class="menu-alone-item" v-for="item in blogFriends">
-                  <img v-if="item.icon" class="menu-alone-icon" :src="item.icon" :alt="item.name">
-                  {{item.name}}
+                  <img v-if="item.icon" class="menu-alone-icon" :src="item.icon" :alt="item.name" />
+                  {{ item.name }}
                 </a>
               </div>
             </div>
@@ -89,18 +95,23 @@
         </div>
       </div>
       <div class="tools">
-        <div class="tool" @click="isShowSearch = true">&#xe618;</div>
-        <div class="tool" v-if="isSun" @click="changeTheme">&#xe63e;</div>
-        <div class="tool" v-else @click="changeTheme">&#xe6c2;</div>
-        <a class="tool" href="/?userinfo">&#xe650;</a>
+        <div class="tool" @click="showSearchBox">&#xe618;</div>
+        <!-- <div class="tool" v-if="isSun" @click="changeTheme">&#xe63e;</div>
+        <div class="tool" v-else @click="changeTheme">&#xe6c2;</div> -->
+        <a class="tool" href="/userinfo.html">&#xe650;</a>
       </div>
     </div>
   </div>
   <div class="search-box" v-show="isShowSearch" @click.self="isShowSearch = false">
     <div class="search-main">
       <div class="search-input">
-        <input class="search-input-text" type="text" @keydown.enter="search" v-model="searchText" placeholder="输入关键词进行搜索">
-        <span class="search-button" @click="search">&#xe618;</span>
+        <input
+          class="search-input-text"
+          type="text"
+          @input="search"
+          v-model="searchText"
+          placeholder="输入关键词进行搜索"
+          ref="searchInput" />
       </div>
       <div class="search-result" @click.self="isShowSearch = false">
         <div class="search-list">
@@ -139,32 +150,42 @@
     computed: {},
     watch: {},
     methods: {
-      changeTheme() {
-        this.isSun = !this.isSun;
-        localStorage.setItem('isSun', this.isSun);
-        // this.changeThemeClass();
+      showSearchBox() {
+        this.isShowSearch = true;
+        this.$nextTick(() => {
+          this.$refs.searchInput.focus();
+        });
       },
-      changeThemeClass() {
-        if (typeof window === 'undefined') return;
-        if (this.isSun) {
-          window.document.documentElement.classList.add('sun');
-          window.document.documentElement.classList.remove('moon');
-        } else {
-          window.document.documentElement.classList.add('moon');
-          window.document.documentElement.classList.remove('sun');
-        }
-      },
+      // changeTheme() {
+      //   this.isSun = !this.isSun;
+      //   localStorage.setItem('isSun', this.isSun);
+      //   this.changeThemeClass();
+      // },
+      // changeThemeClass() {
+      //   if (typeof window === 'undefined') return;
+      //   if (this.isSun) {
+      //     window.document.documentElement.classList.add('sun');
+      //     window.document.documentElement.classList.remove('moon');
+      //   } else {
+      //     window.document.documentElement.classList.add('moon');
+      //     window.document.documentElement.classList.remove('sun');
+      //   }
+      // },
       search() {
         const searchText = this.searchText.trim();
-        if (searchText === '') return;
-        this.searchList = pageDatas.filter(item => item.frontmatter.title?.match(new RegExp(searchText, 'i')));
-      }
+        if (searchText === '') {
+          this.searchList = [];
+        } else {
+          this.searchList = pageDatas.filter((item) => item.frontmatter.title?.match(new RegExp(searchText, 'i')));
+        }
+      },
     },
     created() {
-      this.changeThemeClass();
+      // this.isSun = localStorage.getItem('isSun') === 'true';
+      // this.changeThemeClass();
     },
-    mounted() { },
-    destroy() { },
+    mounted() {},
+    destroy() {},
   };
 </script>
 
@@ -172,10 +193,9 @@
   .Menu {
     position: fixed;
     top: var(--outer-width);
-    left: var(--outer-width);
-    width: calc(100vw - 2 * var(--outer-width));
-    color: var(--theme-color);
-    background: var(--theme-background);
+    left: calc(var(--outer-width) - 1px);
+    width: calc(100vw - 2 * var(--outer-width) + 2px);
+    background: white;
     z-index: 500;
     box-shadow: 0 0 10px #8882;
     transform: translateY(-1px);
@@ -188,24 +208,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-
-  .menus {
-    display: flex;
-    transition: color 0.1s;
-  }
-
-  .menus:hover {
-    color: #1a1a1a88;
-  }
-
-  .menu {
-    padding: 20px;
-    transition: color 0.1s;
-  }
-
-  .menu:hover {
-    color: var(--theme-color);
   }
 
   .logo {
@@ -228,10 +230,26 @@
     margin: 0 0.1em;
   }
 
+  .menus {
+    display: flex;
+    transition: color 0.1s;
+    color: #1a1a1a;
+  }
+
+  .menus:hover{
+    color: #1a1a1a88;
+  }
+
   .menu {
     cursor: pointer;
+    padding: 20px;
+    transition: color 0.1s;
     font-size: 15px;
     z-index: 9;
+  }
+
+  .menu:hover {
+    color: #1a1a1a;
   }
 
   .menu::first-letter {
@@ -255,9 +273,9 @@
   }
 
   .menu-position:hover,
-  .menu:hover>.menu-position {
+  .menu:hover > .menu-position {
     pointer-events: all;
-    background: var(--theme-background);
+    background: white;
   }
 
   .menu-mask {
@@ -328,7 +346,7 @@
     justify-content: flex-start;
   }
 
-  .menu-alone-list:hover>.menu-alone-item {
+  .menu-alone-list:hover > .menu-alone-item {
     opacity: 0.5;
   }
 
@@ -370,7 +388,7 @@
   }
 
   .search-box {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     width: 100%;
@@ -393,16 +411,16 @@
     border-radius: 8px;
     background: white;
     box-shadow: 0 0 5px #7898;
-    display: flex;
-    align-items: center;
   }
 
   .search-input-text {
     border: none;
     outline: none;
+    width: 100%;
     flex: 1;
     border-bottom: 1px solid #9a88;
     padding: 5px 10px;
+    box-sizing: border-box;
     font-size: var(--size3);
     font-weight: 100;
     font-family: inherit;
@@ -455,7 +473,7 @@
     opacity: 1;
   }
 
-  .search-result-item+.search-result-item {
+  .search-result-item + .search-result-item {
     margin-top: 20px;
   }
 
