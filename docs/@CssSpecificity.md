@@ -10,7 +10,7 @@ description: css选择器优先级
 
 # css 选择器优先级
 
-## 选择器分类与等级
+## 选择器分类与优先级
 
 css 选择器可以分为：
 
@@ -22,17 +22,17 @@ css 选择器可以分为：
 1. 伪类选择器：:hover :empty
 1. 伪元素: ::after ::before
 
-css 选择器等级共有 3 级（等级高在前）：
+css 选择优先级共有 3 级（优先级高在前）：
 
 1. ID 选择器
 1. 类选择器，属性选择器，伪类选择器，伪元素
 1. 标签选择器
 
-> 其中通配符（\*）是没有等级的。关系选择器（+、>、~...）对权重没有影响。
+> 其中通配符（\*）是没有优先级的。关系选择器（+、>、~...）对权重没有影响。
 
 ## 权重计算与比较
 
-基于选择器的等级划分，权重划分为（lv1，lv2，lv3）：
+基于选择器类型，优先级的权重表示为为(lv1，lv2，lv3)：
 
 ```css
 div.class			/* (0, 1, 1) */
@@ -46,7 +46,7 @@ div.class			/* (0, 1, 1) */
 
 > 对于继承的属性，是没有权重的。并且继承就以在 dom 树中最近的继承属性值为准。
 
-在很多地方认为等级中的权重为 100、10 和 1，然后相加得到权重。例如`div.test`的权重为 11。大部分情况可以这样认为，因为一般不会用超过 10 个的统计选择器会引发进位，可以以下的选择器证明：
+在很多地方认为优先级中的权重为 100、10 和 1，然后相加得到权重。例如`div.test`的权重为 11。大部分情况可以这样认为，因为一般不会用超过 10 个的统计选择器会引发进位，可以以下的选择器证明：
 
 ```css
 #test {
@@ -132,7 +132,7 @@ div.test {
 
 **⚠ 不到万不得已，不要使用`!important`，这会使样式结构混乱。**
 
-在 css 属性后面添加`!important`可以让这个属性的优先级高于任何选择器，当有两个或多个`!important`作用同一个属性时，会以选择器等级决定。
+在 css 属性后面添加`!important`可以让这个属性的优先级高于任何选择器，当有两个或多个`!important`作用同一个属性时，会以选择器优先级决定。
 
 ```css
 .test {
@@ -176,40 +176,82 @@ div.test {
 
 ## 伪类选择器
 
-一般伪类的权重为(0, 1, 0)，但是也有一些例外，他们通常像函数以下可以追加规则。
+一般伪类的权重为(0, 1, 0)，但是也有一些例外，他们通常像函数一样可以追加规则。
 
 ### :where()
 
-权重为 (0, 0, 0)。 where 伪类选择器可以接受选择器列表作为参数，将会选择所有能被该选择器列表中任何一条规则选中的元素。相当于`或者`。
+`:where()`伪类选择器可以接受选择器列表作为参数，将会选择所有能被该选择器列表中任何一条规则选中的元素。权重永远为 (0, 0, 0)。
 
 ```css
-/* (0, 0, 1) */
 div:where(.test, #test) {
   color: red;
 }
 ```
 
-相当于：
+> 匹配 class 为 test 或者 id 为 test 的 div 标签，权重都为 div 标签权重：(0, 0, 1)。
+
+### :is()
+
+`:is()`与`:where()`相似，不过`:is()`会带上权重。权重采用参数中最高权重，无论是否匹配到该选择器。
 
 ```css
-div.test {
-  color: red;
-}
-div#test {
+div:is(.test, #test) {
   color: red;
 }
 ```
 
-> 权重都为 div 标签权重： (0, 0, 1)
+> 匹配 class 为 test 或者 id 为 test 的 div 标签，权重为：(1, 0, 1)。
+
+```css
+div:is(.test, div#test) {
+  color: red;
+}
+```
+
+> is()中参数的最高权重为(1,0,1)，加上外界 div 标签权重：(1, 0, 2)。
 
 ### :not()
 
-### :is()
+`:not()`伪类选择器可以接受选择器列表作为参数，当不满足其中任意一条时生效。权重为选择器最高权重。
+
+```css
+div:not(.test, #test) {
+  color: red;
+}
+```
+
+> 匹配 class 不为 test 并且 id 不为 test 的 div 标签。权重：(1, 0, 1)。
+
+```css
+div:not(.test):not(#test) {
+  color: red;
+}
+```
+
+> 匹配规则与上一个相同，不过权重为：(1, 1, 1)。
 
 ### :has()
+
+`:has()`伪类选择器可以接受选择器列表作为参数，当满足任意一个参数时，样式生效并作用于当前元素。权重计算方式与`:is()`和`:not()`相同。
+
+```css
+div:has(> p, + #test, .test) {
+  color: red;
+}
+```
+
+> 满足`div > p`，`div + #test`或者`div .test`时样式生效。无论匹配的那个选择器权重都为`div + #test`的权重：(1, 0 ,1)。
 
 ## 参考
 
 1. [https://developer.mozilla.org/zh-CN/docs/Web/CSS/Specificity](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Specificity)
 
 1. [https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Selectors](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Selectors)
+
+1. [https://developer.mozilla.org/zh-CN/docs/Web/CSS/:where](https://developer.mozilla.org/zh-CN/docs/Web/CSS/:where)
+
+1. [https://developer.mozilla.org/zh-CN/docs/Web/CSS/:is](https://developer.mozilla.org/zh-CN/docs/Web/CSS/:is)
+
+1. [https://developer.mozilla.org/zh-CN/docs/Web/CSS/:not](https://developer.mozilla.org/zh-CN/docs/Web/CSS/:not)
+
+1. [https://developer.mozilla.org/zh-CN/docs/Web/CSS/:has](https://developer.mozilla.org/zh-CN/docs/Web/CSS/:has)

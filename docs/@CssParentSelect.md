@@ -5,7 +5,7 @@ title: css控制上级样式
 tags: css css伪类 css函数式伪类
 ---
 
-# css控制上级样式
+# css 控制上级样式
 
 ## 引言
 
@@ -17,48 +17,49 @@ tags: css css伪类 css函数式伪类
 
 ```html
 <style>
-    div.tempalate:has(> p) {
-        background: #888;
-    }
-    div.tempalate:has(> .title) {
-        color: red;
-    }
-    div.tempalate:has(> .text) {
-        color: green;
-    }
+  div.tempalate:has(> p) {
+    background: #888;
+  }
+  div.tempalate:has(> .title) {
+    color: red;
+  }
+  div.tempalate:has(> .text) {
+    color: green;
+  }
 </style>
 
 <!-- 被 div.tempalate:has(> p) 和 div.tempalate:has(> .title) 选中 -->
 <div class="tempalate">
-    <p class="title">我是标题</p>
+  <p class="title">我是标题</p>
 </div>
 
 <!-- 被 div.tempalate:has(> p) 和 div.tempalate:has(> .text) 选中 -->
 <div class="tempalate">
-    <p class="text">我是类容</p>
+  <p class="text">我是类容</p>
 </div>
 ```
 
 运行结果：
-``` html
+
+```html
 <div style="border: 1px solid #973;padding: 10px;border-radius: 10px;">
-	<style>
-		div.tempalate:has(> p) {
-			background: #888
-		}
-		div.tempalate:has(> .title) {
-			color: red
-		}
-		div.tempalate:has(> .text) {
-			color: green
-		}
-	</style>
-	<div class='tempalate'>
-		<p class='title'>我是标题</p>
-	</div>
-	<div class='tempalate'>
-		<p class='text'>我是类容</p>
-	</div>
+  <style>
+    div.tempalate:has(> p) {
+      background: #888;
+    }
+    div.tempalate:has(> .title) {
+      color: red;
+    }
+    div.tempalate:has(> .text) {
+      color: green;
+    }
+  </style>
+  <div class="tempalate">
+    <p class="title">我是标题</p>
+  </div>
+  <div class="tempalate">
+    <p class="text">我是类容</p>
+  </div>
 </div>
 ```
 
