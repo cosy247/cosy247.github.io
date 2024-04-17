@@ -8,8 +8,8 @@
       <span class="blog-info-text">{{ archive }}</span>
       <span class="blog-info-icon">&#xe69d;</span>
     </a>
-    <div class="blog-info-br"></div>
-    <div class="blog-info">
+    <div v-if="tags.length || archive" class="blog-info-br"></div>
+    <div class="blog-info" v-if="date">
       <span class="blog-info-text">{{ date }}</span>
       <span class="blog-info-icon">&#xe6ad;</span>
     </div>
@@ -22,7 +22,8 @@
       <span class="blog-info-icon">&#xe62b;</span>
     </div>
   </div>
-  <MdView class="blog-mdView" />
+  <MdView v-if="userinfo" class="blog-mdView" path="/README.md" />
+  <MdView v-else="userinfo" class="blog-mdView" />
   <div class="recoms">
     <a :href="item.path" class="recom" v-for="(item, index) in recommendations" :key="index">
       {{ item.frontmatter.title }}
@@ -56,6 +57,7 @@
   export default {
     name: 'Blog',
     components: { MdView, Giscus },
+    props: ['userinfo'],
     data: () => ({
       date: '',
       tags: [],
@@ -77,9 +79,7 @@
       this.tags = (pageData.frontmatter.tags || '').split(' ').filter((i) => i);
       this.archive = pageData.frontmatter.archive;
       this.recommendations = Array.from(new Set((pageData.frontmatter.recommendations || '').split(' ')));
-      this.recommendations = this.recommendations
-        .map((id) => pageDatas.find((i) => i.frontmatter.id === +id))
-        .filter((i) => i);
+      this.recommendations = this.recommendations.map((id) => pageDatas.find((i) => i.frontmatter.id === +id)).filter((i) => i);
       this.date = pageData.frontmatter.date;
     },
     mounted() {},

@@ -1,16 +1,16 @@
 <template>
   <div class="mdView">
-    <Content :page-key="pageKey" class="mdContent"/>
+    <Content :path="path" class="mdContent"/>
   </div>
 </template>
 
 <script>
-  import '../styles/rainbow.css';
+  import '../styles/md.css';
 
   export default {
     name: 'MdView',
     components: {},
-    props: ['pageKey'],
+    props: ['path'],
     data: () => ({}),
     computed: {},
     watch: {},

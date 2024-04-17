@@ -1,20 +1,18 @@
 <template>
-  <div class="PageOuter"></div>
-  <!-- <OneSentence /> -->
+  <div class="PageOuter">
+    <div class="copyright">cosy247</div>
+  </div>
   <Menu />
   <!-- <Side /> -->
   <Footer />
 </template>
 
 <script>
-  import OneSentence from './OneSentence.vue';
-  import Side from './Side.vue';
-  import Footer from './Footer.vue';
   import Menu from './Menu.vue';
 
   export default {
     name: 'PageOuter',
-    components: { OneSentence, Side, Footer, Menu },
+    components: { Menu },
     data: () => ({}),
     computed: {},
     watch: {},
@@ -77,5 +75,19 @@
 
   ::v-deep(.PageOuter *) {
     pointer-events: auto;
+  }
+
+  .copyright {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    background: #125fd388;
+    border-radius: 10px;
+    transform: translateX(-50%) scale(0.7);
+    font-size: var(--outer-width);
+    line-height: var(--outer-width);
+    padding: 0px 10px;
+    color: rgba(214, 214, 214, 0.833);
+    transform-origin: center center;
   }
 </style>

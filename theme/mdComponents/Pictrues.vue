@@ -1,5 +1,9 @@
 <template>
-  <div class="Pictrues">Pictrues</div>
+  <div class="Pictrues">
+    ⏬⏬🦋
+    <slot></slot>
+    asd 🦋
+  </div>
 </template>
 
 <script>

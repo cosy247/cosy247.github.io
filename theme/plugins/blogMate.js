@@ -12,7 +12,7 @@ export default ({ countMateNames = [], isArrMateNames = [] }) => ({
       .reduce((pageDatas, page) => {
         const { htmlFilePathRelative: path, frontmatter } = page;
 
-        if (!path || path == 'index.html' || path[0] === '@') return pageDatas;
+        if (!path || path === 'index.html' || path === '404.html' || path[0] === '@') return pageDatas;
 
         // 数组属性转化
         isArrMateNames.forEach((metaName) => {
