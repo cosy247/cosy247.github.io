@@ -3,7 +3,7 @@
   <!-- <OneSentence /> -->
   <Menu />
   <!-- <Side /> -->
-  <Footer title="title" />
+  <Footer />
 </template>
 
 <script>

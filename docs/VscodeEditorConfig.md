@@ -60,7 +60,7 @@ Vscode 可以安装`EditorConfig for VS Code`插件，也可以安装其他组�
 
 ## 配置示例
 
-```editorConfig
+```
 [*]
 root = true
 charset = utf-8

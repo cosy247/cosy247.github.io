@@ -21,9 +21,7 @@
                 </span>
               </div>
               <div class="menu-content-list">
-                <a :href="`/?tag=${key}`" class="menu-content-item" v-for="(item, key) in tags">
-                  {{ key }}({{ item }})
-                </a>
+                <a :href="`/?tag=${key}`" class="menu-content-item" v-for="(item, key) in tags">{{ key }}({{ item }})</a>
               </div>
             </div>
           </div>
@@ -42,9 +40,7 @@
                 </span>
               </div>
               <div class="menu-content-list">
-                <a :href="`/?archive=${key}`" class="menu-content-item" v-for="(item, key) in archive">
-                  {{ key }}[{{ item }}]
-                </a>
+                <a :href="`/?archive=${key}`" class="menu-content-item" v-for="(item, key) in archive">{{ key }}[{{ item }}]</a>
               </div>
             </div>
           </div>
@@ -105,13 +101,7 @@
   <div class="search-box" v-show="isShowSearch" @click.self="isShowSearch = false">
     <div class="search-main">
       <div class="search-input">
-        <input
-          class="search-input-text"
-          type="text"
-          @input="search"
-          v-model="searchText"
-          placeholder="输入关键词进行搜索"
-          ref="searchInput" />
+        <input class="search-input-text" type="text" @input="search" v-model="searchText" placeholder="输入关键词进行搜索" ref="searchInput" />
       </div>
       <div class="search-result" @click.self="isShowSearch = false">
         <div class="search-list">
@@ -146,6 +136,7 @@
       isShowSearch: false,
       searchText: '',
       searchList: [],
+      pageDatas: JSON.parse(JSON.stringify(pageDatas)),
     }),
     computed: {},
     watch: {},
@@ -156,34 +147,16 @@
           this.$refs.searchInput.focus();
         });
       },
-      // changeTheme() {
-      //   this.isSun = !this.isSun;
-      //   localStorage.setItem('isSun', this.isSun);
-      //   this.changeThemeClass();
-      // },
-      // changeThemeClass() {
-      //   if (typeof window === 'undefined') return;
-      //   if (this.isSun) {
-      //     window.document.documentElement.classList.add('sun');
-      //     window.document.documentElement.classList.remove('moon');
-      //   } else {
-      //     window.document.documentElement.classList.add('moon');
-      //     window.document.documentElement.classList.remove('sun');
-      //   }
-      // },
       search() {
         const searchText = this.searchText.trim();
         if (searchText === '') {
           this.searchList = [];
         } else {
-          this.searchList = pageDatas.filter((item) => item.frontmatter.title?.match(new RegExp(searchText, 'i')));
+          this.searchList = this.pageDatas.filter((item) => item.frontmatter.title?.match(new RegExp(searchText, 'i')));
         }
       },
     },
-    created() {
-      // this.isSun = localStorage.getItem('isSun') === 'true';
-      // this.changeThemeClass();
-    },
+    created() {},
     mounted() {},
     destroy() {},
   };
@@ -236,7 +209,7 @@
     color: #1a1a1a;
   }
 
-  .menus:hover{
+  .menus:hover {
     color: #1a1a1a88;
   }
 
