@@ -48,12 +48,13 @@ a {
   transition: letter-spacing 0.3s;
 }
 
-.mdView h1[id],
-.mdView h2[id],
-.mdView h3[id],
-.mdView h4[id],
-.mdView h4[id],
-.mdView h6[id] {
+.mdContent > h1[id],
+.mdContent > h2[id],
+.mdContent > h3[id],
+.mdContent > h4[id],
+.mdContent > h4[id],
+.mdContent > h6[id] {
   padding-top: 90px;
   margin-top: -90px;
+  z-index:  -1;
 }

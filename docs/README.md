@@ -19,43 +19,13 @@
 }
 ---
 
-::: tabs
-
-@tab 标题 1
-
-tab 1 内容
-
-@tab 标题 2
-
-tab 2 内容
-
-@tab:active 标题 3
-
-tab 3 将会被默认激活
-
-tab 3 内容
-
+::: tip warning  
+自定义警告  
 :::
 
-::: important 自定义重要  
-:::
-
-::: : info 自定义信息  
-:::
-
-::: note 自定义注释  
-:::
-
-::: tip
-:::
-
-::: tip 自定义提示 asdkfjh 
-:::
-
-::: warning 自定义警告  
-:::
-
-::: caution 自定义危险自定义危险自定义危险自定义危险自定义危险自定义危险自定义危险自定义危险自定义危险自定义危险自定义危险自定义危险自定义危险自定义危险自定义危险  
+::: version  
+node 18.16.0  
+npm 6.7.1  
 :::
 
 ::: echarts A Radar Chart

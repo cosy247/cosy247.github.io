@@ -60,7 +60,7 @@ export default {
       const [fileName] = file.split('.');
       return containerPlugin({
         type: fileName.toLowerCase(),
-        before: (info) => `<ClientOnly><${fileName} info="${info}">\n`,
+        before: (...info) => `<ClientOnly><${fileName} info="${info}">\n`,
         after: () => `</${fileName}></ClientOnly>\n`,
       });
     }),

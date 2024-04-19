@@ -1171,7 +1171,7 @@ config = {
         justify-content: center;
         color: #6cb2ff;
     }
-    /deep/ .table-content-table td.option > * > span {
+    :deep(.table-content-table td.option > * > span) {
         margin: 0 5px;
         white-space: nowrap;
         cursor: pointer;

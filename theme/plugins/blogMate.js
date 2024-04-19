@@ -46,7 +46,7 @@ export default ({ countMateNames = [], isArrMateNames = [] }) => ({
 
         return pageDatas;
       }, [])
-      .sort((b1, b2) => new Date(b2.date) - new Date(b1.date));
+      .sort((b1, b2) => new Date(b2.frontmatter.date) - new Date(b1.frontmatter.date));
 
     app.writeTemp('app.json', JSON.stringify(app));
     app.writeTemp('blogMate.json', JSON.stringify({ pageDatas: pageDatas, countMateData, themeConfig }));

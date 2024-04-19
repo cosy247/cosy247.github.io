@@ -189,7 +189,7 @@
   }
   .blog-comment {
     position: relative;
-    margin-top: 100px;
+    margin-top: 550px;
     min-height: 50vh;
     padding-bottom: 300px;
     background: linear-gradient(#fff0, #fff 100px);
@@ -198,7 +198,7 @@
   .blog-comment-main {
     width: 95%;
     max-width: 700px;
-    margin: auto;
+    margin: -350px auto 0;
   }
   .blog-toc {
     position: fixed;
