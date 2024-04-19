@@ -230,6 +230,8 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    padding: 0.1em 0;
+    font-size: var(--size1);
   }
   .blog-toc:hover .vuepress-toc-item > a {
     color: inherit;

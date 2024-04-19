@@ -107,12 +107,11 @@
         <div class="search-list">
           <p class="search-result-empty" v-if="searchList.length == 0">空空如也🍂</p>
           <a :href="item.path" class="search-result-item" v-for="item in searchList">
-            <p class="search-result-item-title">{{ item.frontmatter.title }}</p>
+            <p class="search-result-item-title">
+              <span :class="{ 'search-result-key': item.countIndexs.includes(index) }" v-for="(key, index) in item.frontmatter.title">{{ key }}</span>
+            </p>
             <div class="search-result-item-infos">
-              <p class="search-result-item-info" v-show="item.frontmatter.date">
-                &#xe6ad;
-                {{ new Date(item.frontmatter.date).toLocaleDateString() }}
-              </p>
+              <p class="search-result-item-info" v-show="item.frontmatter.date">&#xe6ad;{{ item.frontmatter.date }}</p>
             </div>
           </a>
         </div>
@@ -148,11 +147,29 @@
         });
       },
       search() {
-        const searchText = this.searchText.trim();
+        const searchText = this.searchText.toLowerCase().trim();
         if (searchText === '') {
           this.searchList = [];
         } else {
-          this.searchList = this.pageDatas.filter((item) => item.frontmatter.title?.match(new RegExp(searchText, 'i')));
+          this.searchList = this.pageDatas
+            .map((item) => {
+              let count = 0;
+              const countIndexs = [];
+              const lowerCasetitle = item.frontmatter.title.toLowerCase();
+              for (let index = 0; index < lowerCasetitle.length; index++) {
+                if (lowerCasetitle[index] === searchText[count]) {
+                  count++;
+                  countIndexs.push(index);
+                  if (count === searchText.length) {
+                    return {
+                      countIndexs,
+                      ...item,
+                    };
+                  }
+                }
+              }
+            })
+            .filter((item) => item);
         }
       },
     },
@@ -471,6 +488,11 @@
 
   .search-result-item:hover .search-result-item-title::after {
     opacity: 1;
+  }
+
+  .search-result-key {
+    color: var(--color-theme);
+    text-decoration: underline;
   }
 
   .search-result-item-infos {
