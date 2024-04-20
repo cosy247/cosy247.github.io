@@ -124,6 +124,7 @@
   .cover-content {
     box-sizing: border-box;
     padding-bottom: 10vh;
+    max-width: 67%;
   }
 
   .cover.filter .cover-content {
@@ -131,7 +132,7 @@
   }
 
   .cover-title {
-    font-size: 10vmin;
+    font-size: 11vmin;
     font-weight: 900;
     width: 100%;
     background: linear-gradient(to right, red, blue);

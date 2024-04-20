@@ -238,6 +238,7 @@ export default {
 
 .content {
   width: var(--content-max-width);
+  max-width: 90%;
   margin: auto;
   display: flex;
   justify-content: space-between;
@@ -255,7 +256,7 @@ export default {
   color: transparent;
   display: flex;
   align-items: center;
-  width: 200px;
+  width: 5em;
 }
 
 .logo img {
