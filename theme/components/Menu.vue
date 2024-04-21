@@ -224,7 +224,6 @@ export default {
   },
   created() {
     window.addEventListener("keydown", ({ code, key, keyCode, which }) => {
-      console.log({ code, key, keyCode, which });
       if (!this.isShowSearch) return;
       if (code === "ArrowDown" || key === "ArrowDown" || keyCode === 40 || which === 40) {
         this.downSearchLine();
