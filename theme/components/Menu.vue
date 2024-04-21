@@ -6,6 +6,11 @@
         <img src="../assets/images/icon.png" alt="" />
         SY247
       </a>
+      <div href="/" class="logo mobile" :class="{showMenu: isShowMenu}" @click="isShowMenu = !isShowMenu">
+        C
+        <img src="../assets/images/icon.png" alt="" />
+        SY247
+      </div>
       <div class="menus">
         <div class="menu">
           &#xe617;
@@ -159,6 +164,7 @@ export default {
     searchList: [],
     pageDatas: JSON.parse(JSON.stringify(pageDatas)),
     currentSearchLineIndex: 0,
+    isShowMenu: false,
   }),
   computed: {},
   watch: {},
@@ -272,7 +278,7 @@ export default {
   color: transparent;
   display: flex;
   align-items: center;
-  width: 5em;
+  width: 115px;
 }
 
 .logo img {
@@ -426,7 +432,7 @@ export default {
 
 .tools {
   display: flex;
-  width: 200px;
+  width: 115px;
   gap: 20px;
   font-size: 18px;
   justify-content: flex-end;

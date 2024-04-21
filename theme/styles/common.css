@@ -1,16 +1,9 @@
 /* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
 @font-face {
-  font-family: 'iconfont'; /* Project id 4198141 */
-  src: url('//at.alicdn.com/t/c/font_4198141_uzcwnbpsrag.woff2?t=1710520569787') format('woff2'),
-    url('//at.alicdn.com/t/c/font_4198141_uzcwnbpsrag.woff?t=1710520569787') format('woff'),
-    url('//at.alicdn.com/t/c/font_4198141_uzcwnbpsrag.ttf?t=1710520569787') format('truetype');
-}
-
-@font-face {
-  font-family: 'EVSxnrjqirKp';
-  src: url('../assets//fonts/AlimamaDongFangDaKai-Regular.woff2') format('woff2'),
-    url('../assets//fonts//AlimamaDongFangDaKai-Regular.woff') format('woff'),
-    url('../assets//fonts//AlimamaDongFangDaKai-Regular.ttf') format('truetype');
+  font-family: "iconfont"; /* Project id 4198141 */
+  src: url("//at.alicdn.com/t/c/font_4198141_8g8wt2m2yyg.woff2?t=1713672102423") format("woff2"),
+    url("//at.alicdn.com/t/c/font_4198141_8g8wt2m2yyg.woff?t=1713672102423") format("woff"),
+    url("//at.alicdn.com/t/c/font_4198141_8g8wt2m2yyg.ttf?t=1713672102423") format("truetype");
 }
 
 * {
@@ -31,7 +24,7 @@
   --color-theme: #591ece;
   --color-white: #f7f7f7;
   --outer-width: 15px;
-  --content-width: 95%;
+  --content-width: 90%;
   --content-max-width: 1000px;
 }
 
@@ -56,25 +49,105 @@ a {
 .mdContent > h6[id] {
   padding-top: 90px;
   margin-top: -90px;
-  z-index:  -1;
+  z-index: -1;
 }
 
-@media (any-hover: hover) {
-  body {
-    padding: 0;
+@media (max-width: 1100px) {
+  #app .blog-infos {
+    display: none;
+  }
+  #app .blog-toc {
+    display: none;
+  }
+}
+
+@media (max-width: 810px) {
+  #app .list-item-title {
+    font-size: var(--size3);
+  }
+  #app .PageOuter {
+    display: none;
+  }
+  body:not(#body) {
+    padding: 60px 0 0;
+  }
+  body:not(#body)::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+  }
+  body:not(#body)::-webkit-scrollbar-thumb {
+    width: 0;
+    background: transparent;
   }
 
-  body::-webkit-scrollbar {
-    width: auto;
-    background: #1a232c;
-    padding: 0px 0;
-    margin: 0px 0;
+  #app .Menu {
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 0;
+    border-bottom: var(--color-theme) solid 2px;
+  }
+  #app .Menu .logo {
+    display: none;
   }
 
-  body::-webkit-scrollbar-thumb {
-    margin: 0px 0;
-    background: #8a78;
-    width: var(--outer-width);
-    border-radius: var(--outer-width);
+  #app .Menu .logo.mobile {
+    display: flex;
   }
+
+  #app .Menu .logo.mobile.showMenu + .menus {
+    top: calc(100% - 2px);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #app .Menu .menus {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    left: 0;
+    justify-content: space-between;
+    background: white;
+    border-bottom: var(--color-theme) solid 2px;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.2s;
+  }
+
+  #app .Menu .menu-mask {
+    display: none;
+  }
+
+  #app .Menu .menus::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    height: 100vh;
+    background: #8888;
+  }
+
+  #app .list-over {
+    margin-bottom: 100px;
+  }
+}
+
+@media (max-width: 810px) {
+  /* #app .Menu .logo {
+    font-size: 0px;
+    width: fit-content;
+  }
+  #app .Menu .logo img {
+    font-size: var(--size3);
+  }
+  #app .Menu .tools {
+    width: fit-content;
+  }
+  #app .Menu .content {
+    max-width: 100%;
+    margin: 0px;
+    padding-right: 10px;
+    box-sizing: border-box;
+  } */
 }

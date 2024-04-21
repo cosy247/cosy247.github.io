@@ -219,7 +219,7 @@ export default {
   padding-right: 10px;
   left: calc(50% + 420px);
   width: fit-content;
-  max-width: calc(50% - 450px);
+  max-width: calc(50% - 420px);
   max-height: 50%;
   overflow-y: auto;
   overflow-x: clip;
