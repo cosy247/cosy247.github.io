@@ -109,6 +109,7 @@
           class="search-input-text"
           type="text"
           @input="search"
+          @keydown="searchPreventDefault"
           v-model="searchText"
           placeholder="输入关键词进行搜索"
           ref="searchInput"
@@ -191,6 +192,22 @@ export default {
             }
           })
           .filter((item) => item);
+      }
+    },
+    searchPreventDefault(event) {
+      const { code, key, keyCode, which } = event;
+      if (
+        code === "ArrowDown" ||
+        key === "ArrowDown" ||
+        keyCode === 40 ||
+        which === 40 ||
+        code === "ArrowUp" ||
+        key === "ArrowUp" ||
+        keyCode === 38 ||
+        which === 38
+      ) {
+        event.preventDefault();
+        return;
       }
     },
     downSearchLine() {
