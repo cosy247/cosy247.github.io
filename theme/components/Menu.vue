@@ -268,7 +268,6 @@ export default {
 }
 
 .logo {
-  font-family: cursive;
   cursor: pointer;
   font-size: 26px;
   background: linear-gradient(to right, red, blue);
@@ -279,6 +278,10 @@ export default {
   display: flex;
   align-items: center;
   width: 115px;
+}
+
+.logo.mobile {
+  display: none;
 }
 
 .logo img {
