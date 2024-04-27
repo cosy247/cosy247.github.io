@@ -136,6 +136,16 @@ a {
     height: calc(100vh - 50px - var(--outer-width))
   }
 
+  #app .menus {
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+
+  #app .menu {
+    padding: 20px 0px;
+    white-space: nowrap;
+  }
+
   #app .menu-content-title {
     display: none;
   }
