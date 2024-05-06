@@ -6,7 +6,7 @@
         <img src="../assets/images/icon.png" alt="" />
         SY247
       </a>
-      <div href="/" class="logo mobile" :class="{showMenu: isShowMenu}" @click="isShowMenu = !isShowMenu">
+      <div href="/" class="logo mobile" :class="{ showMenu: isShowMenu }" @click="isShowMenu = !isShowMenu">
         C
         <img src="../assets/images/icon.png" alt="" />
         SY247
@@ -104,6 +104,7 @@
         <!-- <div class="tool" v-if="isSun" @click="changeTheme">&#xe63e;</div>
         <div class="tool" v-else @click="changeTheme">&#xe6c2;</div> -->
         <a class="tool" href="/userinfo.html">&#xe650;</a>
+        <a class="tool home" href="/"> <img src="../assets/images/icon.png" alt="" /></a>
       </div>
     </div>
   </div>
@@ -277,11 +278,12 @@ export default {
   color: transparent;
   display: flex;
   align-items: center;
-  width: 115px;
+  width: 200px;
 }
 
 .logo.mobile {
   display: none;
+  width: fit-content;
 }
 
 .logo img {
@@ -447,6 +449,15 @@ export default {
   cursor: pointer;
 }
 
+.tool.home {
+  display: none;
+}
+
+.tool.home img{
+  height: 1.2em;
+  display: block;
+}
+
 .search-box {
   position: fixed;
   left: 0;
@@ -464,6 +475,7 @@ export default {
 .search-main {
   margin-bottom: 10vh;
   width: 750px;
+  max-width: 90%;
 }
 
 .search-input {

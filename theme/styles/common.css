@@ -131,6 +131,53 @@ a {
   #app .list-over {
     margin-bottom: 100px;
   }
+
+  #app .cover {
+    height: calc(100vh - 50px - var(--outer-width))
+  }
+
+  #app .menus {
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+
+  #app .menu {
+    padding: 20px 0px;
+    white-space: nowrap;
+  }
+
+  #app .menu-content-title {
+    display: none;
+  }
+
+  #app .menu-content-list {
+    margin-top: 0px;
+    padding: 0 10px;
+  }
+
+  #app .menu-content {
+    max-width: 100%;
+  }
+
+  #app .menu-content-item {
+    padding: 10px;
+  }
+
+  #app .menu-position {
+    top: 62px;
+  }
+
+  #app .tool.home {
+    display: block;
+  }
+
+  #app .blog-comment {
+    padding-bottom: 200px;
+  }
+
+  #app .blog-mdView {
+    margin-top: 0px;
+  }
 }
 
 @media (max-width: 810px) {
