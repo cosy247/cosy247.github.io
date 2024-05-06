@@ -1,7 +1,7 @@
 ---
 id: 5
 title: css容器查询@container
-tags: css css自适应
+tags: css
 description: css容器查询@container
 ---
 

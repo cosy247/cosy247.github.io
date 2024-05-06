@@ -2,7 +2,7 @@
 id: 6
 date: 2023/12/11
 title: css控制上级样式
-tags: css css伪类 css函数式伪类
+tags: CSS
 ---
 
 # css 控制上级样式
@@ -13,7 +13,7 @@ tags: css css伪类 css函数式伪类
 
 ## :has()函数式伪类
 
-`:has` 伪类接受一个参数，如果满足参数类容则其中的样式生效，反之则不生效。[MDN/CSS/:has](https://developer.mozilla.org/zh-CN/docs/Web/CSS/:has)
+`:has` 伪类接受一个参数，如果满足参数类容则其中的样式生效，反之则不生效。
 
 ```html
 <style>
@@ -69,4 +69,6 @@ tags: css css伪类 css函数式伪类
 
 `:has`支持多个参数，参数之间使用逗号隔开。例如`div.tempalate:has(> .title, > .text)`，等同于`div.tempalate:has(> .title), div.tempalate:has(> .text)`，只要满足其中一个条件样式就可生效。
 
-## 混合使用
+## 参考
+
+1. [:has() - CSS：层叠样式表 | MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/:has)
