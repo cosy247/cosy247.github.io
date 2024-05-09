@@ -3,6 +3,9 @@ id: 6
 date: 2023/12/11
 title: css控制上级样式
 tags: CSS
+archive:
+recommendations: 2404159043318
+description: css控制上级样式
 ---
 
 # css 控制上级样式
@@ -39,35 +42,26 @@ tags: CSS
 </div>
 ```
 
-运行结果：
-
-```html
-<div style="border: 1px solid #973;padding: 10px;border-radius: 10px;">
-  <style>
-    div.tempalate:has(> p) {
-      background: #888;
-    }
-    div.tempalate:has(> .title) {
-      color: red;
-    }
-    div.tempalate:has(> .text) {
-      color: green;
-    }
-  </style>
-  <div class="tempalate">
-    <p class="title">我是标题</p>
-  </div>
-  <div class="tempalate">
-    <p class="text">我是类容</p>
-  </div>
-</div>
-```
-
 在判断是否选中时可以去除`:has()`来判断。如`div.tempalate:has(> p)`选择器只需要判断`div.tempalate > p`是否存在元素，存在时样式作用于`:has`之前的`div.tempalate`部分
 
 ## 多个参数
 
 `:has`支持多个参数，参数之间使用逗号隔开。例如`div.tempalate:has(> .title, > .text)`，等同于`div.tempalate:has(> .title), div.tempalate:has(> .text)`，只要满足其中一个条件样式就可生效。
+
+## 优先级
+
+`:has` 本身没有优先级，优先级由其中的参数中的最高优先级决定（与具体生效参数无关）。
+
+```css
+/* (0, 1, 2) */
+div.tempalate:has(> p) {
+  background: #888;
+}
+/* (1, 1, 1) */
+div.tempalate:has(> .title, #text) {
+  color: red;
+}
+```
 
 ## 参考
 
