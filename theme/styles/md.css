@@ -1,9 +1,0 @@
-@import url('./rainbow.css');
-
-:root {
-  --tab-nav-bg-color: #c3def3 !important;
-}
-
-p.hint-container-title {
-  margin-bottom: 0px;
-}

@@ -1,5 +1,7 @@
 {
   "name": "my-vuepress-site",
+  "name": "vuepress-theme-cosy",
+  "keywords": ["vuepress-theme"],
   "version": "0.0.1",
   "description": "A VuePress project",
   "license": "MIT",
