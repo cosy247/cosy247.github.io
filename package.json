@@ -10,21 +10,7 @@
     "dev": "vuepress dev docs",
     "update-package": "npx vp-update"
   },
-  "devDependencies": {
-    "@giscus/vue": "^3.0.0",
-    "@vuepress/bundler-vite": "^2.0.0-rc.7",
-    "@vuepress/client": "^2.0.0-rc.7",
-    "@vuepress/plugin-active-header-links": "^2.0.0-rc.7",
-    "@vuepress/plugin-container": "^2.0.0-rc.0",
-    "@vuepress/plugin-copy-code": "next",
-    "@vuepress/plugin-register-components": "next",
-    "@vuepress/plugin-shiki": "next",
-    "@vuepress/plugin-toc": "^2.0.0-rc.7",
-    "@vuepress/utils": "^2.0.0-rc.2",
-    "echarts": "^5.5.0",
-    "fs": "^0.0.1-security",
-    "vue": "^3.4.0",
-    "vuepress": "^2.0.0-rc.7",
-    "vuepress-plugin-md-enhance": "^2.0.0-rc.36"
+  "dependencies": {
+    "vuepress-theme-cosy": "file:theme"
   }
 }
