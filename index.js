@@ -10,12 +10,24 @@ import { getDirname, path } from "@vuepress/utils";
 
 export default (option = {}) => {
   const initOption = {
-    name: "vuepress-theme-cosy",
+    theme: "cosy",
     clientConfigFile: path.resolve(getDirname(import.meta.url), "./client.js"),
+    // 网页信息设置
+    title: "cosy247博客",
+    lang: "zh-Hans-CN",
+    description: "cosy247的个人博客 master",
+    head: [["link", { rel: "icon", href: "/assets/logo.png" }]],
+    // 运行设置
+    temp: "./.temp",
+    cache: "./.cache",
+    public: "./docs",
+    dest: "./_CosyBlog",
+    permalinkPattern: ":raw",
     bundler: viteBundler({
       viteOptions: {},
       vuePluginOptions: {},
     }),
+    // 插件
     plugins: [
       blogMateData({
         countMateNames: ["tags", "archive"],
