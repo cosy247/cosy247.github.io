@@ -4,7 +4,7 @@
       <span class="blog-info-text">{{ item }}</span>
       <span class="blog-info-icon">&#xe617;</span>
     </a>
-    <a v-if="archive" :href="`/?tag=${archive}`" class="blog-info">
+    <a v-if="archive" :href="`/?archive=${archive}`" class="blog-info">
       <span class="blog-info-text">{{ archive }}</span>
       <span class="blog-info-icon">&#xe69d;</span>
     </a>
@@ -50,9 +50,10 @@
 
 <script>
 import { usePageData } from "@vuepress/client";
-import { pageDatas } from "@temp/blogMate";
+import { pageDatas, themeConfig } from "@temp/blogMate";
 import MdView from "../components/MdView.vue";
 import Giscus from "@giscus/vue";
+import md5 from "md5";
 
 export default {
   name: "Blog",
@@ -77,6 +78,16 @@ export default {
   },
   created() {
     const pageData = usePageData().value;
+
+    console.log(pageData.frontmatter);
+    if (pageData.frontmatter.shadow === true) {
+      const shadow = sessionStorage.getItem('shadow');
+      if (!shadow || md5(shadow.slice(6)) !== themeConfig.shadowPassword) {
+        this.$router.push('/')
+      }
+      return
+    }
+
     this.tags = (pageData.frontmatter.tags || "").split(" ").filter((i) => i);
     this.archive = pageData.frontmatter.archive;
     this.recommendations = Array.from(new Set((pageData.frontmatter.recommendations || "").split(" ")));

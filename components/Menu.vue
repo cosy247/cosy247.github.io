@@ -127,14 +127,14 @@
           <a
             v-for="(item, index) in searchList"
             class="search-result-item"
+            @click="goSearchLine(item.path)"
             :class="{ 'search-result-item-active': index === this.currentSearchLineIndex }"
-            :href="item.path"
             @mouseover="currentSearchLineIndex = index"
           >
             <p class="search-result-item-title">
               <span
                 v-for="(key, i) in item.frontmatter.title"
-                :class="{ 'search-result-key': item.countIndexs.includes(i) }"
+                :class="{ 'search-result-key': item.countIndexs && item.countIndexs.includes(i) }"
                 >{{ key }}</span
               >
             </p>
@@ -150,6 +150,8 @@
 
 <script>
 import { pageDatas, countMateData, themeConfig } from "@temp/blogMate";
+import shadows from "@temp/shadows";
+import md5 from "md5";
 
 export default {
   name: "Menu",
@@ -160,6 +162,7 @@ export default {
     archive: countMateData.archive,
     alones: themeConfig.alones,
     blogFriends: themeConfig.blogFriends,
+    shadowPassword: themeConfig.shadowPassword,
     isShowSearch: false,
     searchText: "",
     searchList: [],
@@ -182,23 +185,27 @@ export default {
       if (searchText === "") {
         this.searchList = [];
       } else {
-        this.searchList = this.pageDatas
-          .map((item) => {
-            let count = 0;
-            const countIndexs = [];
-            const lowerCasetitle = item.frontmatter.title.toLowerCase();
-            for (let index = 0; index < lowerCasetitle.length; index++) {
-              if (lowerCasetitle[index] !== searchText[count]) continue;
-              count++;
-              countIndexs.push(index);
-              if (count < searchText.length) continue;
-              return {
-                countIndexs,
-                ...item,
-              };
-            }
-          })
-          .filter((item) => item);
+        if (md5(searchText) === this.shadowPassword) {
+          this.searchList = shadows;
+        } else {
+          this.searchList = this.pageDatas
+            .map((item) => {
+              let count = 0;
+              const countIndexs = [];
+              const lowerCasetitle = item.frontmatter.title.toLowerCase();
+              for (let index = 0; index < lowerCasetitle.length; index++) {
+                if (lowerCasetitle[index] !== searchText[count]) continue;
+                count++;
+                countIndexs.push(index);
+                if (count < searchText.length) continue;
+                return {
+                  countIndexs,
+                  ...item,
+                };
+              }
+            })
+            .filter((item) => item);
+        }
       }
     },
     searchPreventDefault(event) {
@@ -223,10 +230,16 @@ export default {
     upSearchLine() {
       this.currentSearchLineIndex = Math.max(this.currentSearchLineIndex - 1, 0);
     },
-    goSearchLine() {
-      const currentLine = this.searchList[this.currentSearchLineIndex];
-      if (!currentLine || !currentLine.path) return;
-      window.location.href = currentLine.path;
+    goSearchLine(path) {
+      if (!path) {
+        const currentLine = this.searchList[this.currentSearchLineIndex];
+        if (!currentLine || !currentLine.path) return;
+        path = currentLine.path;
+      }
+      if (md5(this.searchText) === this.shadowPassword) {
+        sessionStorage.setItem("shadow", "shadow" + this.searchText);
+      }
+      window.location.href = path;
     },
   },
   created() {
@@ -453,7 +466,7 @@ export default {
   display: none;
 }
 
-.tool.home img{
+.tool.home img {
   height: 1.2em;
   display: block;
 }

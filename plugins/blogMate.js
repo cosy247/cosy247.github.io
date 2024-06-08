@@ -1,23 +1,33 @@
+import md5 from "md5";
+
 export default ({ countMateNames = [], isArrMateNames = [] }) => ({
-  name: 'plugins-blog-meta',
+  name: "plugins-blog-meta",
   onPrepared(app) {
     const countMateData = countMateNames.reduce((countMateData, metaName) => {
       countMateData[metaName] = {};
       return countMateData;
     }, {});
 
-    const themeConfig = app.pages.find((page) => page.filePathRelative === 'README.md').frontmatter;
+    const themeConfig = app.pages.find((page) => page.filePathRelative === "README.md").frontmatter;
+    if (themeConfig.shadowPassword) {
+      themeConfig.shadowPassword = md5(themeConfig.shadowPassword);
+    }
 
-    const pageDatas = app.pages
-      .reduce((pageDatas, page) => {
-        const { htmlFilePathRelative: path, frontmatter } = page;
+    const pageDatas = [];
+    const shadowDatas = [];
 
-        if (!path || path === 'index.html' || path === '404.html' || path[0] === '@') return pageDatas;
+    app.pages.forEach((page) => {
+      const { htmlFilePathRelative: path, frontmatter } = page;
+      if (!path || path === "index.html" || path === "404.html" || path[0] === "@") return pageDatas;
 
+      if (frontmatter.shadow === true) {
+        // 记录数据
+        shadowDatas.push({ path, frontmatter });
+      } else {
         // 数组属性转化
         isArrMateNames.forEach((metaName) => {
           if (frontmatter[metaName]) {
-            frontmatter[metaName] = frontmatter[metaName].split(' ');
+            frontmatter[metaName] = frontmatter[metaName].split(" ");
           }
         });
 
@@ -43,12 +53,14 @@ export default ({ countMateNames = [], isArrMateNames = [] }) => ({
 
         // 记录数据
         pageDatas.push({ path, frontmatter });
+      }
+    }, []);
 
-        return pageDatas;
-      }, [])
-      .sort((b1, b2) => new Date(b2.frontmatter.date) - new Date(b1.frontmatter.date));
+    pageDatas.sort((b1, b2) => new Date(b2.frontmatter.date) - new Date(b1.frontmatter.date));
+    shadowDatas.sort((b1, b2) => new Date(b2.frontmatter.date) - new Date(b1.frontmatter.date));
 
-    app.writeTemp('app.json', JSON.stringify(app));
-    app.writeTemp('blogMate.json', JSON.stringify({ pageDatas: pageDatas, countMateData, themeConfig }));
+    // app.writeTemp('app.json', JSON.stringify(app));
+    app.writeTemp("blogMate.json", JSON.stringify({ pageDatas: pageDatas, countMateData, themeConfig }));
+    app.writeTemp("shadows.json", JSON.stringify(shadowDatas));
   },
 });
