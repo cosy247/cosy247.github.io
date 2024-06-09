@@ -1,5 +1,6 @@
 ---
 {
+  shadowPassword: 'qeqe',
   links:
     [
       { name: '&#xe673;github', href: 'https://github.com/cosy247' },
